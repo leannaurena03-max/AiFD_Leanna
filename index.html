@@ -2,77 +2,40 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Leanna Urena’s A.I. for Designers portfolio. Assignments, poster experiments, and reflections for ART 3041, Fall 2026.">
+<meta name="theme-color" content="#204b3b">
 <title>A.I. FOR DESIGNERS — Leanna Urena</title>
-<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
-:root{--bg:#f8f3ea;--card:rgba(255,251,245,.92);--text:#5f5046;--line:#d8cabf;}
-*{box-sizing:border-box}
-body{
-margin:0;padding:24px;font-family:'Fredoka',sans-serif;color:var(--text);
-background-color:var(--bg);
-background-image:
-radial-gradient(circle at 25px 25px, rgba(255,255,255,.45) 2px, transparent 2px),
-radial-gradient(circle at 0 0, rgba(214,196,183,.22) 1px, transparent 1px),
-repeating-radial-gradient(circle at center, transparent 0 28px, rgba(214,196,183,.09) 29px 30px);
-background-size:80px 80px,40px 40px,220px 220px;
-}
-.container{
-max-width:900px;margin:auto;padding:36px;border-radius:28px;
-background:var(--card);backdrop-filter:blur(4px);
-box-shadow:0 8px 28px rgba(0,0,0,.06);
-border:1px solid rgba(255,255,255,.7);
-}
-h1{
-margin:0;font-size:clamp(2.2rem,6vw,4.6rem);
-font-weight:600;
-text-shadow:0 2px 0 rgba(255,255,255,.9),0 8px 18px rgba(255,255,255,.7);
-}
-.subtitle,.email{font-size:1.15rem;margin-top:.4rem}
-a{color:inherit}
-h2{margin-top:2.2rem}
-ol{list-style:none;padding:0}
-li a{
-display:flex;gap:18px;align-items:center;
-margin:.8rem 0;padding:16px 18px;text-decoration:none;
-border:1px solid var(--line);border-radius:18px;
-background:rgba(255,255,255,.55);
-transition:.2s;
-}
-li a:hover{transform:translateY(-2px);background:white}
-.num{font-weight:600;width:42px}
-@media(max-width:600px){.container{padding:24px}}
+:root{--paper:#f3f2eb;--ink:#242925;--green:#204b3b;--muted:#586359;--line:#c9d0c5;--pale:#e5e9dd;--ease:cubic-bezier(.22,1,.36,1)}
+*{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:24px}body{margin:0;background:var(--paper);color:var(--ink);font-family:Arial,Helvetica,sans-serif;-webkit-font-smoothing:antialiased}a{color:inherit;text-underline-offset:5px}a:hover{color:var(--green)}a:focus-visible,summary:focus-visible{outline:3px solid var(--green);outline-offset:6px}.skip{position:fixed;top:12px;left:12px;z-index:10;background:var(--paper);padding:12px;transform:translateY(-180%)}.skip:focus{transform:none}.shell{width:min(1320px,90%);margin:auto}.topbar{display:flex;justify-content:space-between;gap:24px;align-items:center;padding:25px 0;font-size:12px;letter-spacing:.12em;text-transform:uppercase}.brand{text-decoration:none;font-weight:700;display:flex;align-items:center;gap:12px}.brand:before{content:'';width:11px;height:11px;background:var(--green);border-radius:50%}.nav{display:flex;gap:28px}.nav a{text-decoration:none}.hero{margin:0;position:relative;border-radius:3px;overflow:hidden;background:var(--pale)}.hero img{width:100%;height:auto;display:block;animation:arrive 1.3s var(--ease) both}.hero figcaption{position:absolute;bottom:16px;left:18px;color:#fff;background:rgba(25,40,31,.86);padding:8px 12px;font:10px/1.3 monospace;letter-spacing:.13em;text-transform:uppercase}.intro{padding:48px 0 54px;display:grid;grid-template-columns:1fr auto;align-items:end;gap:28px;border-bottom:1px solid var(--line)}.eyebrow{font-size:11px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;margin:0 0 20px;color:var(--green)}h1{font-size:clamp(45px,7.6vw,108px);font-weight:700;letter-spacing:-.075em;line-height:.92;margin:0}h1 span{display:block;color:var(--green)}.intro-meta{max-width:270px}.intro-meta p{font-size:15px;line-height:1.6;margin:0 0 22px}.intro-meta .course{font:11px/1.6 monospace;letter-spacing:.04em;margin:0}.section-head{display:flex;justify-content:space-between;gap:20px;align-items:baseline;padding:38px 0 23px}.section-head h2{font-size:14px;letter-spacing:.09em;text-transform:uppercase;margin:0}.section-head p{font:11px/1.5 monospace;color:var(--muted);margin:0}.work-grid{display:grid;grid-template-columns:1fr 2fr;gap:8%}.work-note{padding-top:30px;color:var(--muted);font-size:15px;line-height:1.7;max-width:240px}.work-note .asterisk{display:block;color:var(--green);font-size:72px;line-height:1;margin:0 0 22px;transform-origin:28px 28px;animation:turn 28s ease-in-out infinite}.assignment{border-top:1px solid var(--line);transition:background .3s}.assignment:last-child{border-bottom:1px solid var(--line)}summary{list-style:none;cursor:pointer;display:flex;align-items:center;gap:24px;padding:27px 18px;transition:padding .4s var(--ease),color .25s}summary::-webkit-details-marker{display:none}.number{font:12px monospace;color:var(--green);min-width:22px}.assignment-title{font-size:clamp(18px,2vw,26px);letter-spacing:-.035em;flex:1}.indicator{position:relative;width:20px;height:20px;flex-shrink:0}.indicator:before,.indicator:after{content:'';position:absolute;background:currentColor;top:9px;left:3px;width:14px;height:1px;transition:transform .35s}.indicator:after{transform:rotate(90deg)}details[open] .indicator:after{transform:rotate(0)}details[open]{background:var(--pale)}details[open] summary{color:var(--green)}.panel-content{padding:0 24px 28px 64px}.project-link{display:inline-flex;align-items:center;gap:34px;background:var(--green);color:var(--paper);padding:13px 17px;text-decoration:none;font-size:13px;border:1px solid var(--green);transition:background .2s,color .2s}.project-link:hover{background:var(--paper);color:var(--green)}.unlinked{font-size:13px;margin:0;color:var(--muted)}@media(hover:hover){summary:hover{padding-left:26px;color:var(--green);background:var(--pale)}}.samples{margin-top:70px;padding-top:12px;border-top:1px solid var(--line)}.resources{display:flex;gap:12px 28px;flex-wrap:wrap;font-size:13px;margin:0 0 28px}.poster-grid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:18px}.poster-grid a{text-decoration:none;min-width:0}.poster-grid img{width:100%;aspect-ratio:3/4;object-fit:contain;background:#e2e4dc;display:block;transition:transform .4s var(--ease)}.poster-grid a:hover img{transform:translateY(-5px)}.poster-grid a>span{display:flex;justify-content:space-between;margin-top:12px;font:11px monospace;color:var(--muted)}.process{margin-top:64px;padding:44px 0 64px;border-top:1px solid var(--line);display:grid;grid-template-columns:1fr 2fr;gap:8%}.process h2{font-size:28px;letter-spacing:-.04em;font-weight:400;line-height:1.15;margin:0;max-width:230px}.process p{font-size:17px;line-height:1.85;margin:0;max-width:740px}footer{background:var(--green);color:var(--paper)}footer .shell{display:flex;justify-content:space-between;gap:24px;align-items:center;padding:33px 0;font-size:12px}footer a:hover{color:white}.footer-meta{font:10px monospace;letter-spacing:.08em} @keyframes arrive{from{opacity:.45;transform:scale(1.025)}to{opacity:1;transform:scale(1)}}@keyframes turn{0%,85%{transform:rotate(0)}100%{transform:rotate(90deg)}}
+@media(max-width:760px){.shell{width:90%}.topbar{font-size:10px;padding:20px 0}.nav{gap:16px}.hero figcaption{font-size:8px;bottom:9px;left:9px}.intro{grid-template-columns:1fr;padding:30px 0 36px;gap:24px}.intro-meta{max-width:none;display:flex;justify-content:space-between;gap:24px}.intro-meta p{font-size:13px;margin:0;max-width:210px}.intro-meta .course{font-size:10px;min-width:90px}.work-grid{grid-template-columns:1fr}.work-note{display:none}.section-head{padding-top:29px}.section-head p{font-size:10px}summary{padding:23px 8px;gap:16px}.panel-content{padding-left:46px}.samples{margin-top:46px}.poster-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:24px 16px}.poster-grid a:last-child{grid-column:1/-1;width:calc(50% - 8px)}.process{grid-template-columns:1fr;gap:25px;margin-top:42px;padding:34px 0 44px}.process h2{max-width:none;font-size:25px}.process p{font-size:15px}footer .shell{align-items:flex-start;flex-direction:column;gap:18px}.footer-meta{font-size:9px}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*:before,*:after{animation:none!important;transition:none!important}}
 </style>
 </head>
-<body>
-<div class="container">
-<h1>A.I. FOR DESIGNERS — Leanna Urena</h1>
-<div class="subtitle">ART 3041 · Fall 2026</div>
-<div class="email"><a href="mailto:leannaurena03@gmail.com">leannaurena03@gmail.com</a></div>
-<h2>Work</h2>
-<ol>
-<li><a href="#"><span class="num">01</span><span>Custom Instructions</span></a></li>
-<li><a href="#"><span class="num">02</span><span>A Style Guide for Your AI</span></a></li>
-<li><a href="design-a.html"><span class="num">03</span><span>Design a ___</span></a></li>
-<li><a href="chair-sequence.html"><span class="num">04</span><span>Chair Sequence</span></a></li>
-<li><a href="#"><span class="num">04</span><span>Commute Story</span></a></li>
-<li><a href="#"><span class="num">05</span><span>Promo Poster</span></a></li>
-<li><a href="poster-generator.html"><span class="num">06</span><span>Poster Generator</span></a></li>
-<h2 id="poster-samples">Poster Samples + Markdowns</h2>
-<p>
-  <a href="skills.md">Design Rules — skills.md</a>
-  ·
-  <a href="handoff.md">Project Progress — handoff.md</a>
-</p>
-<div style="display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:12px;">
-  <a href="posters/poster1.svg"><img src="posters/poster1.svg" alt="Generated poster 1" style="width:100%;display:block;"></a>
-  <a href="posters/poster2.svg"><img src="posters/poster2.svg" alt="Generated poster 2" style="width:100%;display:block;"></a>
-  <a href="posters/poster3.svg"><img src="posters/poster3.svg" alt="Generated poster 3" style="width:100%;display:block;"></a>
-  <a href="posters/poster4.svg"><img src="posters/poster4.svg" alt="Generated poster 4" style="width:100%;display:block;"></a>
-  <a href="posters/poster5.svg"><img src="posters/poster5.svg" alt="Generated poster 5" style="width:100%;display:block;"></a>
-</div><h2>Poster Generator — My Process</h2>
-<p style="line-height: 1.7;">
-My poster generator started with the bold lettering, strong contrast,
+<body id="top">
+<a class="skip" href="#main">Skip to content</a>
+<header class="shell topbar"><a class="brand" href="#top">Leanna Urena</a><nav class="nav" aria-label="Main navigation"><a href="#work">Work</a><a href="#process">Process</a><a href="mailto:leannaurena03@gmail.com">Contact ↗</a></nav></header>
+<main id="main" class="shell">
+<figure class="hero"><img src="nyc-hero.png" width="1916" height="821" alt="A black tote bag, laptop, green notebook, and white sneakers on a windowsill overlooking the New York City skyline." fetchpriority="high"><figcaption>Design, in everyday motion.</figcaption></figure>
+<section class="intro" aria-labelledby="title"><div><p class="eyebrow">Leanna Urena / Design portfolio</p><h1 id="title">A.I. FOR<span>DESIGNERS</span></h1></div><div class="intro-meta"><p>Experiments in design,<br>technology &amp; creativity.</p><p class="course">ART 3041<br>FALL 2026</p></div></section>
+<section id="work" aria-labelledby="work-title"><div class="section-head"><h2 id="work-title">Work / Assignments</h2><p>01 — 07 · Click to explore</p></div><div class="work-grid"><div class="work-note" aria-hidden="true"><span class="asterisk">✳</span>A collection of ideas,<br>iterations, and experiments.<br>One assignment at a time.</div><div class="assignments">
+<details class="assignment"><summary><span class="number">01</span><span class="assignment-title">Custom Instructions</span><span class="indicator" aria-hidden="true"></span></summary><div class="panel"><div class="panel-content"><p class="unlinked">Page not linked yet.</p></div></div></details>
+<details class="assignment"><summary><span class="number">02</span><span class="assignment-title">A Style Guide for Your AI</span><span class="indicator" aria-hidden="true"></span></summary><div class="panel"><div class="panel-content"><p class="unlinked">Page not linked yet.</p></div></div></details>
+<details class="assignment"><summary><span class="number">03</span><span class="assignment-title">Design a ___</span><span class="indicator" aria-hidden="true"></span></summary><div class="panel"><div class="panel-content"><a class="project-link" href="design-a.html">Open assignment <span aria-hidden="true">↗</span></a></div></div></details>
+<details class="assignment"><summary><span class="number">04</span><span class="assignment-title">Chair Sequence</span><span class="indicator" aria-hidden="true"></span></summary><div class="panel"><div class="panel-content"><a class="project-link" href="chair-sequence.html">Open assignment <span aria-hidden="true">↗</span></a></div></div></details>
+<details class="assignment"><summary><span class="number">05</span><span class="assignment-title">Commute Story</span><span class="indicator" aria-hidden="true"></span></summary><div class="panel"><div class="panel-content"><p class="unlinked">Page not linked yet.</p></div></div></details>
+<details class="assignment"><summary><span class="number">06</span><span class="assignment-title">Promo Poster</span><span class="indicator" aria-hidden="true"></span></summary><div class="panel"><div class="panel-content"><p class="unlinked">Page not linked yet.</p></div></div></details>
+<details class="assignment"><summary><span class="number">07</span><span class="assignment-title">Poster Generator</span><span class="indicator" aria-hidden="true"></span></summary><div class="panel"><div class="panel-content"><a class="project-link" href="poster-generator.html">Open assignment <span aria-hidden="true">↗</span></a></div></div></details>
+</div></div></section>
+<section class="samples" id="poster-samples" aria-labelledby="samples-title"><div class="section-head"><h2 id="samples-title">Poster Samples + Markdowns</h2><p>Generated / Refined / Exported</p></div><p class="resources"><a href="skills.md">Design Rules — skills.md ↗</a><a href="handoff.md">Project Progress — handoff.md ↗</a></p><div class="poster-grid">
+<a href="posters/poster1.svg"><img src="posters/poster1.svg" alt="Generated poster 1" loading="lazy"><span>Sample 01 <span aria-hidden="true">↗</span></span></a>
+<a href="posters/poster2.svg"><img src="posters/poster2.svg" alt="Generated poster 2" loading="lazy"><span>Sample 02 <span aria-hidden="true">↗</span></span></a>
+<a href="posters/poster3.svg"><img src="posters/poster3.svg" alt="Generated poster 3" loading="lazy"><span>Sample 03 <span aria-hidden="true">↗</span></span></a>
+<a href="posters/poster4.svg"><img src="posters/poster4.svg" alt="Generated poster 4" loading="lazy"><span>Sample 04 <span aria-hidden="true">↗</span></span></a>
+<a href="posters/poster5.svg"><img src="posters/poster5.svg" alt="Generated poster 5" loading="lazy"><span>Sample 05 <span aria-hidden="true">↗</span></span></a>
+</div></section>
+<section class="process" id="process" aria-labelledby="process-title"><div><p class="eyebrow">Behind the work</p><h2 id="process-title">Poster Generator — My Process</h2></div><p>My poster generator started with the bold lettering, strong contrast,
 and upside-down text in the WITNESS NYC poster. Since the first version,
 it has developed into a working tool where I can change the text, fonts,
 colors, and layouts to create different posters. One of the hardest parts
@@ -82,8 +45,39 @@ editable in Illustrator, and I was able to change the words and move the
 shapes. There is still room to improve the spacing and make sure different
 amounts of text work well. This process showed me that AI can help turn a
 design idea into custom software, but I still need to give clear
-instructions, test the results, and make decisions about what looks right.
-</p>
-</div>
+instructions, test the results, and make decisions about what looks right.</p></section>
+</main>
+<footer><div class="shell"><a href="mailto:leannaurena03@gmail.com">leannaurena03@gmail.com</a><span class="footer-meta">LEANNA URENA · ART 3041 · FALL 2026</span><a href="#top">Back to top ↑</a></div></footer>
+<script>
+// Native details remain usable when JavaScript is unavailable.
+// Animate measured heights so long titles and changing screen sizes stay fluid.
+const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+document.querySelectorAll('.assignment').forEach(details => {
+  const summary = details.querySelector('summary');
+  const panel = details.querySelector('.panel');
+  let animation = null;
+  let targetOpen = details.open;
+  summary.addEventListener('click', event => {
+    event.preventDefault();
+    targetOpen = !targetOpen;
+    const from = panel.getBoundingClientRect().height;
+    if (animation) { animation.cancel(); animation = null; }
+    if (reducedMotion.matches) { details.open = targetOpen; return; }
+    details.open = true;
+    const to = targetOpen ? panel.scrollHeight : 0;
+    if (!targetOpen && panel.contains(document.activeElement)) summary.focus();
+    panel.inert = !targetOpen;
+    panel.style.overflow = 'hidden';
+    animation = panel.animate([{height:from+'px'}, {height:to+'px'}],
+      {duration:380, easing:'cubic-bezier(.22,1,.36,1)'});
+    animation.onfinish = () => {
+      details.open = targetOpen;
+      panel.inert = false;
+      panel.style.overflow = '';
+      animation = null;
+    };
+  });
+});
+</script>
 </body>
 </html>
