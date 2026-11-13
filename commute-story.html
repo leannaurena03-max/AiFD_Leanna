@@ -502,8 +502,11 @@
       }
     }
   
-    .back-button { display: inline-block; margin: 18px 0 0; padding: 12px 18px; border: 1px solid var(--green); text-decoration: none; font-size: 12px; }
-    .back-button:hover { background: var(--green); color: var(--paper); }
+    .assignment-nav{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;padding:24px 0;margin-bottom:24px;border-bottom:1px solid #2E9B4F;font-size:14px;line-height:1.5}
+    .assignment-nav a{color:#111111;text-decoration:underline;text-underline-offset:4px}
+    .assignment-nav a:hover{text-decoration-thickness:2px}
+    .assignment-nav a:focus-visible{outline:2px solid #111111;outline-offset:3px}
+    .assignment-nav span{font-size:12px;letter-spacing:.14em;text-transform:uppercase}
     .gallery { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 32px 24px; padding-bottom: 60px; align-items: start; }
     .gallery figure { margin: 0; min-width: 0; }
     .gallery figure > a { display: block; background: var(--pale); border-radius: 3px; }
@@ -526,7 +529,7 @@
     </nav>
   </header>
   <main id="main" class="shell">
-    <a class="back-button" href="index.html#work">← Back to assignments</a>
+    <nav class="assignment-nav" aria-label="Page navigation"><a href="index.html#work">← Back to work</a><span>Leanna Urena / A.I. for Designers</span></nav>
     <section class="intro" aria-labelledby="title">
       <div>
         <p class="eyebrow">Leanna Urena / Assignment 05</p>
@@ -543,10 +546,10 @@
         <p class="gallery-note">01 — 04 · Select an image to view full size</p>
       </div>
       <div class="gallery">
-<figure><a href="commute/commute2(1).png" aria-label="View image 1: The descent"><img src="commute/commute1.png" width="1024" height="1536" alt="Whitewater rapids flowing down an escalator into a dark flooded passage." loading="lazy" decoding="async"></a><figcaption><span class="image-number">01</span><span>The descent</span></figcaption></figure>
-<figure><a href="commute/commute1.png" aria-label="View image 2: The platform"><img src="commute/commute2.png" width="1086" height="1448" alt="Stairway leading to a Grand Central subway platform with churning water in place of the tracks." fetchpriority="high" decoding="async"></a><figcaption><span class="image-number">02</span><span>The platform</span></figcaption></figure>
-<figure><a href="commute/commute3.jpg" aria-label="View image 3: The storm"><img src="commute/commute3.jpg" width="2048" height="1273" alt="Waves filling the tracks beneath a subway platform as lightning crosses a purple sky." loading="lazy" decoding="async"></a><figcaption><span class="image-number">03</span><span>The storm</span></figcaption></figure>
-<figure><a href="commute/commute4.png" aria-label="View image 4: The next stop"><img src="commute/commute4.png" width="1536" height="1320" alt="A colorful New York City subway train beside a rain-soaked platform under storm clouds." loading="lazy" decoding="async"></a><figcaption><span class="image-number">04</span><span>The next stop</span></figcaption></figure>
+<figure><a href="commute2(1).png" aria-label="View image 1: The descent"><img src="commute2(1).png" width="1024" height="1536" alt="Whitewater rapids flowing down an escalator into a dark flooded passage." loading="lazy" decoding="async"></a><figcaption><span class="image-number">01</span><span>The descent</span></figcaption></figure>
+<figure><a href="commute1.png" aria-label="View image 2: The platform"><img src="commute1.png" width="1086" height="1448" alt="Stairway leading to a Grand Central subway platform with churning water in place of the tracks." fetchpriority="high" decoding="async"></a><figcaption><span class="image-number">02</span><span>The platform</span></figcaption></figure>
+<figure><a href="commute3.jpg" aria-label="View image 3: The storm"><img src="commute3.jpg" width="2048" height="1273" alt="Waves filling the tracks beneath a subway platform as lightning crosses a purple sky." loading="lazy" decoding="async"></a><figcaption><span class="image-number">03</span><span>The storm</span></figcaption></figure>
+<figure><a href="commute4.png" aria-label="View image 4: The next stop"><img src="commute4.png" width="1536" height="1320" alt="A colorful New York City subway train beside a rain-soaked platform under storm clouds." loading="lazy" decoding="async"></a><figcaption><span class="image-number">04</span><span>The next stop</span></figcaption></figure>
       </div>
     </section>
   </main>
