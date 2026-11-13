@@ -15,9 +15,55 @@
 @media(max-width:1050px){.toolbar{gap:12px}.control select{max-width:160px}.generate{min-width:150px}.intro p{max-width:280px}.stage{padding:16px}.hero[data-layout=columns]{grid-template-columns:1.2fr 1fr;grid-template-areas:'headline reading' 'graphic graphic'}.hero[data-layout=columns] .graphic-block{min-height:150px;max-height:180px}.hero[data-layout=columns] .graphic{min-height:150px;max-height:180px}.website{--hero-size:clamp(64px,10vw,130px)}.mapping{margin-right:15px;padding-right:15px}.weather-card{padding:18px}}
 @media(max-width:700px){.masthead{height:65px;padding:0 20px}.masthead .credit{font-size:8px}.intro{padding:25px 20px;display:block}.intro h1{font-size:32px}.intro p{margin-top:15px;max-width:350px}.studio{margin:0 12px 15px}.toolbar{padding:14px;gap:14px;display:grid;grid-template-columns:1fr 1fr}.control select{max-width:100%;width:100%}.generate{width:100%;margin:0;min-width:0}.subtoolbar{padding:10px 14px;align-items:start}.subactions{gap:12px}.source-state{max-width:60%}.stage{padding:8px}.website{border-width:5px;--hero-size:clamp(65px,17vw,116px)!important;--gap:18px!important}.site-nav{padding:12px}.site-links{gap:10px;font-size:8px}.site-links a:last-child{display:none}.weather-meta{padding:18px 13px 8px;font-size:8px}.hero[data-layout]{padding:10px 13px 20px;grid-template-columns:1fr;grid-template-areas:'headline' 'graphic' 'reading'}.hero[data-layout] .headline-block{border:0;padding:0}.headline{line-height:1.03}.headline .word{display:inline-block}.headline .second{margin-left:9px}.headline-block .caption{max-width:275px}.hero[data-layout] .graphic-block{min-height:180px;max-height:210px;border:1px solid var(--tint)}.hero[data-layout] .graphic{min-height:180px;max-height:210px}.hero[data-layout] .reading-block{flex-direction:row;align-items:end;border:0;padding:0}.hero[data-layout] .temperature{font-size:82px}.hero[data-layout] .readings{flex-direction:column;gap:6px;min-width:100px}.dispatch{padding:12px 13px;align-items:start}.dispatch strong{font-size:25px;max-width:60%}.dispatch .mono{font-size:8px;max-width:35%;text-align:right}.lower-grid{grid-template-columns:1fr!important}.weather-card{border-right:0;border-bottom:1px solid var(--tint);min-height:104px;padding:15px 13px}.weather-card:last-child{border-bottom:0}.weather-card p{max-width:85%}.site-footer{padding:12px 13px;flex-direction:column;gap:6px;font-size:8px}.studio-footer{padding:12px;align-items:start;font-size:9px}.sliders{grid-template-columns:1fr 1fr}.demo-top{display:block}.presets{margin-top:10px}.explainer{padding:25px 20px}.explain-heading{display:block}.explain-heading p{margin-top:6px}.mapping-grid{grid-template-columns:1fr 1fr;row-gap:20px}.mapping:nth-child(2){border:0;margin:0}.mapping p{font-size:10px}.about{margin:0 20px;display:block}.about>span{display:block;margin-top:15px}.settings-panel{gap:13px}}
 @media(prefers-reduced-motion:no-preference){button{transition:background .15s}.website{transition:background .6s,color .6s}.graphic .windline{animation:drift var(--speed,8s) linear infinite;stroke-dasharray:140 70}@keyframes drift{to{stroke-dashoffset:-210}}}
+.assignment-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin: 0 3.5%;
+  padding: 24px 0;
+  border-bottom: 1px solid #2E9B4F;
+  color: #111111;
+  font: 14px/1.5 Arial, Helvetica, sans-serif;
+}
+
+.assignment-nav a {
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+.assignment-nav a:hover {
+  text-decoration-thickness: 2px;
+}
+
+.assignment-nav a:focus-visible {
+  outline: 2px solid #111111;
+  outline-offset: 3px;
+}
+
+.assignment-nav span {
+  font-size: 12px;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+}
+
+@media (max-width: 700px) {
+  .assignment-nav {
+    margin: 0 20px;
+  }
+
+  .assignment-nav span {
+    font-size: 10px;
+  }
+}
 </style>
 </head>
-<body>
+<body> 
+<nav class="assignment-nav" aria-label="Page navigation">
+  <a href="index.html#work">← Back to work</a>
+  <span>Leanna Urena / A.I. for Designers</span>
+</nav>
 <header class="masthead"><div class="brand">WITNESS <span>/</span> LIVE<span style="font-size:10px;vertical-align:top;margin-left:5px">®</span></div><div class="credit mono">A generative weather experiment<br>Leanna Urena / A.I. for Designers</div></header>
 <main>
 <section class="intro" aria-labelledby="page-title"><div><div class="mono">From poster to living website / Experiment 02</div><h1>The weather is the designer.</h1></div><p>A live feed. A set of design rules. Endless compositions.<br>Change the city or generate a new way to see it.</p></section>
