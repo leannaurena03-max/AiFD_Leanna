@@ -241,7 +241,7 @@
       animation: turn 28s ease-in-out infinite;
     }
 
-    /* DIRECT ASSIGNMENT LINKS — NO ACCORDION */
+    /* DIRECT ASSIGNMENT LINKS */
 
     .assignments {
       display: grid;
@@ -556,8 +556,6 @@
       <div class="section-head">
         <h2 id="work-title">Work / Assignments</h2>
         <p>
-          <span class="desktop-hint">01 — 08 · Hover or focus to explore</span>
-          <span class="touch-hint">01 — 08 · Select an assignment</span>
         </p>
       </div>
 
@@ -623,15 +621,18 @@
           </li>
 
           <li>
-            <a
-              class="assignment-tab"
-              href="commute-story.html"
-              aria-label="Assignment 05: Commute Story"
+            <div
+              class="assignment-tab unavailable"
+              tabindex="0"
+              aria-disabled="true"
+              aria-label="Assignment 05: Commute Story. Unavailable — page not created yet."
             >
               <span class="tab-number" aria-hidden="true">05</span>
-              <span class="tab-title" aria-hidden="true">Commute Story</span>
-              <span class="tab-arrow" aria-hidden="true">↗</span>
-            </a>
+              <span class="tab-title" aria-hidden="true">
+                Commute Story
+                <span class="availability">Unavailable — page not created yet</span>
+              </span>
+            </div>
           </li>
 
           <li>
@@ -669,6 +670,29 @@
             >
               <span class="tab-number" aria-hidden="true">08</span>
               <span class="tab-title" aria-hidden="true">Poster Samples + My Process</span>
+              <span class="tab-arrow" aria-hidden="true">↗</span>
+            </a>
+          </li>
+          <li>
+            <a
+              class="assignment-tab"
+              href="live-weather.html"
+              aria-label="Assignment 09: Live Poster Generator"
+            >
+              <span class="tab-number" aria-hidden="true">09</span>
+              <span class="tab-title" aria-hidden="true">Live Poster Generator</span>
+              <span class="tab-arrow" aria-hidden="true">↗</span>
+            </a>
+          </li>
+
+          <li>
+            <a
+              class="assignment-tab"
+              href="variable-type.html"
+              aria-label="Assignment 10: Variable Type"
+            >
+              <span class="tab-number" aria-hidden="true">10</span>
+              <span class="tab-title" aria-hidden="true">Variable Type</span>
               <span class="tab-arrow" aria-hidden="true">↗</span>
             </a>
           </li>
