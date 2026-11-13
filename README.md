@@ -1,2 +1,2 @@
-# Fake-Art-Class
-For art not made by humans, fake-ass art.
+# AiDED BY MACHINES
+Can machines create art when humans can't anymore?
