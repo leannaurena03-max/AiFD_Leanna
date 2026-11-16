@@ -1,467 +1,451 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-  <meta http-equiv="Content-Style-Type" content="text/css">
-  <title></title>
-  <meta name="Generator" content="Cocoa HTML Writer">
-  <meta name="CocoaVersion" content="2685.7">
-  <style type="text/css">
-    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
-    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; min-height: 14.0px}
-  </style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Mission Patch Generator — Leanna Urena</title>
+<style>
+:root{--background:#fff;--text:#111;--accent:#2e9b4f;--line:#deded8}
+*{box-sizing:border-box}
+body{margin:0;background:var(--background);color:var(--text);
+  font:16px/1.5 Arial,Helvetica,sans-serif}
+button,input,select{font:inherit}
+button,input,select{border-radius:0}
+button,a,input,select{touch-action:manipulation}
+:focus-visible{outline:2px solid #111;outline-offset:4px}
+.wrap{max-width:1200px;margin:auto;padding:32px}
+a{color:inherit;text-underline-offset:4px}
+header{padding:24px 0 28px;border-bottom:1px solid var(--line)}
+.kicker{font-size:11px;letter-spacing:.14em;text-transform:uppercase;
+  color:#515851;margin:0 0 8px}
+h1,h2{font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;
+  font-weight:700;line-height:1.25}
+h1{font-size:24px;margin:0 0 10px}
+h2{font-size:18px;margin:0 0 18px}
+header p:last-child{max-width:650px;margin:0;color:#515851}
+main{display:grid;grid-template-columns:300px minmax(0,1fr);gap:40px;
+  padding:32px 0}
+aside{min-width:0}
+.field{display:grid;gap:7px;margin-bottom:19px}
+label{font-size:13px;font-weight:bold}
+input[type=text],select{width:100%;padding:10px;border:1px solid #aaa;
+  background:#fff;color:#111;min-height:44px}
+input[type=range]{width:100%;accent-color:var(--accent)}
+.range-label{display:flex;justify-content:space-between;gap:12px}
+output{font-weight:normal}
+button{padding:12px 16px;border:1px solid #111;background:#fff;
+  color:#111;cursor:pointer;font-weight:bold;min-height:46px}
+button:hover{text-decoration:underline;text-underline-offset:4px}
+.primary{background:var(--accent);border-color:var(--accent)}
+.actions{display:grid;gap:10px;margin-top:24px}
+.stage{min-width:0}
+.preview{background:#eeeee8;padding:24px;display:grid;place-items:center}
+canvas{display:block;width:100%;max-width:610px;height:auto;
+  aspect-ratio:1;background:#fff;box-shadow:0 8px 24px #00000015}
+.meta{display:flex;justify-content:space-between;gap:16px;
+  font-size:12px;color:#515851;margin:12px 0 20px;flex-wrap:wrap}
+.download{width:100%}
+.note{font-size:12px;color:#515851}
+details{border-top:1px solid var(--line);padding-top:18px;margin-top:24px}
+summary{cursor:pointer;font-size:13px;font-weight:bold}
+details p{font-size:13px;color:#515851}
+footer{border-top:1px solid var(--line);padding:22px 0;
+  font-size:12px;color:#515851}
+#status{min-height:20px}
+@media(max-width:760px){
+ .wrap{padding:20px 16px}
+ main{grid-template-columns:1fr;gap:28px}
+ .preview{padding:14px}
+ h1{font-size:22px}
+}
+@media print{
+ header,aside,footer,.meta,.download,.note{display:none}
+ .wrap,main,.preview{padding:0;margin:0;background:white;display:block}
+ canvas{width:3.5in;height:3.5in;box-shadow:none}
+}
+</style>
 </head>
 <body>
-<p class="p1">&lt;!DOCTYPE html&gt;</p>
-<p class="p1">&lt;html lang="en"&gt;</p>
-<p class="p1">&lt;head&gt;</p>
-<p class="p1">&lt;meta charset="utf-8"&gt;</p>
-<p class="p1">&lt;meta name="viewport" content="width=device-width,initial-scale=1"&gt;</p>
-<p class="p1">&lt;title&gt;Mission Patch Generator — Leanna Urena&lt;/title&gt;</p>
-<p class="p1">&lt;style&gt;</p>
-<p class="p1">:root{--background:#fff;--text:#111;--accent:#2e9b4f;--line:#deded8}</p>
-<p class="p1">*{box-sizing:border-box}</p>
-<p class="p1">body{margin:0;background:var(--background);color:var(--text);</p>
-<p class="p1"><span class="Apple-converted-space">  </span>font:16px/1.5 Arial,Helvetica,sans-serif}</p>
-<p class="p1">button,input,select{font:inherit}</p>
-<p class="p1">button,input,select{border-radius:0}</p>
-<p class="p1">button,a,input,select{touch-action:manipulation}</p>
-<p class="p1">:focus-visible{outline:2px solid #111;outline-offset:4px}</p>
-<p class="p1">.wrap{max-width:1200px;margin:auto;padding:32px}</p>
-<p class="p1">a{color:inherit;text-underline-offset:4px}</p>
-<p class="p1">header{padding:24px 0 28px;border-bottom:1px solid var(--line)}</p>
-<p class="p1">.kicker{font-size:11px;letter-spacing:.14em;text-transform:uppercase;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>color:#515851;margin:0 0 8px}</p>
-<p class="p1">h1,h2{font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>font-weight:700;line-height:1.25}</p>
-<p class="p1">h1{font-size:24px;margin:0 0 10px}</p>
-<p class="p1">h2{font-size:18px;margin:0 0 18px}</p>
-<p class="p1">header p:last-child{max-width:650px;margin:0;color:#515851}</p>
-<p class="p1">main{display:grid;grid-template-columns:300px minmax(0,1fr);gap:40px;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>padding:32px 0}</p>
-<p class="p1">aside{min-width:0}</p>
-<p class="p1">.field{display:grid;gap:7px;margin-bottom:19px}</p>
-<p class="p1">label{font-size:13px;font-weight:bold}</p>
-<p class="p1">input[type=text],select{width:100%;padding:10px;border:1px solid #aaa;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>background:#fff;color:#111;min-height:44px}</p>
-<p class="p1">input[type=range]{width:100%;accent-color:var(--accent)}</p>
-<p class="p1">.range-label{display:flex;justify-content:space-between;gap:12px}</p>
-<p class="p1">output{font-weight:normal}</p>
-<p class="p1">button{padding:12px 16px;border:1px solid #111;background:#fff;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>color:#111;cursor:pointer;font-weight:bold;min-height:46px}</p>
-<p class="p1">button:hover{text-decoration:underline;text-underline-offset:4px}</p>
-<p class="p1">.primary{background:var(--accent);border-color:var(--accent)}</p>
-<p class="p1">.actions{display:grid;gap:10px;margin-top:24px}</p>
-<p class="p1">.stage{min-width:0}</p>
-<p class="p1">.preview{background:#eeeee8;padding:24px;display:grid;place-items:center}</p>
-<p class="p1">canvas{display:block;width:100%;max-width:610px;height:auto;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>aspect-ratio:1;background:#fff;box-shadow:0 8px 24px #00000015}</p>
-<p class="p1">.meta{display:flex;justify-content:space-between;gap:16px;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>font-size:12px;color:#515851;margin:12px 0 20px;flex-wrap:wrap}</p>
-<p class="p1">.download{width:100%}</p>
-<p class="p1">.note{font-size:12px;color:#515851}</p>
-<p class="p1">details{border-top:1px solid var(--line);padding-top:18px;margin-top:24px}</p>
-<p class="p1">summary{cursor:pointer;font-size:13px;font-weight:bold}</p>
-<p class="p1">details p{font-size:13px;color:#515851}</p>
-<p class="p1">footer{border-top:1px solid var(--line);padding:22px 0;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>font-size:12px;color:#515851}</p>
-<p class="p1">#status{min-height:20px}</p>
-<p class="p1">@media(max-width:760px){</p>
-<p class="p1"><span class="Apple-converted-space"> </span>.wrap{padding:20px 16px}</p>
-<p class="p1"><span class="Apple-converted-space"> </span>main{grid-template-columns:1fr;gap:28px}</p>
-<p class="p1"><span class="Apple-converted-space"> </span>.preview{padding:14px}</p>
-<p class="p1"><span class="Apple-converted-space"> </span>h1{font-size:22px}</p>
-<p class="p1">}</p>
-<p class="p1">@media print{</p>
-<p class="p1"><span class="Apple-converted-space"> </span>header,aside,footer,.meta,.download,.note{display:none}</p>
-<p class="p1"><span class="Apple-converted-space"> </span>.wrap,main,.preview{padding:0;margin:0;background:white;display:block}</p>
-<p class="p1"><span class="Apple-converted-space"> </span>canvas{width:3.5in;height:3.5in;box-shadow:none}</p>
-<p class="p1">}</p>
-<p class="p1">&lt;/style&gt;</p>
-<p class="p1">&lt;/head&gt;</p>
-<p class="p1">&lt;body&gt;</p>
-<p class="p1">&lt;div class="wrap"&gt;</p>
-<p class="p1">&lt;a href="index.html"&gt;← Back to Work&lt;/a&gt;</p>
-<p class="p1">&lt;header&gt;</p>
-<p class="p1">&lt;p class="kicker"&gt;SSEP Mission Patch · Session 2&lt;/p&gt;</p>
-<p class="p1">&lt;h1&gt;Mission Patch Generator&lt;/h1&gt;</p>
-<p class="p1">&lt;p&gt;Collaboration and repeated experimentation lead to discovery</p>
-<p class="p1">along the road of curiosity.&lt;/p&gt;</p>
-<p class="p1">&lt;/header&gt;</p>
-<p class="p2"><br></p>
-<p class="p1">&lt;main&gt;</p>
-<p class="p1">&lt;aside aria-label="Patch controls"&gt;</p>
-<p class="p1">&lt;h2&gt;Build your patch&lt;/h2&gt;</p>
-<p class="p2"><br></p>
-<p class="p1">&lt;div class="field"&gt;</p>
-<p class="p1">&lt;label for="top"&gt;Top label&lt;/label&gt;</p>
-<p class="p1">&lt;input id="top" type="text" maxlength="18" value="BARUCH"&gt;</p>
-<p class="p1">&lt;/div&gt;</p>
-<p class="p2"><br></p>
-<p class="p1">&lt;div class="field"&gt;</p>
-<p class="p1">&lt;label for="bottom"&gt;Bottom label&lt;/label&gt;</p>
-<p class="p1">&lt;input id="bottom" type="text" maxlength="22" value="SSEP"&gt;</p>
-<p class="p1">&lt;/div&gt;</p>
-<p class="p2"><br></p>
-<p class="p1">&lt;div class="field"&gt;</p>
-<p class="p1">&lt;label for="palette"&gt;Color palette&lt;/label&gt;</p>
-<p class="p1">&lt;select id="palette"&gt;</p>
-<p class="p1">&lt;option value="space"&gt;Space · navy / cream / green&lt;/option&gt;</p>
-<p class="p1">&lt;option value="earth"&gt;Earth · green / cream / gold&lt;/option&gt;</p>
-<p class="p1">&lt;option value="mono"&gt;Monochrome · cream / black&lt;/option&gt;</p>
-<p class="p1">&lt;/select&gt;</p>
-<p class="p1">&lt;/div&gt;</p>
-<p class="p2"><br></p>
-<p class="p1">&lt;div class="field"&gt;</p>
-<p class="p1">&lt;label for="layout"&gt;Composition&lt;/label&gt;</p>
-<p class="p1">&lt;select id="layout"&gt;</p>
-<p class="p1">&lt;option value="balanced"&gt;Balanced orbit&lt;/option&gt;</p>
-<p class="p1">&lt;option value="wide"&gt;Wide orbit&lt;/option&gt;</p>
-<p class="p1">&lt;option value="compact"&gt;Compact orbit&lt;/option&gt;</p>
-<p class="p1">&lt;/select&gt;</p>
-<p class="p1">&lt;/div&gt;</p>
-<p class="p2"><br></p>
-<p class="p1">&lt;div class="field"&gt;</p>
-<p class="p1">&lt;div class="range-label"&gt;</p>
-<p class="p1">&lt;label for="road"&gt;Road width&lt;/label&gt;</p>
-<p class="p1">&lt;output id="road-value" for="road"&gt;100%&lt;/output&gt;</p>
-<p class="p1">&lt;/div&gt;</p>
-<p class="p1">&lt;input id="road" type="range" min="75" max="120" value="100"&gt;</p>
-<p class="p1">&lt;/div&gt;</p>
-<p class="p2"><br></p>
-<p class="p1">&lt;div class="field"&gt;</p>
-<p class="p1">&lt;div class="range-label"&gt;</p>
-<p class="p1">&lt;label for="eye"&gt;Eye size&lt;/label&gt;</p>
-<p class="p1">&lt;output id="eye-value" for="eye"&gt;100%&lt;/output&gt;</p>
-<p class="p1">&lt;/div&gt;</p>
-<p class="p1">&lt;input id="eye" type="range" min="80" max="120" value="100"&gt;</p>
-<p class="p1">&lt;/div&gt;</p>
-<p class="p2"><br></p>
-<p class="p1">&lt;div class="field"&gt;</p>
-<p class="p1">&lt;div class="range-label"&gt;</p>
-<p class="p1">&lt;label for="weight"&gt;Line weight&lt;/label&gt;</p>
-<p class="p1">&lt;output id="weight-value" for="weight"&gt;8&lt;/output&gt;</p>
-<p class="p1">&lt;/div&gt;</p>
-<p class="p1">&lt;input id="weight" type="range" min="6" max="12" value="8"&gt;</p>
-<p class="p1">&lt;/div&gt;</p>
-<p class="p2"><br></p>
-<p class="p1">&lt;div class="actions"&gt;</p>
-<p class="p1">&lt;button class="primary" id="generate" type="button"&gt;</p>
-<p class="p1">Generate variation ↗</p>
-<p class="p1">&lt;/button&gt;</p>
-<p class="p1">&lt;button id="reset" type="button"&gt;Reset to starting design&lt;/button&gt;</p>
-<p class="p1">&lt;/div&gt;</p>
-<p class="p2"><br></p>
-<p class="p1">&lt;details&gt;</p>
-<p class="p1">&lt;summary&gt;About the symbols&lt;/summary&gt;</p>
-<p class="p1">&lt;p&gt;The puzzle pieces represent individual contributions to a shared</p>
-<p class="p1">effort. The arrows show the cycle of testing, learning, and trying</p>
-<p class="p1">again. The road leads toward the eye, connecting curiosity with</p>
-<p class="p1">observation and discovery.&lt;/p&gt;</p>
-<p class="p1">&lt;p&gt;Each variation keeps these symbols together while changing their</p>
-<p class="p1">spacing, proportions, and rotation.&lt;/p&gt;</p>
-<p class="p1">&lt;/details&gt;</p>
-<p class="p1">&lt;/aside&gt;</p>
-<p class="p2"><br></p>
-<p class="p1">&lt;section class="stage" aria-label="Patch preview and download"&gt;</p>
-<p class="p1">&lt;div class="preview"&gt;</p>
-<p class="p1">&lt;canvas id="patch" width="1050" height="1050"</p>
-<p class="p1"><span class="Apple-converted-space"> </span>role="img" aria-label="Mission patch with an eye, a road,</p>
-<p class="p1"><span class="Apple-converted-space"> </span>three puzzle-piece circles, and clockwise arrows"&gt;</p>
-<p class="p1">Your browser needs canvas support to display this patch.</p>
-<p class="p1">&lt;/canvas&gt;</p>
-<p class="p1">&lt;/div&gt;</p>
-<p class="p1">&lt;div class="meta"&gt;</p>
-<p class="p1">&lt;span&gt;3.5 × 3.5 inches · 1050 × 1050 px · 300 dpi&lt;/span&gt;</p>
-<p class="p1">&lt;span id="edition"&gt;Starting design&lt;/span&gt;</p>
-<p class="p1">&lt;/div&gt;</p>
-<p class="p1">&lt;button class="primary download" id="download" type="button"&gt;</p>
-<p class="p1">Download PNG</p>
-<p class="p1">&lt;/button&gt;</p>
-<p class="p1">&lt;p class="note" id="status" role="status" aria-live="polite"&gt;</p>
-<p class="p1">Save the variations you want to keep.</p>
-<p class="p1">&lt;/p&gt;</p>
-<p class="p1">&lt;/section&gt;</p>
-<p class="p1">&lt;/main&gt;</p>
-<p class="p2"><br></p>
-<p class="p1">&lt;footer&gt;Leanna Urena · A.I. for Designers · SSEP Mission Patch&lt;/footer&gt;</p>
-<p class="p1">&lt;/div&gt;</p>
-<p class="p2"><br></p>
-<p class="p1">&lt;script&gt;</p>
-<p class="p1">"use strict";</p>
-<p class="p1">(() =&gt; {</p>
-<p class="p1"><span class="Apple-converted-space">  </span>const $ = id =&gt; document.getElementById(id);</p>
-<p class="p1"><span class="Apple-converted-space">  </span>const canvas = $("patch");</p>
-<p class="p1"><span class="Apple-converted-space">  </span>const ctx = canvas.getContext("2d");</p>
-<p class="p1"><span class="Apple-converted-space">  </span>const palettes = {</p>
-<p class="p1"><span class="Apple-converted-space">    </span>space: {bg:"#142c40",ink:"#f3f2eb",accent:"#8bc9a0"},</p>
-<p class="p1"><span class="Apple-converted-space">    </span>earth: {bg:"#204b3b",ink:"#f3f2eb",accent:"#d8bd79"},</p>
-<p class="p1"><span class="Apple-converted-space">    </span>mono:<span class="Apple-converted-space">  </span>{bg:"#f3f2eb",ink:"#242925",accent:"#242925"}</p>
-<p class="p1"><span class="Apple-converted-space">  </span>};</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">  </span>let edition = 0;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>let variation = {spread:1,lift:0,size:1,turns:[0,25,-25],iris:0};</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">  </span>function random(a,b) { return a+Math.random()*(b-a); }</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">  </span>function strokePath(draw,color,width,fill) {</p>
-<p class="p1"><span class="Apple-converted-space">    </span>ctx.beginPath();</p>
-<p class="p1"><span class="Apple-converted-space">    </span>draw();</p>
-<p class="p1"><span class="Apple-converted-space">    </span>if(fill) { ctx.fillStyle=fill; ctx.fill(); }</p>
-<p class="p1"><span class="Apple-converted-space">    </span>if(color) {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>ctx.strokeStyle=color;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>ctx.lineWidth=width;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>ctx.stroke();</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p1"><span class="Apple-converted-space">  </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">  </span>function circle(x,y,r,fill,stroke,width=8) {</p>
-<p class="p1"><span class="Apple-converted-space">    </span>strokePath(()=&gt;ctx.arc(x,y,r,0,Math.PI*2),stroke,width,fill);</p>
-<p class="p1"><span class="Apple-converted-space">  </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">  </span>function label(text,y,color,maxWidth) {</p>
-<p class="p1"><span class="Apple-converted-space">    </span>if(!text.trim()) return;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>ctx.fillStyle=color;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>ctx.textAlign="center";</p>
-<p class="p1"><span class="Apple-converted-space">    </span>ctx.textBaseline="middle";</p>
-<p class="p1"><span class="Apple-converted-space">    </span>let size=48;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>do {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>ctx.font=`700 ${size}px Arial,Helvetica,sans-serif`;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>if(ctx.measureText(text).width&lt;=maxWidth) break;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>size--;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>} while(size&gt;12);</p>
-<p class="p1"><span class="Apple-converted-space">    </span>ctx.fillText(text,500,y);</p>
-<p class="p1"><span class="Apple-converted-space">  </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">  </span>function puzzle(x,y,r,angle,color,width) {</p>
-<p class="p1"><span class="Apple-converted-space">    </span>ctx.save();</p>
-<p class="p1"><span class="Apple-converted-space">    </span>ctx.translate(x,y);</p>
-<p class="p1"><span class="Apple-converted-space">    </span>ctx.rotate(angle*Math.PI/180);</p>
-<p class="p1"><span class="Apple-converted-space">    </span>ctx.scale(r/82,r/82);</p>
-<p class="p1"><span class="Apple-converted-space">    </span>// A simple silhouette with two tabs and one socket.</p>
-<p class="p1"><span class="Apple-converted-space">    </span>strokePath(()=&gt;{</p>
-<p class="p1"><span class="Apple-converted-space">      </span>ctx.moveTo(-39,-36);</p>
-<p class="p1"><span class="Apple-converted-space">      </span>ctx.lineTo(-13,-36);</p>
-<p class="p1"><span class="Apple-converted-space">      </span>ctx.bezierCurveTo(-25,-65,25,-65,13,-36);</p>
-<p class="p1"><span class="Apple-converted-space">      </span>ctx.lineTo(39,-36);</p>
-<p class="p1"><span class="Apple-converted-space">      </span>ctx.lineTo(39,-12);</p>
-<p class="p1"><span class="Apple-converted-space">      </span>ctx.bezierCurveTo(68,-24,68,24,39,12);</p>
-<p class="p1"><span class="Apple-converted-space">      </span>ctx.lineTo(39,38);</p>
-<p class="p1"><span class="Apple-converted-space">      </span>ctx.lineTo(13,38);</p>
-<p class="p1"><span class="Apple-converted-space">      </span>ctx.bezierCurveTo(25,10,-25,10,-13,38);</p>
-<p class="p1"><span class="Apple-converted-space">      </span>ctx.lineTo(-39,38);</p>
-<p class="p1"><span class="Apple-converted-space">      </span>ctx.closePath();</p>
-<p class="p1"><span class="Apple-converted-space">    </span>},color,width*0.72,color);</p>
-<p class="p1"><span class="Apple-converted-space">    </span>ctx.restore();</p>
-<p class="p1"><span class="Apple-converted-space">  </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">  </span>function arrow(cx,cy,rx,ry,start,end,color,width) {</p>
-<p class="p1"><span class="Apple-converted-space">    </span>const a=start*Math.PI/180,b=end*Math.PI/180;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>strokePath(()=&gt;ctx.ellipse(cx,cy,rx,ry,0,a,b),color,width);</p>
-<p class="p1"><span class="Apple-converted-space">    </span>const x=cx+rx*Math.cos(b),y=cy+ry*Math.sin(b);</p>
-<p class="p1"><span class="Apple-converted-space">    </span>const tangent=Math.atan2(ry*Math.cos(b),-rx*Math.sin(b));</p>
-<p class="p1"><span class="Apple-converted-space">    </span>ctx.save();</p>
-<p class="p1"><span class="Apple-converted-space">    </span>ctx.translate(x,y);</p>
-<p class="p1"><span class="Apple-converted-space">    </span>ctx.rotate(tangent);</p>
-<p class="p1"><span class="Apple-converted-space">    </span>strokePath(()=&gt;{</p>
-<p class="p1"><span class="Apple-converted-space">      </span>ctx.moveTo(-22,-14);</p>
-<p class="p1"><span class="Apple-converted-space">      </span>ctx.lineTo(0,0);</p>
-<p class="p1"><span class="Apple-converted-space">      </span>ctx.lineTo(-22,14);</p>
-<p class="p1"><span class="Apple-converted-space">    </span>},color,width);</p>
-<p class="p1"><span class="Apple-converted-space">    </span>ctx.restore();</p>
-<p class="p1"><span class="Apple-converted-space">  </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">  </span>function render() {</p>
-<p class="p1"><span class="Apple-converted-space">    </span>const p=palettes[$("palette").value];</p>
-<p class="p1"><span class="Apple-converted-space">    </span>const weight=Number($("weight").value);</p>
-<p class="p1"><span class="Apple-converted-space">    </span>const road=Number($("road").value)/100;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>const eye=Number($("eye").value)/100;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>$("road-value").textContent=$("road").value+"%";</p>
-<p class="p1"><span class="Apple-converted-space">    </span>$("eye-value").textContent=$("eye").value+"%";</p>
-<p class="p1"><span class="Apple-converted-space">    </span>$("weight-value").textContent=weight;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>ctx.setTransform(1,0,0,1,0,0);</p>
-<p class="p1"><span class="Apple-converted-space">    </span>ctx.clearRect(0,0,1050,1050);</p>
-<p class="p1"><span class="Apple-converted-space">    </span>ctx.setTransform(1.05,0,0,1.05,0,0);</p>
-<p class="p1"><span class="Apple-converted-space">    </span>ctx.lineCap="round";</p>
-<p class="p1"><span class="Apple-converted-space">    </span>ctx.lineJoin="round";</p>
-<p class="p1"><span class="Apple-converted-space">    </span>ctx.fillStyle=p.bg;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>ctx.fillRect(0,0,1000,1000);</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>// Square patch border and protected label areas.</p>
-<p class="p1"><span class="Apple-converted-space">    </span>ctx.strokeStyle=p.ink;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>ctx.lineWidth=12;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>ctx.strokeRect(30,30,940,940);</p>
-<p class="p1"><span class="Apple-converted-space">    </span>ctx.lineWidth=2;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>ctx.strokeRect(48,48,904,904);</p>
-<p class="p1"><span class="Apple-converted-space">    </span>label($("top").value,112,p.ink,800);</p>
-<p class="p1"><span class="Apple-converted-space">    </span>label($("bottom").value,918,p.ink,800);</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>const layouts={</p>
-<p class="p1"><span class="Apple-converted-space">      </span>balanced:{rx:282,ry:232,cy:486,r:82},</p>
-<p class="p1"><span class="Apple-converted-space">      </span>wide:{rx:314,ry:220,cy:486,r:78},</p>
-<p class="p1"><span class="Apple-converted-space">      </span>compact:{rx:254,ry:210,cy:474,r:76}</p>
-<p class="p1"><span class="Apple-converted-space">    </span>};</p>
-<p class="p1"><span class="Apple-converted-space">    </span>const l=layouts[$("layout").value];</p>
-<p class="p1"><span class="Apple-converted-space">    </span>const rx=l.rx*variation.spread;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>const ry=l.ry;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>const cy=l.cy+variation.lift;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>const r=l.r*variation.size;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>// Three arrow segments establish one clockwise cycle.</p>
-<p class="p1"><span class="Apple-converted-space">    </span>arrow(500,cy,rx,ry,-63,3,p.accent,weight);</p>
-<p class="p1"><span class="Apple-converted-space">    </span>arrow(500,cy,rx,ry,57,123,p.accent,weight);</p>
-<p class="p1"><span class="Apple-converted-space">    </span>arrow(500,cy,rx,ry,177,243,p.accent,weight);</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>// Road overlaps the bottom orbit, as in the original sketch.</p>
-<p class="p1"><span class="Apple-converted-space">    </span>const half=164*road;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>strokePath(()=&gt;{</p>
-<p class="p1"><span class="Apple-converted-space">      </span>ctx.moveTo(500-half,856);</p>
-<p class="p1"><span class="Apple-converted-space">      </span>ctx.lineTo(490,530);</p>
-<p class="p1"><span class="Apple-converted-space">      </span>ctx.quadraticCurveTo(500,518,510,530);</p>
-<p class="p1"><span class="Apple-converted-space">      </span>ctx.lineTo(500+half,856);</p>
-<p class="p1"><span class="Apple-converted-space">      </span>ctx.closePath();</p>
-<p class="p1"><span class="Apple-converted-space">    </span>},p.ink,weight,p.bg);</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>ctx.save();</p>
-<p class="p1"><span class="Apple-converted-space">    </span>ctx.setLineDash([24,23]);</p>
-<p class="p1"><span class="Apple-converted-space">    </span>strokePath(()=&gt;{</p>
-<p class="p1"><span class="Apple-converted-space">      </span>ctx.moveTo(500,555);</p>
-<p class="p1"><span class="Apple-converted-space">      </span>ctx.lineTo(500,852);</p>
-<p class="p1"><span class="Apple-converted-space">    </span>},p.accent,Math.max(5,weight*.72));</p>
-<p class="p1"><span class="Apple-converted-space">    </span>ctx.restore();</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>// Three floating circles, each containing a puzzle piece.</p>
-<p class="p1"><span class="Apple-converted-space">    </span>[-90,30,150].forEach((degrees,i)=&gt;{</p>
-<p class="p1"><span class="Apple-converted-space">      </span>const angle=degrees*Math.PI/180;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>const x=500+rx*Math.cos(angle);</p>
-<p class="p1"><span class="Apple-converted-space">      </span>const y=cy+ry*Math.sin(angle);</p>
-<p class="p1"><span class="Apple-converted-space">      </span>circle(x,y,r,p.bg,p.ink,weight);</p>
-<p class="p1"><span class="Apple-converted-space">      </span>puzzle(x,y,r,variation.turns[i],p.accent,weight);</p>
-<p class="p1"><span class="Apple-converted-space">    </span>});</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>// Central eye: restrained linework that survives reduction.</p>
-<p class="p1"><span class="Apple-converted-space">    </span>ctx.save();</p>
-<p class="p1"><span class="Apple-converted-space">    </span>ctx.translate(500,471);</p>
-<p class="p1"><span class="Apple-converted-space">    </span>ctx.scale(eye,eye);</p>
-<p class="p1"><span class="Apple-converted-space">    </span>strokePath(()=&gt;{</p>
-<p class="p1"><span class="Apple-converted-space">      </span>ctx.moveTo(-116,0);</p>
-<p class="p1"><span class="Apple-converted-space">      </span>ctx.quadraticCurveTo(0,-94,116,0);</p>
-<p class="p1"><span class="Apple-converted-space">      </span>ctx.quadraticCurveTo(0,88,-116,0);</p>
-<p class="p1"><span class="Apple-converted-space">      </span>ctx.closePath();</p>
-<p class="p1"><span class="Apple-converted-space">    </span>},p.ink,weight,p.bg);</p>
-<p class="p1"><span class="Apple-converted-space">    </span>circle(variation.iris,0,33,p.accent,p.ink,weight*.7);</p>
-<p class="p1"><span class="Apple-converted-space">    </span>circle(variation.iris,0,14,p.ink);</p>
-<p class="p1"><span class="Apple-converted-space">    </span>ctx.restore();</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>$("edition").textContent=edition</p>
-<p class="p1"><span class="Apple-converted-space">      </span>? "Variation "+String(edition).padStart(2,"0")</p>
-<p class="p1"><span class="Apple-converted-space">      </span>: "Starting design";</p>
-<p class="p1"><span class="Apple-converted-space">  </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">  </span>function generate() {</p>
-<p class="p1"><span class="Apple-converted-space">    </span>edition++;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>variation={</p>
-<p class="p1"><span class="Apple-converted-space">      </span>spread:random(.96,1.04),</p>
-<p class="p1"><span class="Apple-converted-space">      </span>lift:random(-7,7),</p>
-<p class="p1"><span class="Apple-converted-space">      </span>size:random(.92,1.03),</p>
-<p class="p1"><span class="Apple-converted-space">      </span>turns:[random(-45,45),random(-65,65),random(-65,65)],</p>
-<p class="p1"><span class="Apple-converted-space">      </span>iris:random(-4,4)</p>
-<p class="p1"><span class="Apple-converted-space">    </span>};</p>
-<p class="p1"><span class="Apple-converted-space">    </span>render();</p>
-<p class="p1"><span class="Apple-converted-space">    </span>$("status").textContent="New variation ready. Download it to keep it.";</p>
-<p class="p1"><span class="Apple-converted-space">  </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">  </span>function reset() {</p>
-<p class="p1"><span class="Apple-converted-space">    </span>$("top").value="BARUCH";</p>
-<p class="p1"><span class="Apple-converted-space">    </span>$("bottom").value="SSEP";</p>
-<p class="p1"><span class="Apple-converted-space">    </span>$("palette").value="space";</p>
-<p class="p1"><span class="Apple-converted-space">    </span>$("layout").value="balanced";</p>
-<p class="p1"><span class="Apple-converted-space">    </span>$("road").value=100;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>$("eye").value=100;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>$("weight").value=8;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>edition=0;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>variation={spread:1,lift:0,size:1,turns:[0,25,-25],iris:0};</p>
-<p class="p1"><span class="Apple-converted-space">    </span>render();</p>
-<p class="p1"><span class="Apple-converted-space">    </span>$("status").textContent="Starting design restored.";</p>
-<p class="p1"><span class="Apple-converted-space">  </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">  </span>// Set PNG pHYs metadata to 300 dpi (11811 pixels per metre).</p>
-<p class="p1"><span class="Apple-converted-space">  </span>// Canvas dimensions stay 1050 × 1050; artwork bytes are unchanged.</p>
-<p class="p1"><span class="Apple-converted-space">  </span>function png300dpi(bytes) {</p>
-<p class="p1"><span class="Apple-converted-space">    </span>function crc32(data) {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>let crc=0xffffffff;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>for(const byte of data) {</p>
-<p class="p1"><span class="Apple-converted-space">        </span>crc^=byte;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>for(let j=0;j&lt;8;j++)</p>
-<p class="p1"><span class="Apple-converted-space">          </span>crc=(crc&gt;&gt;&gt;1)^((crc&amp;1)?0xedb88320:0);</p>
-<p class="p1"><span class="Apple-converted-space">      </span>}</p>
-<p class="p1"><span class="Apple-converted-space">      </span>return (crc^0xffffffff)&gt;&gt;&gt;0;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p1"><span class="Apple-converted-space">    </span>const chunk=new Uint8Array(21);</p>
-<p class="p1"><span class="Apple-converted-space">    </span>const view=new DataView(chunk.buffer);</p>
-<p class="p1"><span class="Apple-converted-space">    </span>view.setUint32(0,9);</p>
-<p class="p1"><span class="Apple-converted-space">    </span>chunk.set([112,72,89,115],4); // pHYs</p>
-<p class="p1"><span class="Apple-converted-space">    </span>view.setUint32(8,11811);</p>
-<p class="p1"><span class="Apple-converted-space">    </span>view.setUint32(12,11811);</p>
-<p class="p1"><span class="Apple-converted-space">    </span>chunk[16]=1;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>view.setUint32(17,crc32(chunk.subarray(4,17)));</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>const parts=[bytes.subarray(0,8)];</p>
-<p class="p1"><span class="Apple-converted-space">    </span>let offset=8,inserted=false;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>const source=new DataView(</p>
-<p class="p1"><span class="Apple-converted-space">      </span>bytes.buffer,bytes.byteOffset,bytes.byteLength</p>
-<p class="p1"><span class="Apple-converted-space">    </span>);</p>
-<p class="p1"><span class="Apple-converted-space">    </span>while(offset+12&lt;=bytes.length) {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>const length=source.getUint32(offset);</p>
-<p class="p1"><span class="Apple-converted-space">      </span>const end=offset+length+12;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>if(end&gt;bytes.length) throw new Error("Invalid PNG data");</p>
-<p class="p1"><span class="Apple-converted-space">      </span>const type=String.fromCharCode(...bytes.subarray(offset+4,offset+8));</p>
-<p class="p1"><span class="Apple-converted-space">      </span>if(type!=="pHYs") parts.push(bytes.subarray(offset,end));</p>
-<p class="p1"><span class="Apple-converted-space">      </span>if(type==="IHDR"&amp;&amp;!inserted) {</p>
-<p class="p1"><span class="Apple-converted-space">        </span>parts.push(chunk);</p>
-<p class="p1"><span class="Apple-converted-space">        </span>inserted=true;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>}</p>
-<p class="p1"><span class="Apple-converted-space">      </span>offset=end;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p1"><span class="Apple-converted-space">    </span>return new Blob(parts,{type:"image/png"});</p>
-<p class="p1"><span class="Apple-converted-space">  </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">  </span>async function download() {</p>
-<p class="p1"><span class="Apple-converted-space">    </span>const button=$("download");</p>
-<p class="p1"><span class="Apple-converted-space">    </span>button.disabled=true;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>try {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>const raw=await new Promise((resolve,reject)=&gt;{</p>
-<p class="p1"><span class="Apple-converted-space">        </span>canvas.toBlob(blob=&gt;blob?resolve(blob):</p>
-<p class="p1"><span class="Apple-converted-space">          </span>reject(new Error("PNG export unavailable")),"image/png");</p>
-<p class="p1"><span class="Apple-converted-space">      </span>});</p>
-<p class="p1"><span class="Apple-converted-space">      </span>const blob=png300dpi(new Uint8Array(await raw.arrayBuffer()));</p>
-<p class="p1"><span class="Apple-converted-space">      </span>const url=URL.createObjectURL(blob);</p>
-<p class="p1"><span class="Apple-converted-space">      </span>const a=document.createElement("a");</p>
-<p class="p1"><span class="Apple-converted-space">      </span>a.href=url;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>a.download="mission-patch-"+String(edition).padStart(2,"0")+".png";</p>
-<p class="p1"><span class="Apple-converted-space">      </span>document.body.append(a);</p>
-<p class="p1"><span class="Apple-converted-space">      </span>a.click();</p>
-<p class="p1"><span class="Apple-converted-space">      </span>a.remove();</p>
-<p class="p1"><span class="Apple-converted-space">      </span>setTimeout(()=&gt;URL.revokeObjectURL(url),30000);</p>
-<p class="p1"><span class="Apple-converted-space">      </span>$("status").textContent=</p>
-<p class="p1"><span class="Apple-converted-space">        </span>"PNG download started · 1050 × 1050 px · 300 dpi.";</p>
-<p class="p1"><span class="Apple-converted-space">    </span>} catch(error) {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>$("status").textContent="Download failed: "+error.message;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>} finally {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>button.disabled=false;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p1"><span class="Apple-converted-space">  </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">  </span>["top","bottom","palette","layout","road","eye","weight"]</p>
-<p class="p1"><span class="Apple-converted-space">    </span>.forEach(id=&gt;$(id).addEventListener("input",render));</p>
-<p class="p1"><span class="Apple-converted-space">  </span>$("generate").addEventListener("click",generate);</p>
-<p class="p1"><span class="Apple-converted-space">  </span>$("reset").addEventListener("click",reset);</p>
-<p class="p1"><span class="Apple-converted-space">  </span>$("download").addEventListener("click",download);</p>
-<p class="p1"><span class="Apple-converted-space">  </span>render();</p>
-<p class="p1">})();</p>
-<p class="p1">&lt;/script&gt;</p>
-<p class="p1">&lt;/body&gt;</p>
-<p class="p1">&lt;/html&gt;</p>
+<div class="wrap">
+<a href="index.html">← Back to Work</a>
+<header>
+<p class="kicker">SSEP Mission Patch · Session 2</p>
+<h1>Mission Patch Generator</h1>
+<p>Collaboration and repeated experimentation lead to discovery
+along the road of curiosity.</p>
+</header>
+
+<main>
+<aside aria-label="Patch controls">
+<h2>Build your patch</h2>
+
+<div class="field">
+<label for="top">Top label</label>
+<input id="top" type="text" maxlength="18" value="BARUCH">
+</div>
+
+<div class="field">
+<label for="bottom">Bottom label</label>
+<input id="bottom" type="text" maxlength="22" value="SSEP">
+</div>
+
+<div class="field">
+<label for="palette">Color palette</label>
+<select id="palette">
+<option value="space">Space · navy / cream / green</option>
+<option value="earth">Earth · green / cream / gold</option>
+<option value="mono">Monochrome · cream / black</option>
+</select>
+</div>
+
+<div class="field">
+<label for="layout">Composition</label>
+<select id="layout">
+<option value="balanced">Balanced orbit</option>
+<option value="wide">Wide orbit</option>
+<option value="compact">Compact orbit</option>
+</select>
+</div>
+
+<div class="field">
+<div class="range-label">
+<label for="road">Road width</label>
+<output id="road-value" for="road">100%</output>
+</div>
+<input id="road" type="range" min="75" max="120" value="100">
+</div>
+
+<div class="field">
+<div class="range-label">
+<label for="eye">Eye size</label>
+<output id="eye-value" for="eye">100%</output>
+</div>
+<input id="eye" type="range" min="80" max="120" value="100">
+</div>
+
+<div class="field">
+<div class="range-label">
+<label for="weight">Line weight</label>
+<output id="weight-value" for="weight">8</output>
+</div>
+<input id="weight" type="range" min="6" max="12" value="8">
+</div>
+
+<div class="actions">
+<button class="primary" id="generate" type="button">
+Generate variation ↗
+</button>
+<button id="reset" type="button">Reset to starting design</button>
+</div>
+
+<details>
+<summary>About the symbols</summary>
+<p>The puzzle pieces represent individual contributions to a shared
+effort. The arrows show the cycle of testing, learning, and trying
+again. The road leads toward the eye, connecting curiosity with
+observation and discovery.</p>
+<p>Each variation keeps these symbols together while changing their
+spacing, proportions, and rotation.</p>
+</details>
+</aside>
+
+<section class="stage" aria-label="Patch preview and download">
+<div class="preview">
+<canvas id="patch" width="1050" height="1050"
+ role="img" aria-label="Mission patch with an eye, a road,
+ three puzzle-piece circles, and clockwise arrows">
+Your browser needs canvas support to display this patch.
+</canvas>
+</div>
+<div class="meta">
+<span>3.5 × 3.5 inches · 1050 × 1050 px · 300 dpi</span>
+<span id="edition">Starting design</span>
+</div>
+<button class="primary download" id="download" type="button">
+Download PNG
+</button>
+<p class="note" id="status" role="status" aria-live="polite">
+Save the variations you want to keep.
+</p>
+</section>
+</main>
+
+<footer>Leanna Urena · A.I. for Designers · SSEP Mission Patch</footer>
+</div>
+
+<script>
+"use strict";
+(() => {
+  const $ = id => document.getElementById(id);
+  const canvas = $("patch");
+  const ctx = canvas.getContext("2d");
+  const palettes = {
+    space: {bg:"#142c40",ink:"#f3f2eb",accent:"#8bc9a0"},
+    earth: {bg:"#204b3b",ink:"#f3f2eb",accent:"#d8bd79"},
+    mono:  {bg:"#f3f2eb",ink:"#242925",accent:"#242925"}
+  };
+
+  let edition = 0;
+  let variation = {spread:1,lift:0,size:1,turns:[0,25,-25],iris:0};
+
+  function random(a,b) { return a+Math.random()*(b-a); }
+
+  function strokePath(draw,color,width,fill) {
+    ctx.beginPath();
+    draw();
+    if(fill) { ctx.fillStyle=fill; ctx.fill(); }
+    if(color) {
+      ctx.strokeStyle=color;
+      ctx.lineWidth=width;
+      ctx.stroke();
+    }
+  }
+
+  function circle(x,y,r,fill,stroke,width=8) {
+    strokePath(()=>ctx.arc(x,y,r,0,Math.PI*2),stroke,width,fill);
+  }
+
+  function label(text,y,color,maxWidth) {
+    if(!text.trim()) return;
+    ctx.fillStyle=color;
+    ctx.textAlign="center";
+    ctx.textBaseline="middle";
+    let size=48;
+    do {
+      ctx.font=`700 ${size}px Arial,Helvetica,sans-serif`;
+      if(ctx.measureText(text).width<=maxWidth) break;
+      size--;
+    } while(size>12);
+    ctx.fillText(text,500,y);
+  }
+
+  function puzzle(x,y,r,angle,color,width) {
+    ctx.save();
+    ctx.translate(x,y);
+    ctx.rotate(angle*Math.PI/180);
+    ctx.scale(r/82,r/82);
+    // A simple silhouette with two tabs and one socket.
+    strokePath(()=>{
+      ctx.moveTo(-39,-36);
+      ctx.lineTo(-13,-36);
+      ctx.bezierCurveTo(-25,-65,25,-65,13,-36);
+      ctx.lineTo(39,-36);
+      ctx.lineTo(39,-12);
+      ctx.bezierCurveTo(68,-24,68,24,39,12);
+      ctx.lineTo(39,38);
+      ctx.lineTo(13,38);
+      ctx.bezierCurveTo(25,10,-25,10,-13,38);
+      ctx.lineTo(-39,38);
+      ctx.closePath();
+    },color,width*0.72,color);
+    ctx.restore();
+  }
+
+  function arrow(cx,cy,rx,ry,start,end,color,width) {
+    const a=start*Math.PI/180,b=end*Math.PI/180;
+    strokePath(()=>ctx.ellipse(cx,cy,rx,ry,0,a,b),color,width);
+    const x=cx+rx*Math.cos(b),y=cy+ry*Math.sin(b);
+    const tangent=Math.atan2(ry*Math.cos(b),-rx*Math.sin(b));
+    ctx.save();
+    ctx.translate(x,y);
+    ctx.rotate(tangent);
+    strokePath(()=>{
+      ctx.moveTo(-22,-14);
+      ctx.lineTo(0,0);
+      ctx.lineTo(-22,14);
+    },color,width);
+    ctx.restore();
+  }
+
+  function render() {
+    const p=palettes[$("palette").value];
+    const weight=Number($("weight").value);
+    const road=Number($("road").value)/100;
+    const eye=Number($("eye").value)/100;
+    $("road-value").textContent=$("road").value+"%";
+    $("eye-value").textContent=$("eye").value+"%";
+    $("weight-value").textContent=weight;
+
+    ctx.setTransform(1,0,0,1,0,0);
+    ctx.clearRect(0,0,1050,1050);
+    ctx.setTransform(1.05,0,0,1.05,0,0);
+    ctx.lineCap="round";
+    ctx.lineJoin="round";
+    ctx.fillStyle=p.bg;
+    ctx.fillRect(0,0,1000,1000);
+
+    // Square patch border and protected label areas.
+    ctx.strokeStyle=p.ink;
+    ctx.lineWidth=12;
+    ctx.strokeRect(30,30,940,940);
+    ctx.lineWidth=2;
+    ctx.strokeRect(48,48,904,904);
+    label($("top").value,112,p.ink,800);
+    label($("bottom").value,918,p.ink,800);
+
+    const layouts={
+      balanced:{rx:282,ry:232,cy:486,r:82},
+      wide:{rx:314,ry:220,cy:486,r:78},
+      compact:{rx:254,ry:210,cy:474,r:76}
+    };
+    const l=layouts[$("layout").value];
+    const rx=l.rx*variation.spread;
+    const ry=l.ry;
+    const cy=l.cy+variation.lift;
+    const r=l.r*variation.size;
+
+    // Three arrow segments establish one clockwise cycle.
+    arrow(500,cy,rx,ry,-63,3,p.accent,weight);
+    arrow(500,cy,rx,ry,57,123,p.accent,weight);
+    arrow(500,cy,rx,ry,177,243,p.accent,weight);
+
+    // Road overlaps the bottom orbit, as in the original sketch.
+    const half=164*road;
+    strokePath(()=>{
+      ctx.moveTo(500-half,856);
+      ctx.lineTo(490,530);
+      ctx.quadraticCurveTo(500,518,510,530);
+      ctx.lineTo(500+half,856);
+      ctx.closePath();
+    },p.ink,weight,p.bg);
+
+    ctx.save();
+    ctx.setLineDash([24,23]);
+    strokePath(()=>{
+      ctx.moveTo(500,555);
+      ctx.lineTo(500,852);
+    },p.accent,Math.max(5,weight*.72));
+    ctx.restore();
+
+    // Three floating circles, each containing a puzzle piece.
+    [-90,30,150].forEach((degrees,i)=>{
+      const angle=degrees*Math.PI/180;
+      const x=500+rx*Math.cos(angle);
+      const y=cy+ry*Math.sin(angle);
+      circle(x,y,r,p.bg,p.ink,weight);
+      puzzle(x,y,r,variation.turns[i],p.accent,weight);
+    });
+
+    // Central eye: restrained linework that survives reduction.
+    ctx.save();
+    ctx.translate(500,471);
+    ctx.scale(eye,eye);
+    strokePath(()=>{
+      ctx.moveTo(-116,0);
+      ctx.quadraticCurveTo(0,-94,116,0);
+      ctx.quadraticCurveTo(0,88,-116,0);
+      ctx.closePath();
+    },p.ink,weight,p.bg);
+    circle(variation.iris,0,33,p.accent,p.ink,weight*.7);
+    circle(variation.iris,0,14,p.ink);
+    ctx.restore();
+
+    $("edition").textContent=edition
+      ? "Variation "+String(edition).padStart(2,"0")
+      : "Starting design";
+  }
+
+  function generate() {
+    edition++;
+    variation={
+      spread:random(.96,1.04),
+      lift:random(-7,7),
+      size:random(.92,1.03),
+      turns:[random(-45,45),random(-65,65),random(-65,65)],
+      iris:random(-4,4)
+    };
+    render();
+    $("status").textContent="New variation ready. Download it to keep it.";
+  }
+
+  function reset() {
+    $("top").value="BARUCH";
+    $("bottom").value="SSEP";
+    $("palette").value="space";
+    $("layout").value="balanced";
+    $("road").value=100;
+    $("eye").value=100;
+    $("weight").value=8;
+    edition=0;
+    variation={spread:1,lift:0,size:1,turns:[0,25,-25],iris:0};
+    render();
+    $("status").textContent="Starting design restored.";
+  }
+
+  // Set PNG pHYs metadata to 300 dpi (11811 pixels per metre).
+  // Canvas dimensions stay 1050 × 1050; artwork bytes are unchanged.
+  function png300dpi(bytes) {
+    function crc32(data) {
+      let crc=0xffffffff;
+      for(const byte of data) {
+        crc^=byte;
+        for(let j=0;j<8;j++)
+          crc=(crc>>>1)^((crc&1)?0xedb88320:0);
+      }
+      return (crc^0xffffffff)>>>0;
+    }
+    const chunk=new Uint8Array(21);
+    const view=new DataView(chunk.buffer);
+    view.setUint32(0,9);
+    chunk.set([112,72,89,115],4); // pHYs
+    view.setUint32(8,11811);
+    view.setUint32(12,11811);
+    chunk[16]=1;
+    view.setUint32(17,crc32(chunk.subarray(4,17)));
+
+    const parts=[bytes.subarray(0,8)];
+    let offset=8,inserted=false;
+    const source=new DataView(
+      bytes.buffer,bytes.byteOffset,bytes.byteLength
+    );
+    while(offset+12<=bytes.length) {
+      const length=source.getUint32(offset);
+      const end=offset+length+12;
+      if(end>bytes.length) throw new Error("Invalid PNG data");
+      const type=String.fromCharCode(...bytes.subarray(offset+4,offset+8));
+      if(type!=="pHYs") parts.push(bytes.subarray(offset,end));
+      if(type==="IHDR"&&!inserted) {
+        parts.push(chunk);
+        inserted=true;
+      }
+      offset=end;
+    }
+    return new Blob(parts,{type:"image/png"});
+  }
+
+  async function download() {
+    const button=$("download");
+    button.disabled=true;
+    try {
+      const raw=await new Promise((resolve,reject)=>{
+        canvas.toBlob(blob=>blob?resolve(blob):
+          reject(new Error("PNG export unavailable")),"image/png");
+      });
+      const blob=png300dpi(new Uint8Array(await raw.arrayBuffer()));
+      const url=URL.createObjectURL(blob);
+      const a=document.createElement("a");
+      a.href=url;
+      a.download="mission-patch-"+String(edition).padStart(2,"0")+".png";
+      document.body.append(a);
+      a.click();
+      a.remove();
+      setTimeout(()=>URL.revokeObjectURL(url),30000);
+      $("status").textContent=
+        "PNG download started · 1050 × 1050 px · 300 dpi.";
+    } catch(error) {
+      $("status").textContent="Download failed: "+error.message;
+    } finally {
+      button.disabled=false;
+    }
+  }
+
+  ["top","bottom","palette","layout","road","eye","weight"]
+    .forEach(id=>$(id).addEventListener("input",render));
+  $("generate").addEventListener("click",generate);
+  $("reset").addEventListener("click",reset);
+  $("download").addEventListener("click",download);
+  render();
+})();
+</script>
 </body>
 </html>
