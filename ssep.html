@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="SSEP mission patch sketches and concept development by Leanna Urena: collaboration, trial and error, and curiosity on the path to discovery.">
+  <title>SSEP Mission Patch — Leanna Urena</title>
+  <style>
+    :root { --background: #FFFFFF; --text: #111111; --accent: #2E9B4F; }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { margin: 0; background: var(--background); color: var(--text); font: 400 16px/1.5 Arial, Helvetica, sans-serif; isolation: isolate; }
+    h1, h2, h3 { font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; font-weight: 700; line-height: 1.25; }
+    h1 { font-size: 24px; margin: 14px 0 0; }
+    h2 { font-size: 18px; margin: 0; }
+    h3 { font-size: 16px; margin: 0; }
+    p { margin: 0; }
+    a { color: inherit; text-underline-offset: 4px; }
+    a:hover, a:focus-visible { text-decoration-thickness: 2px; }
+    :focus-visible { outline: 2px solid var(--text); outline-offset: 3px; }
+    .wrap { max-width: 1200px; margin: auto; padding: 0 32px; }
+    .topbar, .footer { display: flex; justify-content: space-between; align-items: center; gap: 20px; padding: 24px 0; font-size: 14px; }
+    .topbar { border-bottom: 1px solid var(--accent); }
+    .tag { font-size: 12px; letter-spacing: .14em; text-transform: uppercase; }
+    .intro { padding: 48px 0; }
+    .stripe { width: 64px; height: 8px; margin-bottom: 24px; background: var(--accent); }
+    .intro p { max-width: 560px; margin-top: 16px; }
+    .featured { border: 2px solid var(--accent); background: var(--background); padding: 24px; }
+    .section-head { display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-bottom: 24px; }
+    .badge { padding: 6px 10px; background: var(--accent); font-size: 12px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; }
+    figure { margin: 0; min-width: 0; }
+    .image-link { display: block; }
+    .image-link img { display: block; width: 100%; height: auto; }
+    .featured figure { max-width: 800px; margin: auto; }
+    .image-meta { display: flex; justify-content: space-between; gap: 16px; padding-top: 12px; font-size: 12px; }
+    .concept { max-width: 800px; margin: 24px auto 0; padding-top: 24px; border-top: 1px solid var(--accent); }
+    .concept p { margin-top: 12px; }
+    .process { padding: 48px 0; }
+    .section-copy { max-width: 560px; margin-top: 12px; }
+    .grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; margin-top: 24px; align-items: start; }
+    .card { border: 1px solid var(--accent); background: var(--background); padding: 16px; }
+    .card-head { display: flex; align-items: baseline; gap: 12px; margin-bottom: 16px; }
+    .num { font: 12px monospace; }
+    .card figcaption { margin-top: 16px; }
+    .card figcaption p { margin: 10px 0 16px; }
+    .view-link { display: block; min-height: 56px; padding: 16px 20px; border: 1px solid var(--accent); background: var(--accent); font-weight: 700; text-decoration: none; }
+    .view-link:hover, .view-link:focus-visible { text-decoration: underline; text-decoration-thickness: 2px; }
+    .footer { border-top: 1px solid var(--accent); padding-bottom: 32px; }
+    button { min-height: 44px; padding: 10px 16px; border: 1px solid var(--accent); border-radius: 0; color: var(--text); background: var(--background); font: inherit; cursor: pointer; }
+    button:hover { text-decoration: underline; text-underline-offset: 4px; }
+    .float-layer { position: fixed; inset: 0; z-index: -1; pointer-events: none; overflow: hidden; }
+    .shape { position: absolute; bottom: -70px; width: var(--size); height: var(--size); left: var(--left); background: var(--accent); opacity: .09; animation: rise var(--duration) linear infinite; animation-delay: var(--delay); }
+    .shape:nth-child(even) { border-radius: 50%; }
+    .paused .shape { animation-play-state: paused; }
+    @keyframes rise { from { transform: translateY(0) rotate(0); } to { transform: translateY(calc(-100vh - 140px)) rotate(45deg); } }
+    @media (max-width: 1023px) {
+      .wrap { padding: 0 24px; }
+      .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .shape:nth-child(n+9) { display: none; }
+    }
+    @media (max-width: 639px) {
+      .wrap { padding: 0 16px; }
+      h1 { font-size: 22px; }
+      .topbar { align-items: flex-start; flex-direction: column; gap: 12px; }
+      .tag { font-size: 10px; }
+      .intro, .process { padding: 32px 0; }
+      .featured { padding: 16px; }
+      .section-head { flex-wrap: wrap; margin-bottom: 16px; }
+      .grid { grid-template-columns: 1fr; gap: 16px; }
+      .footer { align-items: flex-start; flex-direction: column; }
+      .shape:nth-child(n+7) { display: none; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      .shape { display: none; animation: none; }
+      #motion { display: none; }
+    }
+  </style>
+</head>
+<body>
+  <div class="float-layer" id="shapes" aria-hidden="true"></div>
+  <div class="wrap">
+    <nav class="topbar" aria-label="Page navigation">
+      <a href="index.html">← Back to work</a>
+      <span class="tag">Leanna Urena / A.I. for Designers</span>
+    </nav>
+
+    <main>
+      <header class="intro">
+        <div class="stripe" aria-hidden="true"></div>
+        <span class="tag">Session 1 · Symbols by hand</span>
+        <h1>SSEP Mission Patch</h1>
+        <p>From early symbols to a selected concept: exploring collaboration, experimentation, and discovery through hand-drawn mission patch designs.</p>
+      </header>
+
+      <!-- Save ssep.html beside index.html. Keep the four JPEGs in the ssep folder.
+           Image paths use the exact filenames shown in your repository. -->
+      <section class="featured" aria-labelledby="selected-title">
+        <div class="section-head">
+          <h2 id="selected-title">The selected concept</h2>
+          <span class="badge">Curiosity → Discovery</span>
+        </div>
+        <figure>
+          <a class="image-link" href="ssep/concept-select.jpeg" aria-label="View the selected mission patch concept at full size">
+            <img src="ssep/concept-select.jpeg" alt="Selected mission patch concept exploring collaboration through puzzle pieces and trial and error through a cycle." fetchpriority="high" decoding="async">
+          </a>
+          <figcaption class="image-meta"><strong>Concept selection</strong><a href="ssep/concept-select.jpeg">View full size ↗</a></figcaption>
+        </figure>
+        <div class="concept">
+          <h3>Discovery begins with curiosity</h3>
+          <p>Through collaboration and trial and error, curiosity becomes a path to discovery. The puzzle pieces represent people bringing their ideas together, while the cycle reflects the process of testing, learning, and trying again. Together, these symbols show how shared effort and a willingness to experiment can turn questions into new possibilities.</p>
+        </div>
+      </section>
+
+      <section class="process" aria-labelledby="process-title">
+        <h2 id="process-title">The process</h2>
+        <p class="section-copy">Three stages of exploration leading to the selected concept. Open any image to see the sketches in detail.</p>
+        <div class="grid">
+          <figure class="card">
+            <div class="card-head"><span class="num">01</span><h3>Visual translation</h3></div>
+            <a class="image-link" href="ssep/visual-transl.jpeg" aria-label="View visual translation sketches at full size">
+              <img src="ssep/visual-transl.jpeg" alt="Hand-drawn visual translation sketches for the SSEP mission patch assignment." loading="lazy" decoding="async">
+            </a>
+            <figcaption>
+              <p>Turning abstract ideas into visual symbols.</p>
+              <a class="view-link" href="ssep/visual-transl.jpeg">View sketches ↗</a>
+            </figcaption>
+          </figure>
+          <figure class="card">
+            <div class="card-head"><span class="num">02</span><h3>Symbol mapping</h3></div>
+            <a class="image-link" href="ssep/symbol-mapping.jpeg" aria-label="View symbol mapping sketches at full size">
+              <img src="ssep/symbol-mapping.jpeg" alt="Hand-drawn symbol maps exploring connections for the SSEP mission patch assignment." loading="lazy" decoding="async">
+            </a>
+            <figcaption>
+              <p>Finding connections between symbols and ideas.</p>
+              <a class="view-link" href="ssep/symbol-mapping.jpeg">View symbol maps ↗</a>
+            </figcaption>
+          </figure>
+          <figure class="card">
+            <div class="card-head"><span class="num">03</span><h3>Rapid concept generation</h3></div>
+            <a class="image-link" href="ssep/rapid-gen.jpeg" aria-label="View rapid mission patch concepts at full size">
+              <img src="ssep/rapid-gen.jpeg" alt="Rapid hand-drawn mission patch concepts exploring different visual approaches." loading="lazy" decoding="async">
+            </a>
+            <figcaption>
+              <p>Exploring different directions through quick sketches.</p>
+              <a class="view-link" href="ssep/rapid-gen.jpeg">View concepts ↗</a>
+            </figcaption>
+          </figure>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <a href="index.html">← Back to work</a>
+      <span class="tag">Leanna Urena · SSEP Mission Patch</span>
+      <button id="motion" type="button" aria-pressed="false">Pause animation</button>
+    </footer>
+  </div>
+  <script>
+    const layer = document.getElementById('shapes');
+    for (let i = 0; i < 12; i++) {
+      const shape = document.createElement('span');
+      shape.className = 'shape';
+      shape.style.setProperty('--size', `${20 + i * 4}px`);
+      shape.style.setProperty('--left', `${(i * 8.3 + 2) % 100}%`);
+      shape.style.setProperty('--duration', `${4 + (i % 5) * .5}s`);
+      shape.style.setProperty('--delay', `${-i * .73}s`);
+      layer.appendChild(shape);
+    }
+    document.getElementById('motion').addEventListener('click', function () {
+      const paused = document.body.classList.toggle('paused');
+      this.setAttribute('aria-pressed', String(paused));
+      this.textContent = paused ? 'Resume animation' : 'Pause animation';
+    });
+  </script>
+</body>
+</html>
