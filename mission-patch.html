@@ -5,168 +5,335 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Mission Patch Generator — Leanna Urena</title>
 <style>
-:root{--background:#fff;--text:#111;--accent:#2e9b4f;--line:#deded8}
+:root{
+  --paper:#f3f2eb;
+  --ink:#242925;
+  --green:#204b3b;
+  --muted:#586359;
+  --cream:#e8e6dc;
+  --line:#cecec2;
+}
 *{box-sizing:border-box}
-body{margin:0;background:var(--background);color:var(--text);
-  font:16px/1.5 Arial,Helvetica,sans-serif}
+body{
+  margin:0;
+  background:var(--paper);
+  color:var(--ink);
+  font:400 15px/1.5 Arial,Helvetica,sans-serif;
+}
 button,input,select{font:inherit}
-button,input,select{border-radius:0}
-button,a,input,select{touch-action:manipulation}
-:focus-visible{outline:2px solid #111;outline-offset:4px}
-.wrap{max-width:1200px;margin:auto;padding:32px}
+button,select,input[type=checkbox]{cursor:pointer}
+button:disabled{opacity:.55;cursor:wait}
+:focus-visible{outline:3px solid var(--green);outline-offset:4px}
 a{color:inherit;text-underline-offset:4px}
-header{padding:24px 0 28px;border-bottom:1px solid var(--line)}
-.kicker{font-size:11px;letter-spacing:.14em;text-transform:uppercase;
-  color:#515851;margin:0 0 8px}
-h1,h2{font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;
-  font-weight:700;line-height:1.25}
+.wrap{max-width:1240px;margin:auto;padding:28px 32px}
+.back{font-size:13px}
+header{
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-end;
+  gap:24px;
+  padding:28px 0;
+  border-bottom:1px solid var(--line);
+}
+h1,h2,h3{
+  font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;
+  font-weight:700;
+  line-height:1.25;
+}
 h1{font-size:24px;margin:0 0 10px}
-h2{font-size:18px;margin:0 0 18px}
-header p:last-child{max-width:650px;margin:0;color:#515851}
-main{display:grid;grid-template-columns:300px minmax(0,1fr);gap:40px;
-  padding:32px 0}
-aside{min-width:0}
-.field{display:grid;gap:7px;margin-bottom:19px}
-label{font-size:13px;font-weight:bold}
-input[type=text],select{width:100%;padding:10px;border:1px solid #aaa;
-  background:#fff;color:#111;min-height:44px}
-input[type=range]{width:100%;accent-color:var(--accent)}
-.range-label{display:flex;justify-content:space-between;gap:12px}
-output{font-weight:normal}
-button{padding:12px 16px;border:1px solid #111;background:#fff;
-  color:#111;cursor:pointer;font-weight:bold;min-height:46px}
-button:hover{text-decoration:underline;text-underline-offset:4px}
-.primary{background:var(--accent);border-color:var(--accent)}
+h2{font-size:18px;margin:0 0 20px}
+header p{max-width:620px;margin:0;color:var(--muted)}
+.eyebrow{
+  font-size:10px;
+  letter-spacing:.15em;
+  text-transform:uppercase;
+  color:var(--muted);
+  margin:0 0 10px;
+}
+.header-note{font-size:12px;white-space:nowrap;color:var(--muted)}
+main{
+  display:grid;
+  grid-template-columns:290px minmax(0,1fr);
+  gap:42px;
+  padding:30px 0;
+}
+aside,.stage{min-width:0}
+.field{display:grid;gap:7px;margin-bottom:18px}
+label{font-size:12px;font-weight:700}
+input[type=text],select{
+  width:100%;
+  min-height:43px;
+  padding:10px 12px;
+  border:1px solid #aeb4a8;
+  border-radius:5px;
+  background:#fff;
+  color:var(--ink);
+}
+input[type=range]{width:100%;accent-color:var(--green)}
+.range-label{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:12px;
+}
+output{font-size:12px;color:var(--muted)}
+.hint{font-size:11px;color:var(--muted);margin:0}
+.section{
+  border-top:1px solid var(--line);
+  margin-top:22px;
+  padding-top:20px;
+}
+.check{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:16px;
+  min-height:38px;
+}
+.check input{width:17px;height:17px;accent-color:var(--green)}
+button{
+  min-height:44px;
+  padding:11px 15px;
+  border:1px solid var(--green);
+  border-radius:5px;
+  background:transparent;
+  color:var(--green);
+  font-weight:700;
+}
+button:hover:enabled{background:var(--cream)}
+.primary{background:var(--green);color:#fff}
+.primary:hover:enabled{background:#173e30}
 .actions{display:grid;gap:10px;margin-top:24px}
-.stage{min-width:0}
-.preview{background:#eeeee8;padding:24px;display:grid;place-items:center}
-canvas{display:block;width:100%;max-width:610px;height:auto;
-  aspect-ratio:1;background:#fff;box-shadow:0 8px 24px #00000015}
-.meta{display:flex;justify-content:space-between;gap:16px;
-  font-size:12px;color:#515851;margin:12px 0 20px;flex-wrap:wrap}
-.download{width:100%}
-.note{font-size:12px;color:#515851}
-details{border-top:1px solid var(--line);padding-top:18px;margin-top:24px}
-summary{cursor:pointer;font-size:13px;font-weight:bold}
-details p{font-size:13px;color:#515851}
-footer{border-top:1px solid var(--line);padding:22px 0;
-  font-size:12px;color:#515851}
-#status{min-height:20px}
-@media(max-width:760px){
- .wrap{padding:20px 16px}
- main{grid-template-columns:1fr;gap:28px}
- .preview{padding:14px}
- h1{font-size:22px}
+.preview-head{
+  display:flex;
+  justify-content:space-between;
+  gap:15px;
+  margin-bottom:12px;
+  font-size:11px;
+  color:var(--muted);
+}
+.preview{
+  background:var(--cream);
+  padding:24px;
+  display:grid;
+  place-items:center;
+  border:1px solid var(--line);
+  border-radius:7px;
+}
+.patch{
+  width:100%;
+  max-width:610px;
+  aspect-ratio:1;
+  box-shadow:0 12px 30px #24292518;
+}
+.patch svg{display:block;width:100%;height:100%}
+.meta{
+  display:flex;
+  justify-content:space-between;
+  flex-wrap:wrap;
+  gap:8px 20px;
+  font-size:11px;
+  color:var(--muted);
+  margin:13px 0 20px;
+}
+.exports{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+#status{min-height:36px;font-size:12px;color:var(--muted)}
+details{
+  border-top:1px solid var(--line);
+  padding-top:16px;
+  margin-top:20px;
+  font-size:12px;
+}
+summary{cursor:pointer;font-weight:700}
+details p{color:var(--muted)}
+footer{
+  border-top:1px solid var(--line);
+  padding:20px 0 8px;
+  color:var(--muted);
+  font-size:11px;
+}
+@media(max-width:800px){
+  .wrap{padding:22px 16px}
+  header{display:block}
+  .header-note{display:block;margin-top:15px}
+  main{grid-template-columns:1fr;gap:30px}
+  .stage{grid-row:1}
+  .preview{padding:14px}
+  .patch{max-width:550px}
+}
+@media(max-width:420px){
+  .exports{grid-template-columns:1fr}
+  .preview-head{flex-wrap:wrap}
 }
 @media print{
- header,aside,footer,.meta,.download,.note{display:none}
- .wrap,main,.preview{padding:0;margin:0;background:white;display:block}
- canvas{width:3.5in;height:3.5in;box-shadow:none}
+  .back,header,aside,.preview-head,.meta,.exports,#status,footer{
+    display:none;
+  }
+  .wrap,main,.preview{
+    display:block;padding:0;margin:0;border:0;background:white;
+  }
+  .patch{width:3.5in;height:3.5in;box-shadow:none}
 }
 </style>
 </head>
 <body>
 <div class="wrap">
-<a href="index.html">← Back to Work</a>
+<a class="back" href="index.html">← Back to Work</a>
+
 <header>
-<p class="kicker">SSEP Mission Patch · Session 2</p>
-<h1>Mission Patch Generator</h1>
-<p>Collaboration and repeated experimentation lead to discovery
-along the road of curiosity.</p>
+  <div>
+    <p class="eyebrow">SSEP Mission Patch · Session 2</p>
+    <h1>Mission Patch Generator</h1>
+    <p>Through collaboration and trial and error, curiosity
+      becomes a path to discovery.</p>
+  </div>
+  <span class="header-note">Leanna Urena · A.I. for Designers</span>
 </header>
 
 <main>
 <aside aria-label="Patch controls">
-<h2>Build your patch</h2>
+  <h2>Build your patch</h2>
 
-<div class="field">
-<label for="top">Top label</label>
-<input id="top" type="text" maxlength="18" value="BARUCH">
-</div>
+  <div class="field">
+    <label for="top">Top label</label>
+    <input id="top" type="text" maxlength="24" value="BARUCH">
+  </div>
 
-<div class="field">
-<label for="bottom">Bottom label</label>
-<input id="bottom" type="text" maxlength="22" value="SSEP">
-</div>
+  <div class="field">
+    <label for="bottom">Bottom label</label>
+    <input id="bottom" type="text" maxlength="28" value="SSEP">
+  </div>
 
-<div class="field">
-<label for="palette">Color palette</label>
-<select id="palette">
-<option value="space">Space · navy / cream / green</option>
-<option value="earth">Earth · green / cream / gold</option>
-<option value="mono">Monochrome · cream / black</option>
-</select>
-</div>
+  <div class="field">
+    <label for="layout">Composition</label>
+    <select id="layout">
+      <option value="auto">Automatic · vary each time</option>
+      <option value="orbit">Balanced orbit</option>
+      <option value="wide">Open orbit</option>
+      <option value="diagonal">Diagonal cycle</option>
+      <option value="horizon">Wide horizon</option>
+      <option value="ascent">Long road</option>
+    </select>
+    <p class="hint">Choose a composition to keep exploring that layout.</p>
+  </div>
 
-<div class="field">
-<label for="layout">Composition</label>
-<select id="layout">
-<option value="balanced">Balanced orbit</option>
-<option value="wide">Wide orbit</option>
-<option value="compact">Compact orbit</option>
-</select>
-</div>
+  <div class="field">
+    <label for="palette">Color palette</label>
+    <select id="palette">
+      <option value="auto">Automatic · vary each time</option>
+      <option value="forest">Paper / forest / gold</option>
+      <option value="space">Navy / cream / sage</option>
+      <option value="earth">Forest / cream / gold</option>
+      <option value="clay">Cream / charcoal / terracotta</option>
+    </select>
+  </div>
 
-<div class="field">
-<div class="range-label">
-<label for="road">Road width</label>
-<output id="road-value" for="road">100%</output>
-</div>
-<input id="road" type="range" min="75" max="120" value="100">
-</div>
+  <div class="field">
+    <label for="type">Text arrangement</label>
+    <select id="type">
+      <option value="auto">Automatic · vary each time</option>
+      <option value="center">Centered</option>
+      <option value="left">Left aligned</option>
+      <option value="split">Opposite corners</option>
+    </select>
+  </div>
 
-<div class="field">
-<div class="range-label">
-<label for="eye">Eye size</label>
-<output id="eye-value" for="eye">100%</output>
-</div>
-<input id="eye" type="range" min="80" max="120" value="100">
-</div>
+  <div class="field">
+    <label for="border">Border</label>
+    <select id="border">
+      <option value="double">Double line</option>
+      <option value="stitch">Stitched edge</option>
+      <option value="solid">Bold frame</option>
+    </select>
+  </div>
 
-<div class="field">
-<div class="range-label">
-<label for="weight">Line weight</label>
-<output id="weight-value" for="weight">8</output>
-</div>
-<input id="weight" type="range" min="6" max="12" value="8">
-</div>
+  <div class="section">
+    <div class="field">
+      <div class="range-label">
+        <label for="road">Road width</label>
+        <output id="road-out" for="road"></output>
+      </div>
+      <input id="road" type="range" min="75" max="125" value="100">
+    </div>
 
-<div class="actions">
-<button class="primary" id="generate" type="button">
-Generate variation ↗
-</button>
-<button id="reset" type="button">Reset to starting design</button>
-</div>
+    <div class="field">
+      <div class="range-label">
+        <label for="eye">Eye size</label>
+        <output id="eye-out" for="eye"></output>
+      </div>
+      <input id="eye" type="range" min="80" max="125" value="100">
+    </div>
 
-<details>
-<summary>About the symbols</summary>
-<p>The puzzle pieces represent individual contributions to a shared
-effort. The arrows show the cycle of testing, learning, and trying
-again. The road leads toward the eye, connecting curiosity with
-observation and discovery.</p>
-<p>Each variation keeps these symbols together while changing their
-spacing, proportions, and rotation.</p>
-</details>
+    <div class="field">
+      <div class="range-label">
+        <label for="pieces">Puzzle circles</label>
+        <output id="pieces-out" for="pieces"></output>
+      </div>
+      <input id="pieces" type="range" min="80" max="115" value="100">
+    </div>
+
+    <div class="field">
+      <div class="range-label">
+        <label for="weight">Line weight</label>
+        <output id="weight-out" for="weight"></output>
+      </div>
+      <input id="weight" type="range" min="5" max="12" value="8">
+    </div>
+
+    <label class="check" for="mono">
+      Monochrome
+      <input id="mono" type="checkbox">
+    </label>
+
+    <label class="check" for="stars">
+      Space details
+      <input id="stars" type="checkbox">
+    </label>
+  </div>
+
+  <div class="actions">
+    <button class="primary" id="generate" type="button">
+      Generate variation ↗
+    </button>
+    <button id="reset" type="button">Reset to sketch layout</button>
+  </div>
+
+  <details>
+    <summary>The concept</summary>
+    <p>Through collaboration and trial and error, curiosity becomes
+      a path to discovery. The puzzle pieces represent people bringing
+      their ideas together, while the cycle reflects the process of
+      testing, learning, and trying again. Together, these symbols show
+      how shared effort and a willingness to experiment can turn
+      questions into new possibilities.</p>
+    <p>The road represents curiosity and the journey forward.
+      The eye represents observation and discovery.</p>
+  </details>
 </aside>
 
-<section class="stage" aria-label="Patch preview and download">
-<div class="preview">
-<canvas id="patch" width="1050" height="1050"
- role="img" aria-label="Mission patch with an eye, a road,
- three puzzle-piece circles, and clockwise arrows">
-Your browser needs canvas support to display this patch.
-</canvas>
-</div>
-<div class="meta">
-<span>3.5 × 3.5 inches · 1050 × 1050 px · 300 dpi</span>
-<span id="edition">Starting design</span>
-</div>
-<button class="primary download" id="download" type="button">
-Download PNG
-</button>
-<p class="note" id="status" role="status" aria-live="polite">
-Save the variations you want to keep.
-</p>
+<section class="stage" aria-label="Patch preview">
+  <div class="preview-head">
+    <span id="composition-name">Balanced orbit</span>
+    <span id="edition">Starting design</span>
+  </div>
+
+  <div class="preview">
+    <div id="preview" class="patch"></div>
+  </div>
+
+  <div class="meta">
+    <span>3.5 × 3.5 inches · square</span>
+    <span>PNG: 2100 × 2100 px · 600 dpi</span>
+  </div>
+
+  <div class="exports">
+    <button class="primary" id="png" type="button">Download PNG</button>
+    <button id="svg" type="button">Download SVG</button>
+  </div>
+
+  <p id="status" role="status" aria-live="polite">
+    Generate variations, then download the ones you want to keep.
+  </p>
 </section>
 </main>
 
@@ -177,273 +344,511 @@ Save the variations you want to keep.
 "use strict";
 (() => {
   const $ = id => document.getElementById(id);
-  const canvas = $("patch");
-  const ctx = canvas.getContext("2d");
+  const TAU = Math.PI * 2;
+
   const palettes = {
-    space: {bg:"#142c40",ink:"#f3f2eb",accent:"#8bc9a0"},
-    earth: {bg:"#204b3b",ink:"#f3f2eb",accent:"#d8bd79"},
-    mono:  {bg:"#f3f2eb",ink:"#242925",accent:"#242925"}
+    forest:{bg:"#f3f2eb",ink:"#204b3b",accent:"#94703e"},
+    space:{bg:"#142c40",ink:"#f3f2eb",accent:"#9dceb0"},
+    earth:{bg:"#204b3b",ink:"#f3f2eb",accent:"#d8bd79"},
+    clay:{bg:"#eee9df",ink:"#282d29",accent:"#a84d37"}
   };
 
-  let edition = 0;
-  let variation = {spread:1,lift:0,size:1,turns:[0,25,-25],iris:0};
-
-  function random(a,b) { return a+Math.random()*(b-a); }
-
-  function strokePath(draw,color,width,fill) {
-    ctx.beginPath();
-    draw();
-    if(fill) { ctx.fillStyle=fill; ctx.fill(); }
-    if(color) {
-      ctx.strokeStyle=color;
-      ctx.lineWidth=width;
-      ctx.stroke();
+  const layouts = {
+    orbit:{
+      name:"Balanced orbit",
+      cx:500,cy:477,rx:248,ry:205,r:74,tilt:0,bend:0
+    },
+    wide:{
+      name:"Open orbit",
+      cx:500,cy:475,rx:288,ry:182,r:69,tilt:0,bend:30
+    },
+    diagonal:{
+      name:"Diagonal cycle",
+      cx:500,cy:478,rx:256,ry:203,r:70,tilt:-19,bend:-65
+    },
+    horizon:{
+      name:"Wide horizon",
+      cx:500,cy:500,rx:284,ry:148,r:65,tilt:0,bend:65
+    },
+    ascent:{
+      name:"Long road",
+      cx:500,cy:427,rx:226,ry:174,r:69,tilt:9,bend:-45
     }
+  };
+
+  const measure = document.createElement("canvas").getContext("2d");
+
+  let state = initialState();
+
+  function initialState() {
+    return {
+      edition:0,
+      seed:38219,
+      layout:"orbit",
+      palette:"forest",
+      type:"center",
+      spread:1,
+      lift:0,
+      tilt:0,
+      bend:0,
+      shift:0,
+      turns:[0,25,-25]
+    };
   }
 
-  function circle(x,y,r,fill,stroke,width=8) {
-    strokePath(()=>ctx.arc(x,y,r,0,Math.PI*2),stroke,width,fill);
+  function seeded(seed) {
+    let n = seed >>> 0;
+    return () => {
+      n += 0x6D2B79F5;
+      let t = Math.imul(n ^ n >>> 15,1 | n);
+      t ^= t + Math.imul(t ^ t >>> 7,61 | t);
+      return ((t ^ t >>> 14) >>> 0) / 4294967296;
+    };
   }
 
-  function label(text,y,color,maxWidth) {
-    if(!text.trim()) return;
-    ctx.fillStyle=color;
-    ctx.textAlign="center";
-    ctx.textBaseline="middle";
-    let size=48;
-    do {
-      ctx.font=`700 ${size}px Arial,Helvetica,sans-serif`;
-      if(ctx.measureText(text).width<=maxWidth) break;
+  function newSeed() {
+    const a = new Uint32Array(1);
+    if (window.crypto && crypto.getRandomValues) {
+      crypto.getRandomValues(a);
+      return a[0];
+    }
+    return Math.floor(Math.random() * 4294967296);
+  }
+
+  const random = (rng,a,b) => a + rng() * (b-a);
+  const pick = (rng,items) => items[Math.floor(rng() * items.length)];
+
+  function different(rng,items,current) {
+    const choices = items.filter(item => item !== current);
+    return pick(rng,choices.length ? choices : items);
+  }
+
+  function escapeText(value) {
+    return String(value).replace(/[&<>"']/g,c => ({
+      "&":"&amp;","<":"&lt;",">":"&gt;",
+      '"':"&quot;","'":"&apos;"
+    }[c]));
+  }
+
+  const f = n => Number(n.toFixed(2));
+
+  function textLabel(value,x,y,size,anchor,color,maxWidth=810) {
+    const text = value.trim();
+    if (!text) return "";
+    measure.font = `700 ${size}px Arial`;
+    while (size > 12 && measure.measureText(text).width > maxWidth) {
       size--;
-    } while(size>12);
-    ctx.fillText(text,500,y);
+      measure.font = `700 ${size}px Arial`;
+    }
+    return `<text x="${x}" y="${y}" fill="${color}"
+      font-family="Arial,Helvetica,sans-serif"
+      font-size="${size}" font-weight="700"
+      text-anchor="${anchor}">${escapeText(text)}</text>`;
   }
 
-  function puzzle(x,y,r,angle,color,width) {
-    ctx.save();
-    ctx.translate(x,y);
-    ctx.rotate(angle*Math.PI/180);
-    ctx.scale(r/82,r/82);
-    // A simple silhouette with two tabs and one socket.
-    strokePath(()=>{
-      ctx.moveTo(-39,-36);
-      ctx.lineTo(-13,-36);
-      ctx.bezierCurveTo(-25,-65,25,-65,13,-36);
-      ctx.lineTo(39,-36);
-      ctx.lineTo(39,-12);
-      ctx.bezierCurveTo(68,-24,68,24,39,12);
-      ctx.lineTo(39,38);
-      ctx.lineTo(13,38);
-      ctx.bezierCurveTo(25,10,-25,10,-13,38);
-      ctx.lineTo(-39,38);
-      ctx.closePath();
-    },color,width*0.72,color);
-    ctx.restore();
+  function puzzle(x,y,r,angle,color) {
+    return `<g transform="translate(${f(x)} ${f(y)})
+      rotate(${f(angle)}) scale(${f(r/82)})">
+      <path fill="${color}" d="
+        M -38 -36
+        H -13
+        C -25 -65 25 -65 13 -36
+        H 38 V -12
+        C 67 -24 67 24 38 12
+        V 38 H 13
+        C 25 10 -25 10 -13 38
+        H -38 V 13
+        C -10 25 -10 -25 -38 -13
+        Z"/>
+      </g>`;
   }
 
-  function arrow(cx,cy,rx,ry,start,end,color,width) {
-    const a=start*Math.PI/180,b=end*Math.PI/180;
-    strokePath(()=>ctx.ellipse(cx,cy,rx,ry,0,a,b),color,width);
-    const x=cx+rx*Math.cos(b),y=cy+ry*Math.sin(b);
-    const tangent=Math.atan2(ry*Math.cos(b),-rx*Math.sin(b));
-    ctx.save();
-    ctx.translate(x,y);
-    ctx.rotate(tangent);
-    strokePath(()=>{
-      ctx.moveTo(-22,-14);
-      ctx.lineTo(0,0);
-      ctx.lineTo(-22,14);
-    },color,width);
-    ctx.restore();
+  function point(cx,cy,rx,ry,angle,tilt) {
+    const a = angle * Math.PI / 180;
+    const t = tilt * Math.PI / 180;
+    const x = rx * Math.cos(a);
+    const y = ry * Math.sin(a);
+    return {
+      x:cx + x*Math.cos(t) - y*Math.sin(t),
+      y:cy + x*Math.sin(t) + y*Math.cos(t)
+    };
+  }
+
+  function orbitArrow(cx,cy,rx,ry,start,end,tilt,color,weight) {
+    const points = [];
+    const count = Math.max(12,Math.ceil((end-start)/3));
+
+    for (let i=0;i<=count;i++) {
+      points.push(point(cx,cy,rx,ry,
+        start+(end-start)*i/count,tilt));
+    }
+
+    const d = points.map((p,i) =>
+      `${i ? "L" : "M"} ${f(p.x)} ${f(p.y)}`).join(" ");
+
+    const tip = points[points.length-1];
+    const previous = points[points.length-2];
+    const a = Math.atan2(tip.y-previous.y,tip.x-previous.x);
+    const length = 21 + weight*.4;
+    const wing = 10 + weight*.2;
+    const bx = tip.x-length*Math.cos(a);
+    const by = tip.y-length*Math.sin(a);
+
+    return `<path d="${d}" fill="none" stroke="${color}"
+      stroke-width="${weight}" stroke-linecap="round"/>
+      <path fill="${color}" d="
+        M ${f(tip.x)} ${f(tip.y)}
+        L ${f(bx+wing*Math.sin(a))} ${f(by-wing*Math.cos(a))}
+        L ${f(bx-wing*Math.sin(a))} ${f(by+wing*Math.cos(a))}
+        Z"/>`;
+  }
+
+  function artwork() {
+    const layoutKey = $("layout").value === "auto"
+      ? state.layout : $("layout").value;
+    const paletteKey = $("palette").value === "auto"
+      ? state.palette : $("palette").value;
+    const type = $("type").value === "auto"
+      ? state.type : $("type").value;
+
+    const l = layouts[layoutKey];
+    const p = $("mono").checked
+      ? {bg:"#f3f2eb",ink:"#242925",accent:"#242925"}
+      : palettes[paletteKey];
+
+    const weight = Number($("weight").value);
+    const eyeScale = Number($("eye").value)/100;
+    const roadScale = Number($("road").value)/100;
+    const pieceScale = Number($("pieces").value)/100;
+
+    const cx = l.cx;
+    const cy = l.cy + state.lift;
+    const rx = l.rx * state.spread;
+    const ry = l.ry;
+    const r = l.r * pieceScale;
+    const tilt = l.tilt + state.tilt;
+    const eyeY = cy-8;
+    const endY = eyeY+43;
+    const baseX = 500+state.shift;
+    const half = 127*roadScale;
+    const bend = l.bend+state.bend;
+    const angles = [-90,30,150];
+
+    $("composition-name").textContent = l.name;
+    $("edition").textContent = state.edition
+      ? "Variation "+String(state.edition).padStart(2,"0")
+      : "Starting design";
+
+    let svg = `<svg xmlns="http://www.w3.org/2000/svg"
+      width="3.5in" height="3.5in" viewBox="0 0 1000 1000"
+      role="img" aria-label="Mission patch: a road leads toward
+      an eye, surrounded by three puzzle circles and a clockwise cycle.">
+      <title>Curiosity becomes a path to discovery</title>
+      <desc>Collaboration, experimentation, observation, and discovery.</desc>
+      <rect width="1000" height="1000" fill="${p.bg}"/>`;
+
+    if ($("stars").checked) {
+      const rng = seeded(state.seed ^ 0x1A45F);
+      for (let i=0;i<26;i++) {
+        const x = random(rng,105,895);
+        const y = random(rng,180,815);
+        const radius = random(rng,1.5,3);
+        svg += `<circle cx="${f(x)}" cy="${f(y)}"
+          r="${f(radius)}" fill="${p.ink}" opacity=".28"/>`;
+      }
+    }
+
+    // Arrows leave a clear gap around each puzzle circle.
+    angles.forEach((a,i) => {
+      const next = a+120;
+      const speedAt = degrees => {
+        const theta = degrees*Math.PI/180;
+        return Math.hypot(rx*Math.sin(theta),ry*Math.cos(theta));
+      };
+      const gap1 = (r+19)/speedAt(a)*180/Math.PI;
+      const gap2 = (r+26)/speedAt(next)*180/Math.PI;
+
+      svg += orbitArrow(
+        cx,cy,rx,ry,a+gap1,next-gap2,tilt,p.accent,weight
+      );
+    });
+
+    // A perspective road always connects the bottom to the eye.
+    svg += `<path d="
+      M ${f(baseX-half)} 840
+      C ${f(baseX-half+bend)} 730
+        ${f(cx-38-bend)} ${f(endY+110)}
+        ${f(cx-12)} ${f(endY)}
+      Q ${cx} ${f(endY-12)} ${f(cx+12)} ${f(endY)}
+      C ${f(cx+38-bend)} ${f(endY+110)}
+        ${f(baseX+half+bend)} 730
+        ${f(baseX+half)} 840
+      Z"
+      fill="${p.bg}" stroke="${p.ink}"
+      stroke-width="${weight}" stroke-linejoin="round"/>
+
+      <path d="
+      M ${baseX} 837
+      C ${f(baseX+bend)} 730
+        ${f(cx-bend)} ${f(endY+110)}
+        ${cx} ${f(endY+23)}"
+      fill="none" stroke="${p.accent}"
+      stroke-width="${Math.max(5,weight*.75)}"
+      stroke-dasharray="23 22" stroke-linecap="round"/>`;
+
+    angles.forEach((a,i) => {
+      const q = point(cx,cy,rx,ry,a,tilt);
+      svg += `<circle cx="${f(q.x)}" cy="${f(q.y)}"
+        r="${f(r)}" fill="${p.bg}"
+        stroke="${p.ink}" stroke-width="${weight}"/>`;
+      svg += puzzle(q.x,q.y,r,state.turns[i],p.accent);
+    });
+
+    svg += `<g transform="translate(${cx} ${eyeY})
+      scale(${eyeScale})">
+      <path d="M -116 0 Q 0 -100 116 0
+        Q 0 100 -116 0 Z"
+        fill="${p.bg}" stroke="${p.ink}"
+        stroke-width="${weight}" stroke-linejoin="round"/>
+      <circle r="32" fill="${p.accent}"
+        stroke="${p.ink}" stroke-width="${weight*.7}"/>
+      <circle r="14" fill="${p.ink}"/>
+      <circle cx="7" cy="-8" r="4" fill="${p.bg}"/>
+      </g>`;
+
+    if ($("border").value === "double") {
+      svg += `<rect x="30" y="30" width="940" height="940"
+        fill="none" stroke="${p.ink}" stroke-width="12"/>
+        <rect x="48" y="48" width="904" height="904"
+        fill="none" stroke="${p.ink}" stroke-width="2"/>`;
+    } else if ($("border").value === "stitch") {
+      svg += `<rect x="30" y="30" width="940" height="940"
+        fill="none" stroke="${p.ink}" stroke-width="13"/>
+        <rect x="49" y="49" width="902" height="902"
+        fill="none" stroke="${p.accent}" stroke-width="3"
+        stroke-dasharray="8 9"/>`;
+    } else {
+      svg += `<rect x="35" y="35" width="930" height="930"
+        fill="none" stroke="${p.ink}" stroke-width="24"/>`;
+    }
+
+    const top = $("top").value;
+    const bottom = $("bottom").value;
+
+    if (type === "center") {
+      svg += textLabel(top,500,118,46,"middle",p.ink);
+      svg += textLabel(bottom,500,925,37,"middle",p.ink);
+    } else if (type === "left") {
+      svg += textLabel(top,85,118,46,"start",p.ink);
+      svg += textLabel(bottom,85,925,37,"start",p.ink);
+    } else {
+      svg += textLabel(top,85,118,46,"start",p.ink);
+      svg += textLabel(bottom,915,925,37,"end",p.ink);
+    }
+
+    return svg+"</svg>";
   }
 
   function render() {
-    const p=palettes[$("palette").value];
-    const weight=Number($("weight").value);
-    const road=Number($("road").value)/100;
-    const eye=Number($("eye").value)/100;
-    $("road-value").textContent=$("road").value+"%";
-    $("eye-value").textContent=$("eye").value+"%";
-    $("weight-value").textContent=weight;
-
-    ctx.setTransform(1,0,0,1,0,0);
-    ctx.clearRect(0,0,1050,1050);
-    ctx.setTransform(1.05,0,0,1.05,0,0);
-    ctx.lineCap="round";
-    ctx.lineJoin="round";
-    ctx.fillStyle=p.bg;
-    ctx.fillRect(0,0,1000,1000);
-
-    // Square patch border and protected label areas.
-    ctx.strokeStyle=p.ink;
-    ctx.lineWidth=12;
-    ctx.strokeRect(30,30,940,940);
-    ctx.lineWidth=2;
-    ctx.strokeRect(48,48,904,904);
-    label($("top").value,112,p.ink,800);
-    label($("bottom").value,918,p.ink,800);
-
-    const layouts={
-      balanced:{rx:282,ry:232,cy:486,r:82},
-      wide:{rx:314,ry:220,cy:486,r:78},
-      compact:{rx:254,ry:210,cy:474,r:76}
-    };
-    const l=layouts[$("layout").value];
-    const rx=l.rx*variation.spread;
-    const ry=l.ry;
-    const cy=l.cy+variation.lift;
-    const r=l.r*variation.size;
-
-    // Three arrow segments establish one clockwise cycle.
-    arrow(500,cy,rx,ry,-63,3,p.accent,weight);
-    arrow(500,cy,rx,ry,57,123,p.accent,weight);
-    arrow(500,cy,rx,ry,177,243,p.accent,weight);
-
-    // Road overlaps the bottom orbit, as in the original sketch.
-    const half=164*road;
-    strokePath(()=>{
-      ctx.moveTo(500-half,856);
-      ctx.lineTo(490,530);
-      ctx.quadraticCurveTo(500,518,510,530);
-      ctx.lineTo(500+half,856);
-      ctx.closePath();
-    },p.ink,weight,p.bg);
-
-    ctx.save();
-    ctx.setLineDash([24,23]);
-    strokePath(()=>{
-      ctx.moveTo(500,555);
-      ctx.lineTo(500,852);
-    },p.accent,Math.max(5,weight*.72));
-    ctx.restore();
-
-    // Three floating circles, each containing a puzzle piece.
-    [-90,30,150].forEach((degrees,i)=>{
-      const angle=degrees*Math.PI/180;
-      const x=500+rx*Math.cos(angle);
-      const y=cy+ry*Math.sin(angle);
-      circle(x,y,r,p.bg,p.ink,weight);
-      puzzle(x,y,r,variation.turns[i],p.accent,weight);
+    ["road","eye","pieces"].forEach(id => {
+      $(id+"-out").textContent = $(id).value+"%";
     });
-
-    // Central eye: restrained linework that survives reduction.
-    ctx.save();
-    ctx.translate(500,471);
-    ctx.scale(eye,eye);
-    strokePath(()=>{
-      ctx.moveTo(-116,0);
-      ctx.quadraticCurveTo(0,-94,116,0);
-      ctx.quadraticCurveTo(0,88,-116,0);
-      ctx.closePath();
-    },p.ink,weight,p.bg);
-    circle(variation.iris,0,33,p.accent,p.ink,weight*.7);
-    circle(variation.iris,0,14,p.ink);
-    ctx.restore();
-
-    $("edition").textContent=edition
-      ? "Variation "+String(edition).padStart(2,"0")
-      : "Starting design";
+    $("weight-out").textContent = $("weight").value;
+    $("preview").innerHTML = artwork();
   }
 
   function generate() {
-    edition++;
-    variation={
-      spread:random(.96,1.04),
-      lift:random(-7,7),
-      size:random(.92,1.03),
-      turns:[random(-45,45),random(-65,65),random(-65,65)],
-      iris:random(-4,4)
-    };
+    const rng = seeded(newSeed());
+
+    if ($("layout").value === "auto") {
+      state.layout = different(rng,Object.keys(layouts),state.layout);
+    }
+    if ($("palette").value === "auto") {
+      state.palette = different(rng,Object.keys(palettes),state.palette);
+    }
+    if ($("type").value === "auto") {
+      state.type = different(rng,["center","left","split"],state.type);
+    }
+
+    state.edition++;
+    state.seed = newSeed();
+    state.spread = random(rng,.97,1.03);
+    state.lift = random(rng,-6,6);
+    state.tilt = random(rng,-5,5);
+    state.bend = random(rng,-25,25);
+    state.shift = random(rng,-20,20);
+    state.turns = [
+      random(rng,-50,50),
+      random(rng,-75,75),
+      random(rng,-75,75)
+    ];
+
+    $("road").value = Math.round(random(rng,85,119));
+    $("eye").value = Math.round(random(rng,86,119));
+    $("pieces").value = Math.round(random(rng,86,110));
+    $("weight").value = pick(rng,[6,7,8,9,10]);
+
     render();
-    $("status").textContent="New variation ready. Download it to keep it.";
+    $("status").textContent =
+      "New variation ready. Download it before generating another.";
   }
 
   function reset() {
-    $("top").value="BARUCH";
-    $("bottom").value="SSEP";
-    $("palette").value="space";
-    $("layout").value="balanced";
-    $("road").value=100;
-    $("eye").value=100;
-    $("weight").value=8;
-    edition=0;
-    variation={spread:1,lift:0,size:1,turns:[0,25,-25],iris:0};
+    state = initialState();
+    $("top").value = "BARUCH";
+    $("bottom").value = "SSEP";
+    $("layout").value = "auto";
+    $("palette").value = "auto";
+    $("type").value = "auto";
+    $("border").value = "double";
+    $("road").value = 100;
+    $("eye").value = 100;
+    $("pieces").value = 100;
+    $("weight").value = 8;
+    $("mono").checked = false;
+    $("stars").checked = false;
     render();
-    $("status").textContent="Starting design restored.";
+    $("status").textContent = "Starting design restored.";
   }
 
-  // Set PNG pHYs metadata to 300 dpi (11811 pixels per metre).
-  // Canvas dimensions stay 1050 × 1050; artwork bytes are unchanged.
-  function png300dpi(bytes) {
-    function crc32(data) {
-      let crc=0xffffffff;
-      for(const byte of data) {
-        crc^=byte;
-        for(let j=0;j<8;j++)
-          crc=(crc>>>1)^((crc&1)?0xedb88320:0);
+  function save(blob,filename) {
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement("a");
+    link.href = url;
+    link.download = filename;
+    document.body.append(link);
+    link.click();
+    link.remove();
+    setTimeout(() => URL.revokeObjectURL(url),30000);
+  }
+
+  function filename() {
+    return "mission-patch-"+String(state.edition).padStart(2,"0");
+  }
+
+  function exportSVG() {
+    // Export the currently displayed artwork.
+    const markup = new XMLSerializer().serializeToString(
+      $("preview").querySelector("svg")
+    );
+    save(new Blob([markup],{type:"image/svg+xml;charset=utf-8"}),
+      filename()+".svg");
+    $("status").textContent = "SVG download started.";
+  }
+
+  function crc32(bytes) {
+    let crc = 0xffffffff;
+    for (const byte of bytes) {
+      crc ^= byte;
+      for (let i=0;i<8;i++) {
+        crc = (crc>>>1)^((crc&1) ? 0xedb88320 : 0);
       }
-      return (crc^0xffffffff)>>>0;
     }
-    const chunk=new Uint8Array(21);
-    const view=new DataView(chunk.buffer);
+    return (crc^0xffffffff)>>>0;
+  }
+
+  function setPNGResolution(bytes,dpi) {
+    const chunk = new Uint8Array(21);
+    const view = new DataView(chunk.buffer);
+    const pixelsPerMetre = Math.round(dpi/.0254);
+
     view.setUint32(0,9);
-    chunk.set([112,72,89,115],4); // pHYs
-    view.setUint32(8,11811);
-    view.setUint32(12,11811);
-    chunk[16]=1;
+    chunk.set([112,72,89,115],4);
+    view.setUint32(8,pixelsPerMetre);
+    view.setUint32(12,pixelsPerMetre);
+    chunk[16] = 1;
     view.setUint32(17,crc32(chunk.subarray(4,17)));
 
-    const parts=[bytes.subarray(0,8)];
-    let offset=8,inserted=false;
-    const source=new DataView(
+    const source = new DataView(
       bytes.buffer,bytes.byteOffset,bytes.byteLength
     );
-    while(offset+12<=bytes.length) {
-      const length=source.getUint32(offset);
-      const end=offset+length+12;
-      if(end>bytes.length) throw new Error("Invalid PNG data");
-      const type=String.fromCharCode(...bytes.subarray(offset+4,offset+8));
-      if(type!=="pHYs") parts.push(bytes.subarray(offset,end));
-      if(type==="IHDR"&&!inserted) {
+    const parts = [bytes.subarray(0,8)];
+    let offset = 8;
+    let inserted = false;
+
+    while (offset+12 <= bytes.length) {
+      const length = source.getUint32(offset);
+      const end = offset+length+12;
+      if (end > bytes.length) throw new Error("Invalid PNG data");
+
+      const type = String.fromCharCode(
+        ...bytes.subarray(offset+4,offset+8)
+      );
+
+      if (type !== "pHYs") parts.push(bytes.subarray(offset,end));
+
+      if (type === "IHDR" && !inserted) {
         parts.push(chunk);
-        inserted=true;
+        inserted = true;
       }
-      offset=end;
+      offset = end;
     }
+
+    if (!inserted) throw new Error("Missing PNG header");
     return new Blob(parts,{type:"image/png"});
   }
 
-  async function download() {
-    const button=$("download");
-    button.disabled=true;
+  async function exportPNG() {
+    const button = $("png");
+    button.disabled = true;
+    let url;
+
     try {
-      const raw=await new Promise((resolve,reject)=>{
-        canvas.toBlob(blob=>blob?resolve(blob):
-          reject(new Error("PNG export unavailable")),"image/png");
+      const clone = $("preview").querySelector("svg").cloneNode(true);
+      clone.setAttribute("width","2100");
+      clone.setAttribute("height","2100");
+
+      const markup = new XMLSerializer().serializeToString(clone);
+      url = URL.createObjectURL(new Blob(
+        [markup],{type:"image/svg+xml;charset=utf-8"}
+      ));
+
+      const image = new Image();
+      await new Promise((resolve,reject) => {
+        image.onload = resolve;
+        image.onerror = () => reject(new Error("Could not render SVG"));
+        image.src = url;
       });
-      const blob=png300dpi(new Uint8Array(await raw.arrayBuffer()));
-      const url=URL.createObjectURL(blob);
-      const a=document.createElement("a");
-      a.href=url;
-      a.download="mission-patch-"+String(edition).padStart(2,"0")+".png";
-      document.body.append(a);
-      a.click();
-      a.remove();
-      setTimeout(()=>URL.revokeObjectURL(url),30000);
-      $("status").textContent=
-        "PNG download started · 1050 × 1050 px · 300 dpi.";
-    } catch(error) {
-      $("status").textContent="Download failed: "+error.message;
+
+      const canvas = document.createElement("canvas");
+      canvas.width = 2100;
+      canvas.height = 2100;
+      const ctx = canvas.getContext("2d");
+      if (!ctx) throw new Error("Canvas is unavailable");
+      ctx.drawImage(image,0,0,2100,2100);
+
+      const raw = await new Promise((resolve,reject) => {
+        canvas.toBlob(
+          blob => blob ? resolve(blob)
+            : reject(new Error("PNG export is unavailable")),
+          "image/png"
+        );
+      });
+
+      const png = setPNGResolution(
+        new Uint8Array(await raw.arrayBuffer()),600
+      );
+
+      save(png,filename()+".png");
+      $("status").textContent =
+        "PNG download started · 2100 × 2100 px · 600 dpi.";
+    } catch (error) {
+      $("status").textContent = "Download failed: "+error.message;
     } finally {
-      button.disabled=false;
+      if (url) URL.revokeObjectURL(url);
+      button.disabled = false;
     }
   }
 
-  ["top","bottom","palette","layout","road","eye","weight"]
-    .forEach(id=>$(id).addEventListener("input",render));
+  ["top","bottom","layout","palette","type","border",
+   "road","eye","pieces","weight","mono","stars"]
+    .forEach(id => $(id).addEventListener("input",render));
+
   $("generate").addEventListener("click",generate);
   $("reset").addEventListener("click",reset);
-  $("download").addEventListener("click",download);
+  $("svg").addEventListener("click",exportSVG);
+  $("png").addEventListener("click",exportPNG);
+
   render();
 })();
 </script>
