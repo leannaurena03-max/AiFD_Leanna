@@ -516,8 +516,6 @@
     <a class="brand" href="#top">Leanna Urena</a>
 
     <nav class="nav" aria-label="Main navigation">
-      <a href="#work">Work</a>
-      <a href="poster-process.html">Process</a>
       <a href="mailto:leannaurena03@gmail.com">Contact ↗</a>
     </nav>
   </header>
@@ -567,133 +565,7 @@
           One assignment at a time.
         </div>
 
-        <ol class="assignments" aria-label="Assignments">
-          <!-- Unavailable entries have no link. Focus reveals their status. -->
-          <li>
-            <div
-              class="assignment-tab unavailable"
-              tabindex="0"
-              aria-disabled="true"
-              aria-label="Assignment 01: Custom Instructions. Unavailable — page not created yet."
-            >
-              <span class="tab-number" aria-hidden="true">01</span>
-              <span class="tab-title" aria-hidden="true">
-                Custom Instructions
-                <span class="availability">Unavailable — page not created yet</span>
-              </span>
-            </div>
-          </li>
-
-          <li>
-            <a
-              class="assignment-tab"
-              href="style-guide.html"
-              aria-label="Assignment 02: A Style Guide for Your AI"
-            >
-              <span class="tab-number" aria-hidden="true">02</span>
-              <span class="tab-title" aria-hidden="true">A Style Guide for Your AI</span>
-              <span class="tab-arrow" aria-hidden="true">↗</span>
-            </a>
-          </li>
-
-          <li>
-            <a
-              class="assignment-tab"
-              href="design-a.html"
-              aria-label="Assignment 03: Design a ___"
-            >
-              <span class="tab-number" aria-hidden="true">03</span>
-              <span class="tab-title" aria-hidden="true">Design a ___</span>
-              <span class="tab-arrow" aria-hidden="true">↗</span>
-            </a>
-          </li>
-
-          <li>
-            <a
-              class="assignment-tab"
-              href="chair-sequence.html"
-              aria-label="Assignment 04: Chair Sequence"
-            >
-              <span class="tab-number" aria-hidden="true">04</span>
-              <span class="tab-title" aria-hidden="true">Chair Sequence</span>
-              <span class="tab-arrow" aria-hidden="true">↗</span>
-            </a>
-          </li>
-
-          <li>
-            <a
-              class="assignment-tab"
-              href="commute-story.html"
-              aria-label="Assignment 05: Commute Story"
-            >
-              <span class="tab-number" aria-hidden="true">05</span>
-              <span class="tab-title" aria-hidden="true">Commute Story</span>
-              <span class="tab-arrow" aria-hidden="true">↗</span>
-            </a>
-          </li>
-
-          <li>
-            <div
-              class="assignment-tab unavailable"
-              tabindex="0"
-              aria-disabled="true"
-              aria-label="Assignment 06: Promo Poster. Unavailable — page not created yet."
-            >
-              <span class="tab-number" aria-hidden="true">06</span>
-              <span class="tab-title" aria-hidden="true">
-                Promo Poster
-                <span class="availability">Unavailable — page not created yet</span>
-              </span>
-            </div>
-          </li>
-
-          <li>
-            <a
-              class="assignment-tab"
-              href="poster-generator.html"
-              aria-label="Assignment 07: Poster Generator"
-            >
-              <span class="tab-number" aria-hidden="true">07</span>
-              <span class="tab-title" aria-hidden="true">Poster Generator</span>
-              <span class="tab-arrow" aria-hidden="true">↗</span>
-            </a>
-          </li>
-
-          <li>
-            <a
-              class="assignment-tab"
-              href="poster-process.html"
-              aria-label="Assignment 08: Poster Samples and My Process"
-            >
-              <span class="tab-number" aria-hidden="true">08</span>
-              <span class="tab-title" aria-hidden="true">Poster Samples + My Process</span>
-              <span class="tab-arrow" aria-hidden="true">↗</span>
-            </a>
-          </li>
-          <li>
-            <a
-              class="assignment-tab"
-              href="live-weather.html"
-              aria-label="Assignment 09: Live Poster Generator"
-            >
-              <span class="tab-number" aria-hidden="true">09</span>
-              <span class="tab-title" aria-hidden="true">Live Poster Generator</span>
-              <span class="tab-arrow" aria-hidden="true">↗</span>
-            </a>
-          </li>
-
-          <li>
-            <a
-              class="assignment-tab"
-              href="variable-type.html"
-              aria-label="Assignment 10: Variable Type"
-            >
-              <span class="tab-number" aria-hidden="true">10</span>
-              <span class="tab-title" aria-hidden="true">Variable Type</span>
-              <span class="tab-arrow" aria-hidden="true">↗</span>
-            </a>
-          </li>
-        </ol>
+        <ol class="assignments" aria-label="Assignments"></ol>
       </div>
     </section>
   </main>
@@ -709,5 +581,84 @@
       <a href="#top">Back to top ↑</a>
     </div>
   </footer>
+  <script>
+    // Edit assignments here. Add an entry to append a tab; numbering is automatic.
+    // Use href: null for an unavailable page, or a filename to make it a link.
+    const assignments = [
+      {
+        "title": "Custom Instructions",
+        "href": null
+      },
+      {
+        "title": "A Style Guide for Your AI",
+        "href": "style-guide.html"
+      },
+      {
+        "title": "Design a ___",
+        "href": "design-a.html"
+      },
+      {
+        "title": "Chair Sequence",
+        "href": "chair-sequence.html"
+      },
+      {
+        "title": "Commute Story",
+        "href": "commute-story.html"
+      },
+      {
+        "title": "Promo Poster",
+        "href": null
+      },
+      {
+        "title": "Poster Generator",
+        "href": "poster-generator.html"
+      },
+      {
+        "title": "Poster Samples + My Process",
+        "href": "poster-process.html"
+      },
+      {
+        "title": "Live Poster Generator",
+        "href": "live-weather.html"
+      },
+      {
+        "title": "Variable Type",
+        "href": "variable-type.html"
+      }
+    ];
+
+    const list = document.querySelector('.assignments');
+    assignments.forEach(({ title, href }, index) => {
+      const number = String(index + 1).padStart(2, '0');
+      const item = document.createElement('li');
+      const tab = document.createElement(href ? 'a' : 'div');
+      tab.className = 'assignment-tab' + (href ? '' : ' unavailable');
+      tab.setAttribute('aria-label', `Assignment ${number}: ${title}${href ? '' : '. Unavailable — page not created yet.'}`);
+      if (href) {
+        tab.setAttribute('href', href);
+      } else {
+        tab.tabIndex = 0;
+        tab.setAttribute('aria-disabled', 'true');
+      }
+
+      const addSpan = (className, text, parent = tab) => {
+        const span = document.createElement('span');
+        span.className = className;
+        span.textContent = text;
+        span.setAttribute('aria-hidden', 'true');
+        parent.append(span);
+        return span;
+      };
+      addSpan('tab-number', number);
+      const label = addSpan('tab-title', title);
+      if (href) {
+        addSpan('tab-arrow', '↗');
+      } else {
+        addSpan('availability', 'Unavailable — page not created yet', label);
+      }
+      item.append(tab);
+      list.append(item);
+    });
+  </script>
 </body>
 </html>
