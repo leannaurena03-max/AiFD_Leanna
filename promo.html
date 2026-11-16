@@ -80,12 +80,11 @@
         <div class="stripe" aria-hidden="true"></div>
         <span class="tag">Promotional design</span>
         <h1>A promotional poster</h1>
-        <p>Four images. One in the spotlight.</p>
+        <p>A concert tour poster, explored through four images.</p>
       </header>
 
-      <!-- Keep promo1–promo4 in the same folder as this HTML.
-           PNG is the default; the script also checks JPG, JPEG and WebP.
-           If you use an images folder, update BOTH href and src below.
+      <!-- Save this HTML beside index.html in the repository root.
+           Images are promo-posters/promo1.png through promo-posters/promo4.png.
            Replace the alt text with a description of each image when added. -->
       <section class="featured" aria-labelledby="featured-title">
         <div class="section-head">
@@ -93,8 +92,8 @@
           <span class="badge">Featured / 04</span>
         </div>
         <figure>
-          <a class="image-link" href="promo4.png" aria-label="Open featured promotional image 4 at full size">
-            <img src="promo4.png" alt="Featured promotional poster — image 4" data-promo="promo4" fetchpriority="high" decoding="async">
+          <a class="image-link" href="promo-posters/promo4.png" aria-label="Open featured promotional image 4 at full size">
+            <img src="promo-posters/promo4.png" alt="Featured promotional poster — image 4" fetchpriority="high" decoding="async">
           </a>
           <figcaption><strong class="label">Promo 04</strong><span>View full size ↗</span></figcaption>
         </figure>
@@ -104,20 +103,20 @@
         <h2 id="gallery-title">The collection</h2>
         <div class="grid">
           <figure class="card">
-            <a class="image-link" href="promo1.png" aria-label="Open promotional image 1 at full size">
-              <img src="promo1.png" alt="Promotional poster — image 1" data-promo="promo1" loading="lazy" decoding="async">
+            <a class="image-link" href="promo-posters/promo1.png" aria-label="Open promotional image 1 at full size">
+              <img src="promo-posters/promo1.png" alt="Promotional poster — image 1" loading="lazy" decoding="async">
             </a>
             <figcaption><strong class="label">Promo 01</strong><span>View full size ↗</span></figcaption>
           </figure>
           <figure class="card">
-            <a class="image-link" href="promo2.png" aria-label="Open promotional image 2 at full size">
-              <img src="promo2.png" alt="Promotional poster — image 2" data-promo="promo2" loading="lazy" decoding="async">
+            <a class="image-link" href="promo-posters/promo2.png" aria-label="Open promotional image 2 at full size">
+              <img src="promo-posters/promo2.png" alt="Promotional poster — image 2" loading="lazy" decoding="async">
             </a>
             <figcaption><strong class="label">Promo 02</strong><span>View full size ↗</span></figcaption>
           </figure>
           <figure class="card">
-            <a class="image-link" href="promo3.png" aria-label="Open promotional image 3 at full size">
-              <img src="promo3.png" alt="Promotional poster — image 3" data-promo="promo3" loading="lazy" decoding="async">
+            <a class="image-link" href="promo-posters/promo3.png" aria-label="Open promotional image 3 at full size">
+              <img src="promo-posters/promo3.png" alt="Promotional poster — image 3" loading="lazy" decoding="async">
             </a>
             <figcaption><strong class="label">Promo 03</strong><span>View full size ↗</span></figcaption>
           </figure>
@@ -133,20 +132,6 @@
   </div>
 
   <script>
-    // Keep the images and their full-size links together if the file format changes.
-    document.querySelectorAll('img[data-promo]').forEach(img => {
-      const stem = img.getAttribute('src').replace(/\.[^.]+$/, '');
-      const formats = ['jpg', 'jpeg', 'webp'];
-      let next = 0;
-      const tryNextFormat = () => {
-        if (next >= formats.length) { img.onerror = null; return; }
-        img.src = `${stem}.${formats[next++]}`;
-        img.closest('a').href = img.getAttribute('src');
-      };
-      img.onerror = tryNextFormat;
-      if (img.complete && !img.naturalWidth) tryNextFormat();
-    });
-
     const layer = document.getElementById('shapes');
     for (let i = 0; i < 12; i++) {
       const shape = document.createElement('span');
