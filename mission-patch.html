@@ -4,36 +4,50 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Mission Patch Generator — Leanna Urena</title>
+
 <style>
-:root{
-  --paper:#f3f2eb;
-  --ink:#242925;
-  --green:#204b3b;
-  --muted:#586359;
-  --cream:#e8e6dc;
-  --line:#cecec2;
+@font-face{
+  font-family:"Patch Amstelvar";
+  src:url("fonts/Amstelvar-Roman[GRAD,XOPQ,XTRA,YOPQ,YTAS,YTDE,YTFI,YTLC,YTUC,wdth,wght,opsz].ttf")
+    format("truetype");
+  font-weight:100 1000;
+  font-stretch:50% 125%;
+  font-style:normal;
+  font-display:swap;
 }
+
+:root{
+  color-scheme:dark;
+  --background:#111411;
+  --panel:#191e19;
+  --input:#111611;
+  --text:#f3f2eb;
+  --muted:#b7beb4;
+  --accent:#2e9b4f;
+  --line:#3d493d;
+}
+
 *{box-sizing:border-box}
 body{
   margin:0;
-  background:var(--paper);
-  color:var(--ink);
+  background:var(--background);
+  color:var(--text);
   font:400 15px/1.5 Arial,Helvetica,sans-serif;
 }
-button,input,select{font:inherit}
-button,select,input[type=checkbox]{cursor:pointer}
-button:disabled{opacity:.55;cursor:wait}
-:focus-visible{outline:3px solid var(--green);outline-offset:4px}
+button,input,select{font:inherit;color:inherit}
+button,select,input[type=checkbox],input[type=range]{cursor:pointer}
+button:disabled,input:disabled,select:disabled{
+  opacity:.45;
+  cursor:default;
+}
 a{color:inherit;text-underline-offset:4px}
-.wrap{max-width:1240px;margin:auto;padding:28px 32px}
-.back{font-size:13px}
-header{
-  display:flex;
-  justify-content:space-between;
-  align-items:flex-end;
-  gap:24px;
-  padding:28px 0;
-  border-bottom:1px solid var(--line);
+a:hover,button:hover:enabled{
+  text-decoration:underline;
+  text-underline-offset:4px;
+}
+:focus-visible{
+  outline:2px solid var(--text);
+  outline-offset:4px;
 }
 h1,h2,h3{
   font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;
@@ -41,217 +55,316 @@ h1,h2,h3{
   line-height:1.25;
 }
 h1{font-size:24px;margin:0 0 10px}
-h2{font-size:18px;margin:0 0 20px}
-header p{max-width:620px;margin:0;color:var(--muted)}
-.eyebrow{
+h2{font-size:18px;margin:0}
+h3{font-size:15px;margin:0 0 18px}
+
+.wrap{max-width:1200px;margin:auto;padding:0 32px}
+nav{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:20px;
+  padding:24px 0;
+  border-bottom:1px solid var(--accent);
+  font-size:13px;
+}
+nav span{
   font-size:10px;
-  letter-spacing:.15em;
+  letter-spacing:.12em;
   text-transform:uppercase;
   color:var(--muted);
-  margin:0 0 10px;
 }
-.header-note{font-size:12px;white-space:nowrap;color:var(--muted)}
-main{
-  display:grid;
-  grid-template-columns:290px minmax(0,1fr);
-  gap:42px;
-  padding:30px 0;
-}
-aside,.stage{min-width:0}
-.field{display:grid;gap:7px;margin-bottom:18px}
-label{font-size:12px;font-weight:700}
-input[type=text],select{
-  width:100%;
-  min-height:43px;
-  padding:10px 12px;
-  border:1px solid #aeb4a8;
-  border-radius:5px;
-  background:#fff;
-  color:var(--ink);
-}
-input[type=range]{width:100%;accent-color:var(--green)}
-.range-label{
+header{
   display:flex;
   justify-content:space-between;
   align-items:center;
-  gap:12px;
+  gap:28px;
+  padding:36px 0;
 }
-output{font-size:12px;color:var(--muted)}
-.hint{font-size:11px;color:var(--muted);margin:0}
-.section{
-  border-top:1px solid var(--line);
-  margin-top:22px;
-  padding-top:20px;
+.title::before{
+  content:"";
+  display:block;
+  width:64px;
+  height:8px;
+  background:var(--accent);
+  margin-bottom:20px;
 }
-.check{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:16px;
-  min-height:38px;
-}
-.check input{width:17px;height:17px;accent-color:var(--green)}
+header p{max-width:530px;margin:0;color:var(--muted)}
+.header-actions{display:flex;gap:10px;flex-wrap:wrap}
+
 button{
   min-height:44px;
-  padding:11px 15px;
-  border:1px solid var(--green);
-  border-radius:5px;
+  padding:10px 16px;
+  border:1px solid var(--accent);
+  border-radius:0;
   background:transparent;
-  color:var(--green);
   font-weight:700;
 }
-button:hover:enabled{background:var(--cream)}
-.primary{background:var(--green);color:#fff}
-.primary:hover:enabled{background:#173e30}
-.actions{display:grid;gap:10px;margin-top:24px}
-.preview-head{
+.primary{
+  background:var(--accent);
+  color:#09130b;
+}
+.primary:hover:enabled{background:#41ad60}
+
+.workspace{
+  display:grid;
+  grid-template-columns:310px minmax(0,1fr);
+  gap:28px;
+  align-items:start;
+}
+aside,.stage{min-width:0}
+.inspector-heading{
   display:flex;
   justify-content:space-between;
+  align-items:center;
   gap:15px;
-  margin-bottom:12px;
-  font-size:11px;
+  margin-bottom:20px;
+}
+.inspector-heading span{
+  font-size:10px;
+  letter-spacing:.12em;
   color:var(--muted);
 }
-.preview{
-  background:var(--cream);
-  padding:24px;
+.group{
+  padding:20px;
+  margin:0 0 20px;
+  border:1px solid var(--line);
+  background:var(--panel);
+}
+.field{display:grid;gap:7px;margin-bottom:17px}
+.field:last-child{margin-bottom:0}
+label{font-size:12px}
+input[type=text],select{
+  width:100%;
+  min-height:44px;
+  padding:10px 11px;
+  border:1px solid #596354;
+  border-radius:0;
+  background:var(--input);
+}
+input[type=range]{
+  width:100%;
+  margin:3px 0 0;
+  accent-color:var(--accent);
+}
+input[type=checkbox]{
+  width:17px;
+  height:17px;
+  accent-color:var(--accent);
+}
+.range-label,.check{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:14px;
+}
+.check{min-height:40px;font-size:12px}
+output{
+  color:var(--muted);
+  font-size:11px;
+  font-variant-numeric:tabular-nums;
+}
+.pair{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.seed-row{display:grid;grid-template-columns:1fr auto;gap:8px}
+.seed-row input{min-width:0}
+.helper{
+  margin:10px 0 0;
+  color:var(--muted);
+  font-size:11px;
+  line-height:1.6;
+}
+.full{width:100%}
+details>summary{
+  cursor:pointer;
+  font-size:15px;
+  font-weight:700;
+}
+details[open]>summary{margin-bottom:20px}
+details p{font-size:12px;line-height:1.65;color:var(--muted)}
+
+.stage{
+  border:1px solid var(--accent);
+  background:var(--panel);
+}
+.stage-top{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  flex-wrap:wrap;
+  gap:10px;
+  padding:18px 22px;
+  border-bottom:1px solid var(--line);
+  font-size:12px;
+}
+.stage-top span:last-child{
+  font-size:10px;
+  color:var(--muted);
+}
+.preview-wrap{
   display:grid;
   place-items:center;
-  border:1px solid var(--line);
-  border-radius:7px;
+  padding:28px;
+  background:#141914;
 }
-.patch{
+#preview{
   width:100%;
-  max-width:610px;
+  max-width:620px;
   aspect-ratio:1;
-  box-shadow:0 12px 30px #24292518;
 }
-.patch svg{display:block;width:100%;height:100%}
-.meta{
+#preview svg{display:block;width:100%;height:100%}
+.preview-info{
   display:flex;
   justify-content:space-between;
   flex-wrap:wrap;
-  gap:8px 20px;
+  gap:10px;
+  padding:16px 22px;
+  border-top:1px solid var(--line);
   font-size:11px;
   color:var(--muted);
-  margin:13px 0 20px;
 }
-.exports{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-#status{min-height:36px;font-size:12px;color:var(--muted)}
-details{
-  border-top:1px solid var(--line);
-  padding-top:16px;
-  margin-top:20px;
+.exports{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px;
+  padding:0 22px 20px;
+}
+.stage-note{
+  margin:0;
+  padding:0 22px 22px;
+  color:var(--muted);
+  font-size:11px;
+  text-align:center;
+}
+.status{
+  margin:22px 0 0;
+  padding-top:18px;
+  min-height:44px;
+  border-top:1px solid var(--accent);
   font-size:12px;
+  color:var(--muted);
 }
-summary{cursor:pointer;font-weight:700}
-details p{color:var(--muted)}
-footer{
+.about{
   border-top:1px solid var(--line);
-  padding:20px 0 8px;
+  margin-top:30px;
+  padding-top:22px;
+}
+.about p{max-width:760px}
+footer{
+  display:flex;
+  justify-content:space-between;
+  flex-wrap:wrap;
+  gap:16px;
+  margin-top:30px;
+  padding:24px 0;
+  border-top:1px solid var(--accent);
   color:var(--muted);
   font-size:11px;
+}
+
+@media(min-width:1000px){
+  .stage{position:sticky;top:24px}
 }
 @media(max-width:800px){
-  .wrap{padding:22px 16px}
-  header{display:block}
-  .header-note{display:block;margin-top:15px}
-  main{grid-template-columns:1fr;gap:30px}
-  .stage{grid-row:1}
-  .preview{padding:14px}
-  .patch{max-width:550px}
+  .wrap{padding:0 20px}
+  header{align-items:flex-start;flex-direction:column}
+  .workspace{display:flex;flex-direction:column;gap:28px}
+  .stage{order:0;width:100%}
+  aside{order:1;width:100%}
+  .preview-wrap{padding:20px}
+  #preview{max-width:540px}
 }
-@media(max-width:420px){
-  .exports{grid-template-columns:1fr}
-  .preview-head{flex-wrap:wrap}
+@media(max-width:460px){
+  .wrap{padding:0 16px}
+  nav{align-items:flex-start}
+  nav span{max-width:150px;text-align:right}
+  .header-actions{width:100%}
+  .header-actions button{flex:1}
+  .preview-wrap{padding:12px}
+  .stage-top,.preview-info{padding:15px}
+  .exports{padding:0 15px 16px;grid-template-columns:1fr}
 }
 @media print{
-  .back,header,aside,.preview-head,.meta,.exports,#status,footer{
-    display:none;
+  nav,header,aside,.stage-top,.preview-info,.exports,
+  .stage-note,.status,.about,footer{display:none}
+  body,.wrap,.workspace,.stage,.preview-wrap{
+    display:block;
+    background:white;
+    padding:0;
+    margin:0;
+    border:0;
   }
-  .wrap,main,.preview{
-    display:block;padding:0;margin:0;border:0;background:white;
-  }
-  .patch{width:3.5in;height:3.5in;box-shadow:none}
+  #preview{width:3.5in;height:3.5in}
 }
 </style>
 </head>
+
 <body>
 <div class="wrap">
-<a class="back" href="index.html">← Back to Work</a>
+<nav aria-label="Assignment navigation">
+  <a href="index.html#work">← Back to Work</a>
+  <span>Leanna Urena / A.I. for Designers</span>
+</nav>
 
 <header>
-  <div>
-    <p class="eyebrow">SSEP Mission Patch · Session 2</p>
+  <div class="title">
     <h1>Mission Patch Generator</h1>
-    <p>Through collaboration and trial and error, curiosity
-      becomes a path to discovery.</p>
+    <p>Through collaboration and trial and error,
+      curiosity becomes a path to discovery.</p>
   </div>
-  <span class="header-note">Leanna Urena · A.I. for Designers</span>
+  <div class="header-actions">
+    <button id="reset" type="button">Reset</button>
+    <button id="generate-top" class="primary" type="button">
+      Generate ↗
+    </button>
+  </div>
 </header>
 
-<main>
+<main class="workspace">
 <aside aria-label="Patch controls">
-  <h2>Build your patch</h2>
-
-  <div class="field">
-    <label for="top">Top label</label>
-    <input id="top" type="text" maxlength="24" value="BARUCH">
+  <div class="inspector-heading">
+    <h2>Make it yours.</h2>
+    <span>SSEP / SESSION 2</span>
   </div>
 
-  <div class="field">
-    <label for="bottom">Bottom label</label>
-    <input id="bottom" type="text" maxlength="28" value="SSEP">
-  </div>
+  <section class="group">
+    <h3>Your words</h3>
+    <div class="field">
+      <label for="top">Top label</label>
+      <input id="top" type="text" maxlength="24" value="BARUCH">
+    </div>
+    <div class="field">
+      <label for="bottom">Bottom label</label>
+      <input id="bottom" type="text" maxlength="28" value="SSEP">
+    </div>
+    <div class="field">
+      <label for="alignment">Text arrangement</label>
+      <select id="alignment">
+        <option value="auto">Automatic</option>
+        <option value="center">Centered</option>
+        <option value="left">Left aligned</option>
+        <option value="split">Opposite corners</option>
+      </select>
+    </div>
+  </section>
 
-  <div class="field">
-    <label for="layout">Composition</label>
-    <select id="layout">
-      <option value="auto">Automatic · vary each time</option>
-      <option value="orbit">Balanced orbit</option>
-      <option value="wide">Open orbit</option>
-      <option value="diagonal">Diagonal cycle</option>
-      <option value="horizon">Wide horizon</option>
-      <option value="ascent">Long road</option>
-    </select>
-    <p class="hint">Choose a composition to keep exploring that layout.</p>
-  </div>
+  <section class="group">
+    <h3>Composition</h3>
+    <div class="field">
+      <label for="layout">Layout</label>
+      <select id="layout">
+        <option value="auto">Automatic</option>
+        <option value="orbit">Balanced orbit</option>
+        <option value="wide">Open orbit</option>
+        <option value="diagonal">Diagonal cycle</option>
+        <option value="horizon">Wide horizon</option>
+        <option value="ascent">Long road</option>
+      </select>
+    </div>
 
-  <div class="field">
-    <label for="palette">Color palette</label>
-    <select id="palette">
-      <option value="auto">Automatic · vary each time</option>
-      <option value="forest">Paper / forest / gold</option>
-      <option value="space">Navy / cream / sage</option>
-      <option value="earth">Forest / cream / gold</option>
-      <option value="clay">Cream / charcoal / terracotta</option>
-    </select>
-  </div>
-
-  <div class="field">
-    <label for="type">Text arrangement</label>
-    <select id="type">
-      <option value="auto">Automatic · vary each time</option>
-      <option value="center">Centered</option>
-      <option value="left">Left aligned</option>
-      <option value="split">Opposite corners</option>
-    </select>
-  </div>
-
-  <div class="field">
-    <label for="border">Border</label>
-    <select id="border">
-      <option value="double">Double line</option>
-      <option value="stitch">Stitched edge</option>
-      <option value="solid">Bold frame</option>
-    </select>
-  </div>
-
-  <div class="section">
     <div class="field">
       <div class="range-label">
         <label for="road">Road width</label>
-        <output id="road-out" for="road"></output>
+        <output id="road-value" for="road"></output>
       </div>
       <input id="road" type="range" min="75" max="125" value="100">
     </div>
@@ -259,7 +372,7 @@ footer{
     <div class="field">
       <div class="range-label">
         <label for="eye">Eye size</label>
-        <output id="eye-out" for="eye"></output>
+        <output id="eye-value" for="eye"></output>
       </div>
       <input id="eye" type="range" min="80" max="125" value="100">
     </div>
@@ -267,17 +380,98 @@ footer{
     <div class="field">
       <div class="range-label">
         <label for="pieces">Puzzle circles</label>
-        <output id="pieces-out" for="pieces"></output>
+        <output id="pieces-value" for="pieces"></output>
       </div>
       <input id="pieces" type="range" min="80" max="115" value="100">
     </div>
 
     <div class="field">
       <div class="range-label">
-        <label for="weight">Line weight</label>
-        <output id="weight-out" for="weight"></output>
+        <label for="line">Line weight</label>
+        <output id="line-value" for="line"></output>
       </div>
-      <input id="weight" type="range" min="5" max="12" value="8">
+      <input id="line" type="range" min="5" max="12" value="8">
+    </div>
+  </section>
+
+  <details class="group" open>
+    <summary>Typography</summary>
+
+    <div class="field">
+      <label for="font">Patch lettering</label>
+      <select id="font">
+        <option value="amstelvar">Amstelvar Roman</option>
+        <option value="arial">Helvetica / Arial</option>
+      </select>
+    </div>
+
+    <label class="check" for="auto-type">
+      Vary lettering with Generate
+      <input id="auto-type" type="checkbox" checked>
+    </label>
+
+    <div class="field" style="margin-top:16px">
+      <div class="range-label">
+        <label for="weight">Letter weight</label>
+        <output id="weight-value" for="weight"></output>
+      </div>
+      <input id="weight" type="range"
+        min="100" max="900" step="10" value="700">
+    </div>
+
+    <div class="field">
+      <div class="range-label">
+        <label for="width">Letter width</label>
+        <output id="width-value" for="width"></output>
+      </div>
+      <input id="width" type="range" min="50" max="125" value="85">
+    </div>
+
+    <div class="field">
+      <div class="range-label">
+        <label for="optical">Optical size</label>
+        <output id="optical-value" for="optical"></output>
+      </div>
+      <input id="optical" type="range" min="12" max="144" value="72">
+    </div>
+
+    <div class="field">
+      <label for="motion">Lettering motion</label>
+      <select id="motion">
+        <option value="hover">Hover, focus, or tap</option>
+        <option value="loop">Continuous loop</option>
+        <option value="off">Off</option>
+      </select>
+    </div>
+
+    <button id="play" class="full" type="button" aria-pressed="false">
+      Play lettering
+    </button>
+
+    <p class="helper" id="font-status">Loading your Amstelvar font…</p>
+  </details>
+
+  <details class="group" open>
+    <summary>Color & finishing</summary>
+
+    <div class="field">
+      <label for="palette">Palette</label>
+      <select id="palette">
+        <option value="auto">Automatic</option>
+        <option value="forest">Forest / cream / gold</option>
+        <option value="space">Navy / cream / sage</option>
+        <option value="paper">Paper / forest / clay</option>
+        <option value="noir">Charcoal / cream / green</option>
+      </select>
+    </div>
+
+    <div class="field">
+      <label for="border">Border</label>
+      <select id="border">
+        <option value="double">Double line</option>
+        <option value="stitch">Stitched edge</option>
+        <option value="bold">Bold frame</option>
+      </select>
     </div>
 
     <label class="check" for="mono">
@@ -289,71 +483,99 @@ footer{
       Space details
       <input id="stars" type="checkbox">
     </label>
-  </div>
-
-  <div class="actions">
-    <button class="primary" id="generate" type="button">
-      Generate variation ↗
-    </button>
-    <button id="reset" type="button">Reset to sketch layout</button>
-  </div>
-
-  <details>
-    <summary>The concept</summary>
-    <p>Through collaboration and trial and error, curiosity becomes
-      a path to discovery. The puzzle pieces represent people bringing
-      their ideas together, while the cycle reflects the process of
-      testing, learning, and trying again. Together, these symbols show
-      how shared effort and a willingness to experiment can turn
-      questions into new possibilities.</p>
-    <p>The road represents curiosity and the journey forward.
-      The eye represents observation and discovery.</p>
   </details>
+
+  <details class="group">
+    <summary>Composition seed</summary>
+    <div class="field">
+      <label for="seed">Seed</label>
+      <div class="seed-row">
+        <input id="seed" type="text" inputmode="numeric"
+          maxlength="10" value="2409">
+        <button id="apply-seed" type="button">Apply</button>
+      </div>
+    </div>
+    <p class="helper">
+      The same seed and settings recreate the same starting design.
+    </p>
+  </details>
+
+  <button id="generate" class="primary full" type="button">
+    Generate new patch ↗
+  </button>
+  <p class="helper">Keep your words. Explore a new arrangement.</p>
 </aside>
 
-<section class="stage" aria-label="Patch preview">
-  <div class="preview-head">
-    <span id="composition-name">Balanced orbit</span>
-    <span id="edition">Starting design</span>
+<section class="stage" aria-label="Patch preview and export">
+  <div class="stage-top">
+    <span id="layout-name">Patch preview</span>
+    <span id="seed-label">SEED 2409</span>
   </div>
 
-  <div class="preview">
-    <div id="preview" class="patch"></div>
+  <div class="preview-wrap">
+    <div id="preview" tabindex="0"
+      aria-label="Mission patch preview. Hover, focus, or tap to animate lettering.">
+    </div>
   </div>
 
-  <div class="meta">
+  <div class="preview-info">
     <span>3.5 × 3.5 inches · square</span>
-    <span>PNG: 2100 × 2100 px · 600 dpi</span>
+    <span>2100 × 2100 px · 600 dpi</span>
   </div>
 
   <div class="exports">
-    <button class="primary" id="png" type="button">Download PNG</button>
+    <button id="png" class="primary" type="button">Download PNG</button>
     <button id="svg" type="button">Download SVG</button>
   </div>
 
-  <p id="status" role="status" aria-live="polite">
-    Generate variations, then download the ones you want to keep.
+  <p class="stage-note">
+    Download captures the displayed patch, including its lettering.
   </p>
 </section>
 </main>
 
-<footer>Leanna Urena · A.I. for Designers · SSEP Mission Patch</footer>
+<p id="status" class="status" role="status" aria-live="polite">
+  Preparing your patch…
+</p>
+
+<details class="about">
+  <summary>The concept</summary>
+  <p>Through collaboration and trial and error, curiosity becomes
+    a path to discovery. The puzzle pieces represent people bringing
+    their ideas together, while the cycle reflects the process of
+    testing, learning, and trying again. Together, these symbols show
+    how shared effort and a willingness to experiment can turn
+    questions into new possibilities.</p>
+  <p>The road represents curiosity and the journey forward.
+    The eye represents observation and discovery.</p>
+</details>
+
+<footer>
+  <span>Leanna Urena / A.I. for Designers</span>
+  <span>SSEP Mission Patch / Session 2</span>
+</footer>
 </div>
 
 <script>
 "use strict";
 (() => {
   const $ = id => document.getElementById(id);
-  const TAU = Math.PI * 2;
+  const NS = "http://www.w3.org/2000/svg";
+  const preview = $("preview");
+  const reduced = matchMedia("(prefers-reduced-motion: reduce)");
+  const measure = document.createElement("canvas").getContext("2d");
 
-  const palettes = {
-    forest:{bg:"#f3f2eb",ink:"#204b3b",accent:"#94703e"},
+  const FONT_FILE =
+    "Amstelvar-Roman[GRAD,XOPQ,XTRA,YOPQ,YTAS,YTDE,YTFI,YTLC,YTUC,wdth,wght,opsz].ttf";
+
+  const PALETTES = {
+    forest:{bg:"#173d2e",ink:"#f3f2eb",accent:"#d4b77b"},
     space:{bg:"#142c40",ink:"#f3f2eb",accent:"#9dceb0"},
-    earth:{bg:"#204b3b",ink:"#f3f2eb",accent:"#d8bd79"},
-    clay:{bg:"#eee9df",ink:"#282d29",accent:"#a84d37"}
+    paper:{bg:"#f3f2eb",ink:"#204b3b",accent:"#a4533c"},
+    noir:{bg:"#202620",ink:"#f3f2eb",accent:"#91c69b"}
   };
 
-  const layouts = {
+  const LAYOUTS = {
     orbit:{
       name:"Balanced orbit",
       cx:500,cy:477,rx:248,ry:205,r:74,tilt:0,bend:0
@@ -376,126 +598,141 @@ footer{
     }
   };
 
-  const measure = document.createElement("canvas").getContext("2d");
+  const state = {
+    seed:2409,
+    design:null,
+    font:null,
+    fontError:"",
+    svg:null,
+    settings:null,
+    hovered:false,
+    focused:false,
+    manual:false,
+    paused:false,
+    frame:0,
+    elapsed:0,
+    started:0,
+    lastStep:-1
+  };
 
-  let state = initialState();
+  const glyphCache = new Map();
+  const clamp = (n,a,b) => Math.max(a,Math.min(b,n));
+  const f = n => Number(n.toFixed(3));
+  const pick = (rng,list) => list[Math.floor(rng()*list.length)];
+  const between = (rng,a,b) => a+rng()*(b-a);
 
-  function initialState() {
-    return {
-      edition:0,
-      seed:38219,
-      layout:"orbit",
-      palette:"forest",
-      type:"center",
-      spread:1,
-      lift:0,
-      tilt:0,
-      bend:0,
-      shift:0,
-      turns:[0,25,-25]
-    };
-  }
+  const escape = text => String(text).replace(/[&<>"']/g,c => ({
+    "&":"&amp;","<":"&lt;",">":"&gt;",
+    '"':"&quot;","'":"&apos;"
+  }[c]));
 
   function seeded(seed) {
     let n = seed >>> 0;
     return () => {
       n += 0x6D2B79F5;
-      let t = Math.imul(n ^ n >>> 15,1 | n);
-      t ^= t + Math.imul(t ^ t >>> 7,61 | t);
-      return ((t ^ t >>> 14) >>> 0) / 4294967296;
+      let t = Math.imul(n ^ n>>>15,1|n);
+      t ^= t+Math.imul(t ^ t>>>7,61|t);
+      return ((t ^ t>>>14)>>>0)/4294967296;
     };
   }
 
-  function newSeed() {
+  function randomSeed() {
     const a = new Uint32Array(1);
     if (window.crypto && crypto.getRandomValues) {
       crypto.getRandomValues(a);
       return a[0];
     }
-    return Math.floor(Math.random() * 4294967296);
+    return Math.floor(Math.random()*4294967296);
   }
 
-  const random = (rng,a,b) => a + rng() * (b-a);
-  const pick = (rng,items) => items[Math.floor(rng() * items.length)];
-
-  function different(rng,items,current) {
-    const choices = items.filter(item => item !== current);
-    return pick(rng,choices.length ? choices : items);
-  }
-
-  function escapeText(value) {
-    return String(value).replace(/[&<>"']/g,c => ({
-      "&":"&amp;","<":"&lt;",">":"&gt;",
-      '"':"&quot;","'":"&apos;"
-    }[c]));
-  }
-
-  const f = n => Number(n.toFixed(2));
-
-  function textLabel(value,x,y,size,anchor,color,maxWidth=810) {
-    const text = value.trim();
-    if (!text) return "";
-    measure.font = `700 ${size}px Arial`;
-    while (size > 12 && measure.measureText(text).width > maxWidth) {
-      size--;
-      measure.font = `700 ${size}px Arial`;
-    }
-    return `<text x="${x}" y="${y}" fill="${color}"
-      font-family="Arial,Helvetica,sans-serif"
-      font-size="${size}" font-weight="700"
-      text-anchor="${anchor}">${escapeText(text)}</text>`;
-  }
-
-  function puzzle(x,y,r,angle,color) {
-    return `<g transform="translate(${f(x)} ${f(y)})
-      rotate(${f(angle)}) scale(${f(r/82)})">
-      <path fill="${color}" d="
-        M -38 -36
-        H -13
-        C -25 -65 25 -65 13 -36
-        H 38 V -12
-        C 67 -24 67 24 38 12
-        V 38 H 13
-        C 25 10 -25 10 -13 38
-        H -38 V 13
-        C -10 25 -10 -25 -38 -13
-        Z"/>
-      </g>`;
-  }
-
-  function point(cx,cy,rx,ry,angle,tilt) {
-    const a = angle * Math.PI / 180;
-    const t = tilt * Math.PI / 180;
-    const x = rx * Math.cos(a);
-    const y = ry * Math.sin(a);
+  function settings() {
     return {
-      x:cx + x*Math.cos(t) - y*Math.sin(t),
-      y:cy + x*Math.sin(t) + y*Math.cos(t)
+      top:$("top").value.trim(),
+      bottom:$("bottom").value.trim(),
+      layout:$("layout").value,
+      alignment:$("alignment").value,
+      palette:$("palette").value,
+      border:$("border").value,
+      font:$("font").value,
+      motion:$("motion").value,
+      autoType:$("auto-type").checked,
+      mono:$("mono").checked,
+      stars:$("stars").checked,
+      road:Number($("road").value)/100,
+      eye:Number($("eye").value)/100,
+      pieces:Number($("pieces").value)/100,
+      line:Number($("line").value),
+      weight:Number($("weight").value),
+      width:Number($("width").value),
+      optical:Number($("optical").value)
     };
   }
 
-  function orbitArrow(cx,cy,rx,ry,start,end,tilt,color,weight) {
+  function makeDesign(s,seed) {
+    const rng = seeded(seed);
+    const layout = s.layout === "auto"
+      ? pick(rng,Object.keys(LAYOUTS)) : s.layout;
+    const palette = s.palette === "auto"
+      ? pick(rng,Object.keys(PALETTES)) : s.palette;
+    const alignment = s.alignment === "auto"
+      ? pick(rng,["center","left","split"]) : s.alignment;
+
+    return {
+      layout,palette,alignment,
+      spread:between(rng,.97,1.03),
+      lift:between(rng,-6,6),
+      tilt:between(rng,-5,5),
+      bend:between(rng,-30,30),
+      shift:between(rng,-20,20),
+      turns:[
+        between(rng,-50,50),
+        between(rng,-75,75),
+        between(rng,-75,75)
+      ],
+      axes:s.autoType ? {
+        wght:pick(rng,[350,500,700,850]),
+        wdth:pick(rng,[65,80,95,110]),
+        opsz:pick(rng,[24,48,72,110])
+      } : {wght:s.weight,wdth:s.width,opsz:s.optical}
+    };
+  }
+
+  function point(cx,cy,rx,ry,angle,tilt) {
+    const a = angle*Math.PI/180;
+    const t = tilt*Math.PI/180;
+    const x = rx*Math.cos(a);
+    const y = ry*Math.sin(a);
+
+    return {
+      x:cx+x*Math.cos(t)-y*Math.sin(t),
+      y:cy+x*Math.sin(t)+y*Math.cos(t)
+    };
+  }
+
+  function arrow(cx,cy,rx,ry,start,end,tilt,color,width) {
     const points = [];
     const count = Math.max(12,Math.ceil((end-start)/3));
 
     for (let i=0;i<=count;i++) {
-      points.push(point(cx,cy,rx,ry,
-        start+(end-start)*i/count,tilt));
+      points.push(point(
+        cx,cy,rx,ry,start+(end-start)*i/count,tilt
+      ));
     }
 
-    const d = points.map((p,i) =>
+    const path = points.map((p,i) =>
       `${i ? "L" : "M"} ${f(p.x)} ${f(p.y)}`).join(" ");
 
-    const tip = points[points.length-1];
-    const previous = points[points.length-2];
+    const tip = points.at(-1);
+    const previous = points.at(-2);
     const a = Math.atan2(tip.y-previous.y,tip.x-previous.x);
-    const length = 21 + weight*.4;
-    const wing = 10 + weight*.2;
+    const length = 21+width*.4;
+    const wing = 10+width*.2;
     const bx = tip.x-length*Math.cos(a);
     const by = tip.y-length*Math.sin(a);
 
-    return `<path d="${d}" fill="none" stroke="${color}"
-      stroke-width="${weight}" stroke-linecap="round"/>
+    return `
+      <path d="${path}" fill="none" stroke="${color}"
+        stroke-width="${width}" stroke-linecap="round"/>
       <path fill="${color}" d="
         M ${f(tip.x)} ${f(tip.y)}
         L ${f(bx+wing*Math.sin(a))} ${f(by-wing*Math.cos(a))}
@@ -503,212 +740,536 @@ footer{
         Z"/>`;
   }
 
-  function artwork() {
-    const layoutKey = $("layout").value === "auto"
-      ? state.layout : $("layout").value;
-    const paletteKey = $("palette").value === "auto"
-      ? state.palette : $("palette").value;
-    const type = $("type").value === "auto"
-      ? state.type : $("type").value;
+  function puzzle(x,y,r,angle,color) {
+    return `
+      <g transform="translate(${f(x)} ${f(y)})
+        rotate(${f(angle)}) scale(${f(r/82)})">
+        <path fill="${color}" d="
+          M -38 -36 H -13
+          C -25 -65 25 -65 13 -36
+          H 38 V -12
+          C 67 -24 67 24 38 12
+          V 38 H 13
+          C 25 10 -25 10 -13 38
+          H -38 V 13
+          C -10 25 -10 -25 -38 -13
+          Z"/>
+      </g>`;
+  }
 
-    const l = layouts[layoutKey];
-    const p = $("mono").checked
-      ? {bg:"#f3f2eb",ink:"#242925",accent:"#242925"}
-      : palettes[paletteKey];
-
-    const weight = Number($("weight").value);
-    const eyeScale = Number($("eye").value)/100;
-    const roadScale = Number($("road").value)/100;
-    const pieceScale = Number($("pieces").value)/100;
-
+  function symbols(s,d,p) {
+    const l = LAYOUTS[d.layout];
     const cx = l.cx;
-    const cy = l.cy + state.lift;
-    const rx = l.rx * state.spread;
+    const cy = l.cy+d.lift;
+    const rx = l.rx*d.spread;
     const ry = l.ry;
-    const r = l.r * pieceScale;
-    const tilt = l.tilt + state.tilt;
+    const radius = l.r*s.pieces;
+    const tilt = l.tilt+d.tilt;
     const eyeY = cy-8;
     const endY = eyeY+43;
-    const baseX = 500+state.shift;
-    const half = 127*roadScale;
-    const bend = l.bend+state.bend;
+    const base = 500+d.shift;
+    const half = 127*s.road;
+    const bend = l.bend+d.bend;
     const angles = [-90,30,150];
 
-    $("composition-name").textContent = l.name;
-    $("edition").textContent = state.edition
-      ? "Variation "+String(state.edition).padStart(2,"0")
-      : "Starting design";
+    let markup = `<rect width="1000" height="1000" fill="${p.bg}"/>`;
 
-    let svg = `<svg xmlns="http://www.w3.org/2000/svg"
-      width="3.5in" height="3.5in" viewBox="0 0 1000 1000"
-      role="img" aria-label="Mission patch: a road leads toward
-      an eye, surrounded by three puzzle circles and a clockwise cycle.">
-      <title>Curiosity becomes a path to discovery</title>
-      <desc>Collaboration, experimentation, observation, and discovery.</desc>
-      <rect width="1000" height="1000" fill="${p.bg}"/>`;
-
-    if ($("stars").checked) {
+    if (s.stars) {
       const rng = seeded(state.seed ^ 0x1A45F);
       for (let i=0;i<26;i++) {
-        const x = random(rng,105,895);
-        const y = random(rng,180,815);
-        const radius = random(rng,1.5,3);
-        svg += `<circle cx="${f(x)}" cy="${f(y)}"
-          r="${f(radius)}" fill="${p.ink}" opacity=".28"/>`;
+        markup += `<circle
+          cx="${f(between(rng,105,895))}"
+          cy="${f(between(rng,180,815))}"
+          r="${f(between(rng,1.5,3))}"
+          fill="${p.ink}" opacity=".28"/>`;
       }
     }
 
-    // Arrows leave a clear gap around each puzzle circle.
-    angles.forEach((a,i) => {
-      const next = a+120;
-      const speedAt = degrees => {
-        const theta = degrees*Math.PI/180;
-        return Math.hypot(rx*Math.sin(theta),ry*Math.cos(theta));
+    angles.forEach(a => {
+      const speed = degrees => {
+        const t = degrees*Math.PI/180;
+        return Math.hypot(rx*Math.sin(t),ry*Math.cos(t));
       };
-      const gap1 = (r+19)/speedAt(a)*180/Math.PI;
-      const gap2 = (r+26)/speedAt(next)*180/Math.PI;
+      const gap1 = (radius+19)/speed(a)*180/Math.PI;
+      const gap2 = (radius+26)/speed(a+120)*180/Math.PI;
 
-      svg += orbitArrow(
-        cx,cy,rx,ry,a+gap1,next-gap2,tilt,p.accent,weight
+      markup += arrow(
+        cx,cy,rx,ry,a+gap1,a+120-gap2,
+        tilt,p.accent,s.line
       );
     });
 
-    // A perspective road always connects the bottom to the eye.
-    svg += `<path d="
-      M ${f(baseX-half)} 840
-      C ${f(baseX-half+bend)} 730
-        ${f(cx-38-bend)} ${f(endY+110)}
-        ${f(cx-12)} ${f(endY)}
-      Q ${cx} ${f(endY-12)} ${f(cx+12)} ${f(endY)}
-      C ${f(cx+38-bend)} ${f(endY+110)}
-        ${f(baseX+half+bend)} 730
-        ${f(baseX+half)} 840
-      Z"
-      fill="${p.bg}" stroke="${p.ink}"
-      stroke-width="${weight}" stroke-linejoin="round"/>
+    markup += `
+      <path d="
+        M ${f(base-half)} 840
+        C ${f(base-half+bend)} 730
+          ${f(cx-38-bend)} ${f(endY+110)}
+          ${f(cx-12)} ${f(endY)}
+        Q ${cx} ${f(endY-12)} ${f(cx+12)} ${f(endY)}
+        C ${f(cx+38-bend)} ${f(endY+110)}
+          ${f(base+half+bend)} 730
+          ${f(base+half)} 840 Z"
+        fill="${p.bg}" stroke="${p.ink}"
+        stroke-width="${s.line}" stroke-linejoin="round"/>
 
       <path d="
-      M ${baseX} 837
-      C ${f(baseX+bend)} 730
-        ${f(cx-bend)} ${f(endY+110)}
-        ${cx} ${f(endY+23)}"
-      fill="none" stroke="${p.accent}"
-      stroke-width="${Math.max(5,weight*.75)}"
-      stroke-dasharray="23 22" stroke-linecap="round"/>`;
+        M ${f(base)} 837
+        C ${f(base+bend)} 730
+          ${f(cx-bend)} ${f(endY+110)}
+          ${cx} ${f(endY+23)}"
+        fill="none" stroke="${p.accent}"
+        stroke-width="${Math.max(5,s.line*.75)}"
+        stroke-dasharray="23 22" stroke-linecap="round"/>`;
 
     angles.forEach((a,i) => {
       const q = point(cx,cy,rx,ry,a,tilt);
-      svg += `<circle cx="${f(q.x)}" cy="${f(q.y)}"
-        r="${f(r)}" fill="${p.bg}"
-        stroke="${p.ink}" stroke-width="${weight}"/>`;
-      svg += puzzle(q.x,q.y,r,state.turns[i],p.accent);
+
+      markup += `
+        <circle cx="${f(q.x)}" cy="${f(q.y)}"
+          r="${f(radius)}" fill="${p.bg}"
+          stroke="${p.ink}" stroke-width="${s.line}"/>
+        ${puzzle(q.x,q.y,radius,d.turns[i],p.accent)}`;
     });
 
-    svg += `<g transform="translate(${cx} ${eyeY})
-      scale(${eyeScale})">
-      <path d="M -116 0 Q 0 -100 116 0
-        Q 0 100 -116 0 Z"
-        fill="${p.bg}" stroke="${p.ink}"
-        stroke-width="${weight}" stroke-linejoin="round"/>
-      <circle r="32" fill="${p.accent}"
-        stroke="${p.ink}" stroke-width="${weight*.7}"/>
-      <circle r="14" fill="${p.ink}"/>
-      <circle cx="7" cy="-8" r="4" fill="${p.bg}"/>
+    markup += `
+      <g transform="translate(${cx} ${f(eyeY)}) scale(${s.eye})">
+        <path d="M -116 0 Q 0 -100 116 0
+          Q 0 100 -116 0 Z"
+          fill="${p.bg}" stroke="${p.ink}"
+          stroke-width="${s.line}" stroke-linejoin="round"/>
+        <circle r="32" fill="${p.accent}"
+          stroke="${p.ink}" stroke-width="${s.line*.7}"/>
+        <circle r="14" fill="${p.ink}"/>
+        <circle cx="7" cy="-8" r="4" fill="${p.bg}"/>
       </g>`;
 
-    if ($("border").value === "double") {
-      svg += `<rect x="30" y="30" width="940" height="940"
-        fill="none" stroke="${p.ink}" stroke-width="12"/>
+    if (s.border === "double") {
+      markup += `
+        <rect x="30" y="30" width="940" height="940"
+          fill="none" stroke="${p.ink}" stroke-width="12"/>
         <rect x="48" y="48" width="904" height="904"
-        fill="none" stroke="${p.ink}" stroke-width="2"/>`;
-    } else if ($("border").value === "stitch") {
-      svg += `<rect x="30" y="30" width="940" height="940"
-        fill="none" stroke="${p.ink}" stroke-width="13"/>
+          fill="none" stroke="${p.ink}" stroke-width="2"/>`;
+    } else if (s.border === "stitch") {
+      markup += `
+        <rect x="30" y="30" width="940" height="940"
+          fill="none" stroke="${p.ink}" stroke-width="13"/>
         <rect x="49" y="49" width="902" height="902"
-        fill="none" stroke="${p.accent}" stroke-width="3"
-        stroke-dasharray="8 9"/>`;
+          fill="none" stroke="${p.accent}" stroke-width="3"
+          stroke-dasharray="8 9"/>`;
     } else {
-      svg += `<rect x="35" y="35" width="930" height="930"
-        fill="none" stroke="${p.ink}" stroke-width="24"/>`;
+      markup += `
+        <rect x="35" y="35" width="930" height="930"
+          fill="none" stroke="${p.ink}" stroke-width="24"/>`;
     }
 
-    const top = $("top").value;
-    const bottom = $("bottom").value;
+    return markup;
+  }
 
-    if (type === "center") {
-      svg += textLabel(top,500,118,46,"middle",p.ink);
-      svg += textLabel(bottom,500,925,37,"middle",p.ink);
-    } else if (type === "left") {
-      svg += textLabel(top,85,118,46,"start",p.ink);
-      svg += textLabel(bottom,85,925,37,"start",p.ink);
-    } else {
-      svg += textLabel(top,85,118,46,"start",p.ink);
-      svg += textLabel(bottom,915,925,37,"end",p.ink);
+  /*
+   * Read variable-font outlines directly from the external font.
+   * Export contains letter shapes, never encoded font data.
+   */
+  function shapedRun(text,axes) {
+    const key = JSON.stringify([text,axes]);
+    if (glyphCache.has(key)) return glyphCache.get(key);
+
+    const available = state.font.variationAxes || {};
+    const requested = {};
+
+    Object.entries(axes).forEach(([tag,value]) => {
+      if (available[tag]) {
+        requested[tag] = clamp(
+          value,available[tag].min,available[tag].max
+        );
+      }
+    });
+
+    const font = Object.keys(requested).length
+      ? state.font.getVariation(requested) : state.font;
+
+    for (const char of Array.from(text)) {
+      if (!/\s/u.test(char) &&
+          !font.hasGlyphForCodePoint(char.codePointAt(0))) {
+        throw new Error(
+          "This font does not contain “"+char+
+          "”. Change the text or select Helvetica / Arial."
+        );
+      }
     }
 
-    return svg+"</svg>";
+    const run = font.layout(text);
+    let x = 0, y = 0;
+    let minX = Infinity, minY = Infinity;
+    let maxX = -Infinity, maxY = -Infinity;
+    let paths = "";
+
+    run.glyphs.forEach((glyph,i) => {
+      const pos = run.positions[i];
+      const gx = x+pos.xOffset;
+      const gy = y+pos.yOffset;
+      const path = glyph.path.toSVG();
+
+      if (path) {
+        const b = glyph.bbox;
+        minX = Math.min(minX,gx+b.minX);
+        minY = Math.min(minY,gy+b.minY);
+        maxX = Math.max(maxX,gx+b.maxX);
+        maxY = Math.max(maxY,gy+b.maxY);
+
+        paths += `<path transform="translate(${f(gx)} ${f(gy)})"
+          d="${escape(path)}"/>`;
+      }
+
+      x += pos.xAdvance;
+      y += pos.yAdvance;
+    });
+
+    const result = {
+      paths,minX,minY,maxX,maxY,
+      width:maxX-minX,height:maxY-minY,
+      units:font.unitsPerEm
+    };
+
+    if (glyphCache.size > 250) glyphCache.clear();
+    glyphCache.set(key,result);
+    return result;
+  }
+
+  function vectorLabel(text,box,size,align,axes,tilt,color) {
+    if (!text) return "";
+    const run = shapedRun(text,axes);
+    if (!Number.isFinite(run.width) || run.width <= 0) return "";
+
+    const shear = Math.abs(Math.tan(tilt*Math.PI/180));
+    const scale = Math.min(
+      size/run.units,
+      box.w/(run.width+shear*run.height),
+      box.h/run.height
+    );
+
+    const width = run.width*scale;
+    const height = run.height*scale;
+    const pad = shear*height/2;
+    const left = align === "center"
+      ? box.x+(box.w-width)/2
+      : align === "end"
+        ? box.x+box.w-width-pad
+        : box.x+pad;
+    const top = box.y+(box.h-height)/2;
+    const baseline = top+run.maxY*scale;
+    const originX = left-run.minX*scale;
+    const centerX = left+width/2;
+    const centerY = top+height/2;
+
+    return `
+      <g fill="${color}" aria-label="${escape(text)}"
+        transform="translate(${f(centerX)} ${f(centerY)})
+          skewX(${f(tilt)})
+          translate(${-f(centerX)} ${-f(centerY)})">
+        <g transform="translate(${f(originX)} ${f(baseline)})
+          scale(${f(scale)} ${-f(scale)})">
+          ${run.paths}
+        </g>
+      </g>`;
+  }
+
+  function systemLabel(text,box,size,align,color) {
+    if (!text) return "";
+    measure.font = `700 ${size}px Arial`;
+
+    while (size > 12 && measure.measureText(text).width > box.w) {
+      size--;
+      measure.font = `700 ${size}px Arial`;
+    }
+
+    const x = align === "center" ? box.x+box.w/2
+      : align === "end" ? box.x+box.w : box.x;
+
+    return `<text x="${x}" y="${box.y+box.h*.72}"
+      text-anchor="${align}" fill="${color}"
+      font-family="Arial,Helvetica,sans-serif"
+      font-size="${size}" font-weight="700">${escape(text)}</text>`;
+  }
+
+  function palette() {
+    return state.settings.mono
+      ? {bg:"#f3f2eb",ink:"#242925",accent:"#242925"}
+      : PALETTES[state.design.palette];
+  }
+
+  function usingVariableFont() {
+    return state.settings?.font === "amstelvar" && !!state.font;
+  }
+
+  function lettering(phase=null) {
+    const s = state.settings;
+    const d = state.design;
+    const p = palette();
+    const base = d.axes;
+
+    const axes = phase === null ? base : {
+      wght:100+800*phase,
+      wdth:clamp(base.wdth-8+16*phase,50,125),
+      opsz:12+132*phase
+    };
+
+    const tilt = phase === null ? 0 : -8*phase;
+    const align = d.alignment === "center" ? "center" : "start";
+    const bottomAlign = d.alignment === "split" ? "end" : align;
+    const topBox = {x:85,y:77,w:830,h:65};
+    const bottomBox = {x:85,y:882,w:830,h:57};
+
+    if (usingVariableFont()) {
+      return vectorLabel(s.top,topBox,52,align,axes,tilt,p.ink) +
+        vectorLabel(s.bottom,bottomBox,42,bottomAlign,axes,tilt,p.ink);
+    }
+
+    return systemLabel(s.top,topBox,46,align,p.ink) +
+      systemLabel(s.bottom,bottomBox,37,bottomAlign,p.ink);
+  }
+
+  function updateReadouts() {
+    const s = state.settings;
+    const axes = state.design.axes;
+
+    ["road","eye","pieces"].forEach(id => {
+      $(id+"-value").textContent = $(id).value+"%";
+    });
+    $("line-value").textContent = s.line;
+
+    $("weight-value").textContent = axes.wght;
+    $("width-value").textContent = axes.wdth+"%";
+    $("optical-value").textContent = axes.opsz;
+
+    ["weight","width","optical"].forEach(id => {
+      $(id).disabled = s.autoType || !usingVariableFont();
+    });
+
+    $("layout-name").textContent = LAYOUTS[state.design.layout].name;
+    $("seed-label").textContent = "SEED "+state.seed;
+
+    if (s.font === "arial") {
+      $("font-status").textContent = "Static Helvetica / Arial lettering.";
+    } else if (state.font) {
+      $("font-status").textContent =
+        "Amstelvar Roman · loaded from your fonts folder.";
+    } else {
+      $("font-status").textContent = state.fontError ||
+        "Loading Amstelvar. Preview currently uses Arial.";
+    }
+
+    $("play").disabled =
+      !usingVariableFont() || s.motion === "off" || reduced.matches;
   }
 
   function render() {
-    ["road","eye","pieces"].forEach(id => {
-      $(id+"-out").textContent = $(id).value+"%";
-    });
-    $("weight-out").textContent = $("weight").value;
-    $("preview").innerHTML = artwork();
+    try {
+      stopFrame();
+      state.elapsed = 0;
+      state.lastStep = -1;
+
+      const s = settings();
+      const d = makeDesign(s,state.seed);
+      state.settings = s;
+      state.design = d;
+
+      const p = palette();
+      const labels = lettering();
+      const metadata = {
+        seed:state.seed,
+        settings:s,
+        layout:d.layout,
+        axes:d.axes,
+        sizeInches:3.5
+      };
+
+      const markup = `
+        <svg xmlns="${NS}" width="3.5in" height="3.5in"
+          viewBox="0 0 1000 1000" role="img"
+          aria-label="Mission patch with a road, eye,
+            three puzzle circles, and a clockwise cycle">
+          <title>Curiosity becomes a path to discovery</title>
+          <desc>Collaboration and experimentation lead to discovery.</desc>
+          <metadata>${escape(JSON.stringify(metadata))}</metadata>
+          ${symbols(s,d,p)}
+          <g id="patch-lettering">${labels}</g>
+        </svg>`;
+
+      preview.innerHTML = markup;
+      state.svg = preview.querySelector("svg");
+      updateReadouts();
+      updatePlayback();
+      $("status").textContent =
+        "Patch ready. Generate a variation or download this version.";
+    } catch (error) {
+      $("status").textContent = error.message;
+    }
+  }
+
+  /*
+   * Only the lettering moves. The symbols retain their meaning.
+   * Amstelvar has no slnt axis; a separate skew supplies the tilt.
+   */
+  function active() {
+    return state.svg && usingVariableFont() &&
+      !reduced.matches && !state.paused && !document.hidden &&
+      state.settings.motion !== "off" &&
+      (state.settings.motion === "loop" ||
+        state.hovered || state.focused || state.manual);
+  }
+
+  function stopFrame() {
+    if (state.frame) cancelAnimationFrame(state.frame);
+    state.frame = 0;
+  }
+
+  function drawLettering(phase=null) {
+    const group = state.svg?.querySelector("#patch-lettering");
+    if (group) group.innerHTML = lettering(phase);
+  }
+
+  function tick(now) {
+    state.frame = 0;
+    if (!active()) {
+      updatePlayback();
+      return;
+    }
+
+    try {
+      state.elapsed = now-state.started;
+      const t = (1-Math.cos(state.elapsed/4000*Math.PI*2))/2;
+      const step = Math.round(t*32);
+
+      if (step !== state.lastStep) {
+        drawLettering(step/32);
+        state.lastStep = step;
+      }
+
+      state.frame = requestAnimationFrame(tick);
+    } catch (error) {
+      state.paused = true;
+      $("status").textContent = error.message;
+      updatePlayback();
+    }
+  }
+
+  function updatePlayback() {
+    if (active()) {
+      if (!state.frame) {
+        state.started = performance.now()-state.elapsed;
+        state.frame = requestAnimationFrame(tick);
+      }
+    } else {
+      stopFrame();
+      if (!state.paused && state.svg) {
+        state.elapsed = 0;
+        state.lastStep = -1;
+        try { drawLettering(); } catch {}
+      }
+    }
+
+    $("play").textContent = state.paused
+      ? "Resume lettering" : active()
+        ? "Pause lettering" : "Play lettering";
+    $("play").setAttribute("aria-pressed",String(!!active()));
   }
 
   function generate() {
-    const rng = seeded(newSeed());
+    const previous = state.design;
+    let seed = randomSeed();
 
-    if ($("layout").value === "auto") {
-      state.layout = different(rng,Object.keys(layouts),state.layout);
-    }
-    if ($("palette").value === "auto") {
-      state.palette = different(rng,Object.keys(palettes),state.palette);
-    }
-    if ($("type").value === "auto") {
-      state.type = different(rng,["center","left","split"],state.type);
+    if ($("layout").value === "auto" && previous) {
+      for (let i=0;i<20;i++) {
+        if (makeDesign(settings(),seed).layout !== previous.layout) break;
+        seed = randomSeed();
+      }
     }
 
-    state.edition++;
-    state.seed = newSeed();
-    state.spread = random(rng,.97,1.03);
-    state.lift = random(rng,-6,6);
-    state.tilt = random(rng,-5,5);
-    state.bend = random(rng,-25,25);
-    state.shift = random(rng,-20,20);
-    state.turns = [
-      random(rng,-50,50),
-      random(rng,-75,75),
-      random(rng,-75,75)
-    ];
-
-    $("road").value = Math.round(random(rng,85,119));
-    $("eye").value = Math.round(random(rng,86,119));
-    $("pieces").value = Math.round(random(rng,86,110));
-    $("weight").value = pick(rng,[6,7,8,9,10]);
-
+    state.seed = seed;
+    $("seed").value = seed;
+    state.manual = false;
     render();
-    $("status").textContent =
-      "New variation ready. Download it before generating another.";
   }
 
   function reset() {
-    state = initialState();
-    $("top").value = "BARUCH";
-    $("bottom").value = "SSEP";
-    $("layout").value = "auto";
-    $("palette").value = "auto";
-    $("type").value = "auto";
-    $("border").value = "double";
-    $("road").value = 100;
-    $("eye").value = 100;
-    $("pieces").value = 100;
-    $("weight").value = 8;
+    const values = {
+      top:"BARUCH",bottom:"SSEP",alignment:"auto",
+      layout:"auto",palette:"auto",border:"double",
+      font:"amstelvar",motion:"hover",
+      road:100,eye:100,pieces:100,line:8,
+      weight:700,width:85,optical:72,seed:2409
+    };
+    Object.entries(values).forEach(([id,value]) => {
+      $(id).value = value;
+    });
+    $("auto-type").checked = true;
     $("mono").checked = false;
     $("stars").checked = false;
+    state.seed = 2409;
+    state.paused = false;
+    state.manual = false;
     render();
-    $("status").textContent = "Starting design restored.";
+  }
+
+  function applySeed() {
+    const value = $("seed").value.trim();
+    if (!/^\d{1,10}$/.test(value) || Number(value)>4294967295) {
+      $("status").textContent =
+        "Use a seed between 0 and 4294967295.";
+      return;
+    }
+    state.seed = Number(value);
+    render();
+  }
+
+  async function fetchBytes(url) {
+    const controller = new AbortController();
+    const timer = setTimeout(() => controller.abort(),10000);
+    try {
+      const response = await fetch(url,{signal:controller.signal});
+      if (!response.ok) throw new Error("Font file unavailable");
+      return new Uint8Array(await response.arrayBuffer());
+    } finally {
+      clearTimeout(timer);
+    }
+  }
+
+  async function loadExternalFont() {
+    try {
+      const enginePromise =
+        import("https://esm.sh/fontkit@2.0.4?bundle");
+
+      const bytesPromise = (async () => {
+        try {
+          return await fetchBytes(new URL(
+            "fonts/"+FONT_FILE,document.baseURI
+          ));
+        } catch {
+          return await fetchBytes(
+            "https://leannaurena03-max.github.io/" +
+            "AiFD_Leanna/fonts/"+FONT_FILE
+          );
+        }
+      })();
+
+      const [engine,bytes] = await Promise.all([
+        enginePromise,bytesPromise
+      ]);
+
+      state.font = engine.create(bytes);
+      state.fontError = "";
+      render();
+    } catch {
+      state.fontError =
+        "Amstelvar could not load. Using Arial. " +
+        "Check the font filename and open through GitHub Pages.";
+      updateReadouts();
+    }
+  }
+
+  function snapshotSVG() {
+    if (!state.svg) throw new Error("No patch is available");
+    return state.svg.cloneNode(true);
   }
 
   function save(blob,filename) {
@@ -722,20 +1283,6 @@ footer{
     setTimeout(() => URL.revokeObjectURL(url),30000);
   }
 
-  function filename() {
-    return "mission-patch-"+String(state.edition).padStart(2,"0");
-  }
-
-  function exportSVG() {
-    // Export the currently displayed artwork.
-    const markup = new XMLSerializer().serializeToString(
-      $("preview").querySelector("svg")
-    );
-    save(new Blob([markup],{type:"image/svg+xml;charset=utf-8"}),
-      filename()+".svg");
-    $("status").textContent = "SVG download started.";
-  }
-
   function crc32(bytes) {
     let crc = 0xffffffff;
     for (const byte of bytes) {
@@ -747,15 +1294,13 @@ footer{
     return (crc^0xffffffff)>>>0;
   }
 
-  function setPNGResolution(bytes,dpi) {
+  function png600dpi(bytes) {
     const chunk = new Uint8Array(21);
     const view = new DataView(chunk.buffer);
-    const pixelsPerMetre = Math.round(dpi/.0254);
-
     view.setUint32(0,9);
     chunk.set([112,72,89,115],4);
-    view.setUint32(8,pixelsPerMetre);
-    view.setUint32(12,pixelsPerMetre);
+    view.setUint32(8,23622);
+    view.setUint32(12,23622);
     chunk[16] = 1;
     view.setUint32(17,crc32(chunk.subarray(4,17)));
 
@@ -766,18 +1311,17 @@ footer{
     let offset = 8;
     let inserted = false;
 
-    while (offset+12 <= bytes.length) {
+    while (offset+12<=bytes.length) {
       const length = source.getUint32(offset);
       const end = offset+length+12;
-      if (end > bytes.length) throw new Error("Invalid PNG data");
+      if (end>bytes.length) throw new Error("Invalid PNG data");
 
       const type = String.fromCharCode(
         ...bytes.subarray(offset+4,offset+8)
       );
+      if (type!=="pHYs") parts.push(bytes.subarray(offset,end));
 
-      if (type !== "pHYs") parts.push(bytes.subarray(offset,end));
-
-      if (type === "IHDR" && !inserted) {
+      if (type==="IHDR" && !inserted) {
         parts.push(chunk);
         inserted = true;
       }
@@ -788,68 +1332,148 @@ footer{
     return new Blob(parts,{type:"image/png"});
   }
 
+  function exportSVG() {
+    try {
+      const xml = new XMLSerializer().serializeToString(snapshotSVG());
+      save(new Blob([xml],{
+        type:"image/svg+xml;charset=utf-8"
+      }),"mission-patch-"+state.seed+".svg");
+      $("status").textContent = "SVG download started.";
+    } catch (error) {
+      $("status").textContent = "Export failed: "+error.message;
+    }
+  }
+
   async function exportPNG() {
     const button = $("png");
     button.disabled = true;
     let url;
 
     try {
-      const clone = $("preview").querySelector("svg").cloneNode(true);
-      clone.setAttribute("width","2100");
-      clone.setAttribute("height","2100");
+      // Clone before awaiting anything, preserving the displayed frame.
+      const svg = snapshotSVG();
+      const seed = state.seed;
+      svg.setAttribute("width","2100");
+      svg.setAttribute("height","2100");
 
-      const markup = new XMLSerializer().serializeToString(clone);
-      url = URL.createObjectURL(new Blob(
-        [markup],{type:"image/svg+xml;charset=utf-8"}
-      ));
+      const xml = new XMLSerializer().serializeToString(svg);
+      url = URL.createObjectURL(new Blob([xml],{
+        type:"image/svg+xml;charset=utf-8"
+      }));
 
       const image = new Image();
       await new Promise((resolve,reject) => {
         image.onload = resolve;
-        image.onerror = () => reject(new Error("Could not render SVG"));
+        image.onerror = () => reject(new Error("Could not render patch"));
         image.src = url;
       });
 
       const canvas = document.createElement("canvas");
-      canvas.width = 2100;
-      canvas.height = 2100;
+      canvas.width = canvas.height = 2100;
       const ctx = canvas.getContext("2d");
-      if (!ctx) throw new Error("Canvas is unavailable");
+      if (!ctx) throw new Error("Canvas unavailable");
       ctx.drawImage(image,0,0,2100,2100);
 
       const raw = await new Promise((resolve,reject) => {
-        canvas.toBlob(
-          blob => blob ? resolve(blob)
-            : reject(new Error("PNG export is unavailable")),
-          "image/png"
-        );
+        canvas.toBlob(blob => blob
+          ? resolve(blob)
+          : reject(new Error("PNG export unavailable")),"image/png");
       });
 
-      const png = setPNGResolution(
-        new Uint8Array(await raw.arrayBuffer()),600
+      save(
+        png600dpi(new Uint8Array(await raw.arrayBuffer())),
+        "mission-patch-"+seed+".png"
       );
 
-      save(png,filename()+".png");
       $("status").textContent =
         "PNG download started · 2100 × 2100 px · 600 dpi.";
     } catch (error) {
-      $("status").textContent = "Download failed: "+error.message;
+      $("status").textContent = "Export failed: "+error.message;
     } finally {
       if (url) URL.revokeObjectURL(url);
       button.disabled = false;
     }
   }
 
-  ["top","bottom","layout","palette","type","border",
-   "road","eye","pieces","weight","mono","stars"]
-    .forEach(id => $(id).addEventListener("input",render));
+  let pending;
+  document.querySelectorAll("aside input, aside select").forEach(input => {
+    if (input.id==="seed") return;
 
-  $("generate").addEventListener("click",generate);
-  $("reset").addEventListener("click",reset);
+    input.addEventListener("input",() => {
+      clearTimeout(pending);
+      pending = setTimeout(render,input.type==="text" ? 140 : 30);
+    });
+  });
+
+  ["generate","generate-top"].forEach(id => {
+    $(id).addEventListener("click",() => {
+      clearTimeout(pending);
+      generate();
+    });
+  });
+
+  $("reset").addEventListener("click",() => {
+    clearTimeout(pending);
+    reset();
+  });
+  $("apply-seed").addEventListener("click",applySeed);
+  $("seed").addEventListener("keydown",event => {
+    if (event.key==="Enter") applySeed();
+  });
+
   $("svg").addEventListener("click",exportSVG);
   $("png").addEventListener("click",exportPNG);
 
+  preview.addEventListener("pointerenter",() => {
+    state.hovered = true;
+    updatePlayback();
+  });
+  preview.addEventListener("pointerleave",() => {
+    state.hovered = false;
+    updatePlayback();
+  });
+  preview.addEventListener("focus",() => {
+    state.focused = true;
+    updatePlayback();
+  });
+  preview.addEventListener("blur",() => {
+    state.focused = false;
+    updatePlayback();
+  });
+
+  function toggleMotion() {
+    if (!usingVariableFont() || reduced.matches ||
+        state.settings.motion==="off") return;
+
+    if (state.paused) {
+      state.paused = false;
+      state.manual = true;
+    } else if (active()) {
+      state.paused = true;
+      state.manual = false;
+    } else {
+      state.manual = true;
+    }
+    updatePlayback();
+  }
+
+  $("play").addEventListener("click",toggleMotion);
+  preview.addEventListener("click",toggleMotion);
+  preview.addEventListener("keydown",event => {
+    if (event.key==="Enter" || event.key===" ") {
+      event.preventDefault();
+      toggleMotion();
+    }
+  });
+
+  reduced.addEventListener("change",() => {
+    updateReadouts();
+    updatePlayback();
+  });
+  document.addEventListener("visibilitychange",updatePlayback);
+
   render();
+  loadExternalFont();
 })();
 </script>
 </body>
