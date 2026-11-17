@@ -43,7 +43,6 @@ fieldset{border:0;padding:0;margin:0 0 22px}legend{padding:0;margin-bottom:10px}
 <div class="field"><label for="top">Top label</label><input id="top" type="text" maxlength="18" value="BARUCH"></div>
 <div class="field"><label for="bottom">Bottom label</label><input id="bottom" type="text" maxlength="22" value="SSEP"></div>
 <div class="field"><label for="palette">Patch colors</label><select id="palette"><option value="forest">Forest · green / cream / mint</option><option value="space">Space · navy / cream / sea glass</option><option value="earth">Earth · green / cream / gold</option><option value="mono">Monochrome · charcoal / cream</option></select></div>
-<div class="field"><label for="texture">Texture</label><select id="texture"><option value="flat">Flat · clean artwork</option><option value="embroidered">Embroidered · woven fabric and raised thread</option></select><p class="help">Your selected finish is included in previews and downloads.</p></div>
 <div class="field"><div class="range-label"><label for="scale">Discovery symbol size</label><output id="scaleValue" for="scale">100%</output></div><input id="scale" type="range" min="80" max="115" value="100"></div>
 <div class="field"><div class="range-label"><label for="road">Road width (when used)</label><output id="roadValue" for="road">100%</output></div><input id="road" type="range" min="75" max="120" value="100"></div>
 <div class="field"><div class="range-label"><label for="weight">Line weight</label><output id="weightValue" for="weight">8</output></div><input id="weight" type="range" min="6" max="14" value="8"></div>
@@ -70,7 +69,7 @@ const languages={literal:"Literal",geometric:"Geometric",narrative:"Narrative",s
 const layouts={orbit:"Collaboration cycle",journey:"Journey to discovery",constellation:"Floating constellation",assembly:"Ideas coming together",flagship:"Shared discovery",portal:"A new perspective"};
 const meanings={orbit:"Shared ideas move through a cycle of testing, learning, and trying again.",journey:"Curiosity creates a path toward observation and discovery.",constellation:"Different ideas float independently while forming a connected whole.",assembly:"Individual contributions come together to create new possibilities.",flagship:"A shared effort marks a new discovery.",portal:"A familiar symbol becomes a window into another idea."};
 const palettes={forest:{bg:"#172820",ink:"#f3f2eb",accent:"#93cfa6"},space:{bg:"#14283e",ink:"#f3f2eb",accent:"#a2d5d0"},earth:{bg:"#28342a",ink:"#f3f2eb",accent:"#d8bd79"},mono:{bg:"#161918",ink:"#f3f2eb",accent:"#f3f2eb"}};
-const defaults={style:"auto",layout:"auto",discovery:"auto",support:"auto",top:"BARUCH",bottom:"SSEP",palette:"forest",texture:"flat",scale:"100",road:"100",weight:"8",smallSize:"120"};
+const defaults={style:"auto",layout:"auto",discovery:"auto",support:"auto",top:"BARUCH",bottom:"SSEP",palette:"forest",scale:"100",road:"100",weight:"8",smallSize:"120"};
 const rand=(a,b)=>a+Math.random()*(b-a),pick=a=>a[Math.floor(Math.random()*a.length)],n=x=>Number(x.toFixed(2));
 const shuffle=a=>{a=[...a];for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;};
 const esc=s=>String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&apos;"}[c]));
@@ -162,22 +161,6 @@ function puzzlePair(x,y,r,p,w){
  return `<g transform="translate(${n(x)} ${n(y)}) scale(${n(r/100)})">`+
  path(left,fill?p.accent:p.bg,p.accent,w*.65)+path(right,fill?p.ink:p.bg,p.ink,w*.65)+"</g>";
 }
-// Keep the finish inside the SVG so saved previews and both exports match.
-function finishArtwork(markup){
- if($("texture").value!=="embroidered")return markup;
- const defs=`<defs>
- <pattern id="patch-finish-weave" width="6" height="6" patternUnits="userSpaceOnUse">
- <path d="M-2 2L2-2M0 6L6 0M4 8L8 4" stroke="#ffffff" stroke-width=".9" opacity=".13"/>
- <path d="M-2 4L4-2M2 8L8 2" stroke="#000000" stroke-width="1" opacity=".22"/>
- <path d="M0 1H6M0 4H6" stroke="#ffffff" stroke-width=".45" opacity=".055"/>
- </pattern>
- <filter id="patch-finish-thread" x="-30%" y="-30%" width="160%" height="160%" color-interpolation-filters="sRGB">
- <feDropShadow dx="1.4" dy="2.3" stdDeviation="1" flood-color="#000000" flood-opacity=".55"/>
- <feDropShadow dx="-.6" dy="-.8" stdDeviation=".35" flood-color="#ffffff" flood-opacity=".28"/>
- </filter></defs>`;
- const raised=markup.replace('<g stroke-linecap="round" stroke-linejoin="round">','<g stroke-linecap="round" stroke-linejoin="round" filter="url(#patch-finish-thread)">');
- return defs+raised+`<rect width="1000" height="1000" fill="url(#patch-finish-weave)" pointer-events="none"/>`;
-}
 function compose(){
  const p=palettes[$("palette").value],mode=state.language,w=Math.max(Number($("weight").value),mode==="minimal"?10:0),g=geometryFor();
  const [mx,my,mr]=g.main;
@@ -219,10 +202,10 @@ function compose(){
   }else{s+=glyph(state.support,x,y,r,p,w,0);}
  }
  s+=glyph(state.main,mx,my,mr,p,w,0);
- return finishArtwork(s+"</g>");
+ return s+"</g>";
 }
 function render(){
- artCache=compose();$("patch").innerHTML=artCache.replaceAll("patch-finish-","preview-finish-");$("mini").innerHTML=artCache.replaceAll("patch-finish-","mini-finish-");
+ artCache=compose();$("patch").innerHTML=artCache;$("mini").innerHTML=artCache;
  ["scale","road"].forEach(id=>$(id+"Value").textContent=$(id).value+"%");
  $("road").disabled=state.support!=="road";
  $("weightValue").textContent=$("weight").value;$("smallValue").textContent=$("smallSize").value+" px";$("mini").style.width=$("smallSize").value+"px";
@@ -260,7 +243,7 @@ function normalizeSnapshot(item){
  const finite=(v,a,b,f)=>Number.isFinite(Number(v))?clamp(Number(v),a,b):f;
  const safeState={language:st.language,layout:st.layout,main:st.main,support:st.support,spread:finite(st.spread,.96,1.03,1),lift:finite(st.lift,-8,8,0),phase:finite(st.phase,-4,4,0),bend:finite(st.bend,-14,14,0),symbolScale:finite(st.symbolScale,.95,1.03,1),turns:Array.from({length:3},(_,i)=>finite(st.turns?.[i],-30,30,0))};
  const valid=(v,a,f)=>a.includes(v)?v:f;
- const safeParams={style:valid(pa.style,["auto",...Object.keys(languages)],"auto"),layout:valid(pa.layout,["auto",...Object.keys(layouts)],"auto"),discovery:valid(pa.discovery,["auto","eye","magnifier"],"auto"),support:valid(pa.support,["auto","none","road","bubble","flag","geometry"],"auto"),top:String(pa.top??"").slice(0,18),bottom:String(pa.bottom??"").slice(0,22),palette:valid(pa.palette,Object.keys(palettes),"forest"),texture:valid(pa.texture,["flat","embroidered"],"flat"),scale:String(finite(pa.scale,80,115,100)),road:String(finite(pa.road,75,120,100)),weight:String(finite(pa.weight,6,14,8)),smallSize:String(finite(pa.smallSize,80,180,120))};
+ const safeParams={style:valid(pa.style,["auto",...Object.keys(languages)],"auto"),layout:valid(pa.layout,["auto",...Object.keys(layouts)],"auto"),discovery:valid(pa.discovery,["auto","eye","magnifier"],"auto"),support:valid(pa.support,["auto","none","road","bubble","flag","geometry"],"auto"),top:String(pa.top??"").slice(0,18),bottom:String(pa.bottom??"").slice(0,22),palette:valid(pa.palette,Object.keys(palettes),"forest"),scale:String(finite(pa.scale,80,115,100)),road:String(finite(pa.road,75,120,100)),weight:String(finite(pa.weight,6,14,8)),smallSize:String(finite(pa.smallSize,80,180,120))};
  return {id:typeof item.id==="string"?item.id.slice(0,80):"saved-"+Math.random().toString(36).slice(2),edition:Math.floor(finite(item.edition,0,999999,0)),state:safeState,params:safeParams};
 }
 let saved=[];
