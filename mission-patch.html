@@ -986,7 +986,7 @@ footer{
       : align === "end" ? box.x+box.w : box.x;
 
     return `<text x="${x}" y="${box.y+box.h*.72}"
-      text-anchor="${align}" fill="${color}"
+      text-anchor="${align === "center" ? "middle" : align}"
       font-family="Arial,Helvetica,sans-serif"
       font-size="${size}" font-weight="700">${escape(text)}</text>`;
   }
@@ -1111,11 +1111,7 @@ footer{
    * Amstelvar has no slnt axis; a separate skew supplies the tilt.
    */
   function active() {
-    return state.svg && usingVariableFont() &&
-      !reduced.matches && !state.paused && !document.hidden &&
-      state.settings.motion !== "off" &&
-      (state.settings.motion === "loop" ||
-        state.hovered || state.focused || state.manual);
+    return false;
   }
 
   function stopFrame() {
