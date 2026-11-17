@@ -35,7 +35,7 @@ fieldset{border:0;padding:0;margin:0 0 22px}legend{padding:0;margin-bottom:10px}
 <div class="field"><label for="style">Design language</label><select id="style"><option value="auto">Explore all approaches</option><option value="literal">Literal · original sketch</option><option value="geometric">Geometric · shapes and connections</option><option value="narrative">Narrative · a journey to discovery</option><option value="symbolic">Symbolic · bold, simplified icons</option><option value="abstract">Abstract · fragments and angles</option><option value="minimal">Minimal · fewer, stronger forms</option><option value="unexpected">Unexpected · symbols within symbols</option></select></div>
 <div class="field"><label for="layout">Composition</label><select id="layout"><option value="auto">Explore different compositions</option><option value="orbit">Collaboration cycle</option><option value="journey">Road to discovery</option><option value="constellation">Floating constellation</option><option value="assembly">Ideas coming together</option><option value="flagship">Flag of discovery</option><option value="portal">A new perspective</option></select></div>
 <fieldset><legend>Elements from my sketches</legend><div class="symbol-list">
-<label><input type="checkbox" name="motif" value="eye" checked>Eye</label><label><input type="checkbox" name="motif" value="magnifier" checked>Magnifier</label><label><input type="checkbox" name="motif" value="puzzle" checked>Puzzle pieces</label><label><input type="checkbox" name="motif" value="sphere" checked>Floating spheres</label><label><input type="checkbox" name="motif" value="cycle" checked>Cycle arrows</label><label><input type="checkbox" name="motif" value="road" checked>Road</label><label><input type="checkbox" name="motif" value="flag" checked>Flag</label><label><input type="checkbox" name="motif" value="geometry" checked>Geometric forms</label>
+<label><input type="checkbox" name="motif" value="eye" checked>Eye</label><label><input type="checkbox" name="motif" value="magnifier" checked>Magnifier</label><label><input type="checkbox" name="motif" value="puzzle" checked>Puzzle pieces</label><label><input type="checkbox" name="motif" value="bubble" checked>Bubbles</label><label><input type="checkbox" name="motif" value="cycle" checked>Cycle arrows</label><label><input type="checkbox" name="motif" value="road" checked>Road</label><label><input type="checkbox" name="motif" value="flag" checked>Flag</label><label><input type="checkbox" name="motif" value="geometry" checked>Geometric forms</label>
 </div><p class="help symbol-help">Choose the elements the generator can draw from. Each new patch uses a different combination.</p></fieldset>
 <div class="field"><label for="top">Top label</label><input id="top" type="text" maxlength="18" value="BARUCH"></div>
 <div class="field"><label for="bottom">Bottom label</label><input id="bottom" type="text" maxlength="22" value="SSEP"></div>
@@ -44,7 +44,7 @@ fieldset{border:0;padding:0;margin:0 0 22px}legend{padding:0;margin-bottom:10px}
 <div class="field"><div class="range-label"><label for="road">Road width</label><output id="roadValue" for="road">100%</output></div><input id="road" type="range" min="75" max="120" value="100"></div>
 <div class="field"><div class="range-label"><label for="weight">Line weight</label><output id="weightValue" for="weight">8</output></div><input id="weight" type="range" min="6" max="14" value="8"></div>
 <div class="actions"><button class="primary" id="generate" type="button">Generate new patch ↗</button><button id="reset" type="button">Reset to original sketch</button></div>
-<details><summary>Concept &amp; symbols</summary><p>Through collaboration and trial and error, curiosity becomes a path to discovery. The puzzle pieces represent people bringing their ideas together, while the cycle reflects the process of testing, learning, and trying again. Together, these symbols show how shared effort and a willingness to experiment can turn questions into new possibilities.</p><p>The eye and magnifying glass suggest observation and discovery. The road represents curiosity and the journey forward. Floating spheres suggest weightlessness, while the flag marks a new discovery. Geometric forms translate these ideas into simpler visual relationships.</p></details>
+<details><summary>Concept &amp; symbols</summary><p>Through collaboration and trial and error, curiosity becomes a path to discovery. The puzzle pieces represent people bringing their ideas together, while the cycle reflects the process of testing, learning, and trying again. Together, these symbols show how shared effort and a willingness to experiment can turn questions into new possibilities.</p><p>The eye and magnifying glass suggest observation and discovery. The road represents curiosity and the journey forward. Bubbles suggest weightlessness, while the flag marks a new discovery. Geometric forms translate these ideas into simpler visual relationships.</p></details>
 <details><summary>How variations work</summary><p>The generator combines symbols from both sketch sheets. It changes the main symbol, supporting symbols, composition, proportions, rotations, and visual language.</p><p>Choose a specific language or composition to explore it further, or leave both on Explore for a wider range. Your labels, palette, and enabled elements stay as you set them.</p><p>The small preview mirrors the exported artwork. PNG exports are 1050 × 1050 pixels at 300 dpi; SVG exports are set to 3.5 × 3.5 inches.</p></details>
 </aside>
 <section class="stage" aria-label="Patch preview and export">
@@ -59,7 +59,7 @@ fieldset{border:0;padding:0;margin:0 0 22px}legend{padding:0;margin-bottom:10px}
 "use strict";
 (() => {
 const $ = id => document.getElementById(id);
-const names={eye:"eye",magnifier:"magnifying glass",puzzle:"puzzle pieces",sphere:"floating spheres",cycle:"cycle arrows",road:"road",flag:"flag",geometry:"geometric forms"};
+const names={eye:"eye",magnifier:"magnifying glass",puzzle:"puzzle pieces",bubble:"bubbles",cycle:"cycle arrows",road:"road",flag:"flag",geometry:"geometric forms"};
 const languages={literal:"Literal",geometric:"Geometric",narrative:"Narrative",symbolic:"Symbolic",abstract:"Abstract",minimal:"Minimal",unexpected:"Unexpected"};
 const layouts={orbit:"Collaboration cycle",journey:"Road to discovery",constellation:"Floating constellation",assembly:"Ideas coming together",flagship:"Flag of discovery",portal:"A new perspective"};
 const meanings={orbit:"Shared ideas move through a cycle of testing, learning, and trying again.",journey:"Curiosity creates a path toward observation and discovery.",constellation:"Different ideas float independently while forming a connected whole.",assembly:"Individual contributions come together to create new possibilities.",flagship:"A shared effort marks a new discovery.",portal:"A familiar symbol becomes a window into another idea."};
@@ -74,6 +74,16 @@ let state={language:"literal",layout:"orbit",main:"eye",satellites:["puzzle","pu
 const path=(d,fill,stroke,w,extra="")=>`<path d="${d}" fill="${fill}" stroke="${stroke}" stroke-width="${w}" ${extra}/>`;
 const circle=(x,y,r,fill,stroke="none",w=0)=>`<circle cx="${n(x)}" cy="${n(y)}" r="${n(r)}" fill="${fill}" stroke="${stroke}" stroke-width="${w}"/>`;
 const puzzle="M-36-34H-12C-25-62 25-62 12-34H36V-11C64-24 64 24 36 11V36H12C25 9-25 9-12 36H-36Z";
+function bubble(x,y,r,p,w,simple=false){
+ const point=(a,b)=>`${n(x+a*r)} ${n(y+b*r)}`;
+ // An open center and asymmetric reflections keep this a soap bubble
+ // even when the rest of the composition uses solid symbolic shapes.
+ let s=circle(x,y,r,"none",p.accent,Math.max(3,w*.55));
+ s+=path(`M${point(-.72,-.28)}Q${point(-.62,-.73)} ${point(-.2,-.78)}`,"none",p.ink,Math.max(4,w*.8));
+ s+=path(`M${point(.48,.63)}Q${point(.7,.53)} ${point(.77,.24)}`,"none",p.ink,Math.max(2.5,w*.45),'opacity=".65"');
+ if(!simple)s+=circle(x+.02*r,y-.8*r,Math.max(2,w*.32),p.ink);
+ return s;
+}
 function glyph(kind,x,y,r,p,w,angle=0){
  const mode=state.language,angular=mode==="geometric"||mode==="abstract",bold=mode==="symbolic",simple=mode==="minimal";
  let s="";
@@ -88,10 +98,8 @@ function glyph(kind,x,y,r,p,w,angle=0){
   if(!simple)s+=path("M-27-35Q-36-25-36-13","none",p.ink,w*.65);
  }else if(kind==="puzzle"){
   s+=`<g transform="scale(1.45)">${path(puzzle,bold?p.accent:p.bg,p.accent,w/1.45)}</g>`;
- }else if(kind==="sphere"){
-  s+=circle(0,0,65,bold?p.accent:p.bg,p.ink,w);
-  s+=path("M-44-19Q-40-43-18-48","none",bold?p.bg:p.accent,w);
-  if(!simple)s+=path("M24 44Q42 37 47 21","none",bold?p.bg:p.ink,w*.7);
+ }else if(kind==="bubble"){
+  s+=bubble(0,0,65,p,w,simple);
  }else if(kind==="flag"){
   s+=path("M-58 82V-78M-79 82H-26","none",p.ink,w);
   s+=path("M-58-72Q-18-91 13-72T75-72V18Q43 37 13 18T-58 18Z",bold?p.accent:p.bg,p.ink,w);
@@ -139,10 +147,9 @@ function compose(){
  slots=slots.map(([x,y,r])=>[500+(x-500)*state.spread,y+state.lift,r]);
  const main=has(state.main)?state.main:enabled[0];
  if(main){
-  if((layout==="portal"||mode==="unexpected")&&has("sphere")){
-   s+=circle(center[0],center[1],center[2]*1.16,p.bg,p.ink,w);
-   if(mode!=="minimal")s+=path(`M${center[0]-center[2]*.8} ${center[1]-center[2]*.64}Q${center[0]-center[2]*.45} ${center[1]-center[2]*1.13} ${center[0]+center[2]*.05} ${center[1]-center[2]*1.03}`,"none",p.accent,w*.8);
-   use("sphere");
+  if((layout==="portal"||mode==="unexpected")&&has("bubble")){
+   s+=bubble(center[0],center[1],center[2]*1.16,p,w,mode==="minimal");
+   use("bubble");
   }
   if(state.road&&has("road")&&main!=="road"&&layout!=="flagship"){
    const x=center[0],endY=center[1]+center[2]*.28,half=155*Number($("road").value)/100;
