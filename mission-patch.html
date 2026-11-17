@@ -30,6 +30,8 @@ fieldset{border:0;padding:0;margin:0 0 22px}legend{padding:0;margin-bottom:10px}
 .color-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:16px 0}.color-field{display:grid;gap:6px;font-size:11px}.color-field input[type=color]{width:100%;height:38px;background:var(--field);border:1px solid var(--line);padding:3px;cursor:pointer}.color-field output{font-size:10px}
 .custom-panel{margin:22px 0;padding:18px 0;border-top:1px solid var(--line)}.custom-panel summary{font-size:14px}.custom-panel[open] summary{margin-bottom:16px}.custom-panel .field:last-child{margin-bottom:0}.toggle{display:flex;gap:9px;align-items:center;margin:14px 0;font-weight:400}.toggle input{accent-color:var(--green);width:17px;height:17px}.element-color{display:grid;grid-template-columns:1fr 44px;gap:10px;align-items:center;margin-bottom:12px}.element-color input{width:44px;height:36px;border:1px solid var(--line);background:var(--field);padding:2px}.full-button{width:100%;margin-top:8px}.primary{color:#08140b}.project-header .kicker{color:var(--muted);font-weight:400;font-size:11px;letter-spacing:.1em}.project-header .green-bar{height:6px;margin-bottom:22px}.project-header{padding:36px 0 24px}
 @media(min-width:741px) and (max-width:1023px){.wrap{padding:24px}}@media(max-width:740px){.custom-panel{margin:16px 0}}
+
+[hidden]{display:none!important}.tab-nav{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px;margin-bottom:22px}.tab-nav button{padding:9px 5px;min-height:40px;font-size:11px;font-weight:700}.tab-nav [aria-selected="true"]{background:var(--green);border-color:var(--green);color:#08140b}.tab-panel{min-width:0}.control-group{margin-bottom:24px;padding-bottom:6px;border-bottom:1px solid var(--line)}.control-group h3{font-size:13px;color:var(--muted);margin-bottom:16px}.mode-note{margin-bottom:14px}#spacePreset{margin:0 0 22px}#exploreOptions{padding-top:6px}.control-panels{max-height:min(64vh,720px);overflow-y:auto;scrollbar-gutter:stable;padding:2px 8px 2px 2px}.tab-panel details{margin-top:20px}.actions{margin-top:20px}@media(max-width:740px){.tab-nav{grid-template-columns:repeat(5,minmax(0,1fr))}.tab-nav button{font-size:10px}.control-panels{max-height:420px}}
 </style>
 </head>
 <body>
@@ -39,22 +41,334 @@ fieldset{border:0;padding:0;margin:0 0 22px}legend{padding:0;margin-bottom:10px}
 <main>
 <aside aria-label="Patch controls">
 <h2>Build your patch</h2>
-<button class="primary" id="spacePreset" type="button" style="width:100%;margin-bottom:12px">Space Discovery · square patch</button><p class="help" style="margin-bottom:22px">Load the space design, then adjust its labels, colors, scale, and finish.</p>
-<div class="field"><label for="style">Design language</label><select id="style"><option value="auto">Explore all approaches</option><option value="literal">Literal · original sketch</option><option value="geometric">Geometric · shapes and connections</option><option value="narrative">Narrative · a journey to discovery</option><option value="symbolic">Symbolic · bold, simplified icons</option><option value="abstract">Abstract · fragments and angles</option><option value="minimal">Minimal · fewer, stronger forms</option><option value="unexpected">Unexpected · symbols within symbols</option></select></div>
-<div class="field"><label for="layout">Composition</label><select id="layout"><option value="auto">Explore different compositions</option><option value="orbit">Collaboration cycle</option><option value="journey">Journey to discovery</option><option value="constellation">Floating constellation</option><option value="assembly">Ideas coming together</option><option value="flagship">Shared discovery</option><option value="portal">A new perspective</option></select></div>
-<div class="core-note"><p class="kicker">One shared message</p><p>Puzzle pieces for collaboration. Cycle arrows for experimentation. An eye or magnifier for discovery.</p></div>
-<div class="field"><label for="discovery">Discovery symbol</label><select id="discovery"><option value="auto">Explore eye and magnifier</option><option value="eye">Eye · curiosity and observation</option><option value="magnifier">Magnifier · discovery</option></select></div>
-<div class="field"><label for="support">Supporting element</label><select id="support"><option value="auto">Explore my sketch elements</option><option value="none">Core symbols only</option><option value="road">Road · the journey forward</option><option value="bubble">Bubbles · weightlessness</option><option value="flag">Flag · a new discovery</option><option value="geometry">Geometric forms · connected ideas</option></select><p class="help">Each patch uses one supporting idea alongside the three core symbols.</p></div>
-<div class="field"><label for="top">Top label</label><input id="top" type="text" maxlength="18" value="BARUCH COLLEGE"></div>
-<div class="field"><label for="bottom">Bottom label</label><input id="bottom" type="text" maxlength="22" value="ISS SPRING 2027"></div>
-<div class="field"><label for="palette">Patch colors</label><select id="palette"><option value="forest">Forest · green / cream / mint</option><option value="space">Space · navy / cream / sea glass</option><option value="earth">Earth · green / cream / gold</option><option value="mono">Monochrome · charcoal / cream</option></select></div>
-<details class="custom-panel" open><summary>Colors &amp; lettering</summary><p class="help">Choose a palette above, then fine-tune each color.</p><div class="color-grid"><label class="color-field" for="bgColor">Background<input type="color" id="bgColor" value="#14283e"><output id="bgColorValue" for="bgColor">#14283E</output></label><label class="color-field" for="inkColor">Main artwork<input type="color" id="inkColor" value="#f3f2eb"><output id="inkColorValue" for="inkColor">#F3F2EB</output></label><label class="color-field" for="accentColor">Accent<input type="color" id="accentColor" value="#a2d5d0"><output id="accentColorValue" for="accentColor">#A2D5D0</output></label><label class="color-field" for="goldColor">Orbit & stars<input type="color" id="goldColor" value="#dfba67"><output id="goldColorValue" for="goldColor">#DFBA67</output></label><label class="color-field" for="textColor">Label text<input type="color" id="textColor" value="#f3f2eb"><output id="textColorValue" for="textColor">#F3F2EB</output></label><label class="color-field" for="borderColor">Border<input type="color" id="borderColor" value="#f3f2eb"><output id="borderColorValue" for="borderColor">#F3F2EB</output></label></div><div class="field"><div class="range-label"><label for="labelSize">Label size</label><output id="labelSizeValue" for="labelSize">46</output></div><input type="range" id="labelSize" min="30" max="54" value="46"></div><div class="field"><div class="range-label"><label for="letterSpacing">Letter spacing</label><output id="letterSpacingValue" for="letterSpacing">0</output></div><input type="range" id="letterSpacing" min="0" max="5" value="0"></div><div class="field"><div class="range-label"><label for="borderWeight">Border weight</label><output id="borderWeightValue" for="borderWeight">12</output></div><input type="range" id="borderWeight" min="0" max="18" value="12"></div></details><details class="custom-panel" open><summary>Space elements</summary><div class="field"><label for="spaceScene">Space backdrop</label><select id="spaceScene"><option value="full">Stars, orbit &amp; Earth horizon</option><option value="none">Core symbols only</option></select><p class="help">These elements stay available when you generate or remix. Adjust or hide each one under Individual elements.</p></div><div class="field"><label for="eyeDetail">Discovery detail</label><select id="eyeDetail"><option value="planet">Ringed planet inside eye or magnifier</option><option value="classic">Original eye or magnifier detail</option></select></div></details><details class="custom-panel" open><summary>Individual elements</summary><div class="field"><label for="elementSelect">Element to adjust</label><select id="elementSelect"></select><p class="help">Adjust one element at a time. Your changes appear in both previews and downloads.</p></div><label class="toggle" for="elementVisible"><input id="elementVisible" type="checkbox" checked>Show this element</label><div class="field"><div class="range-label"><label for="elementSize">Size</label><output id="elementSizeValue" for="elementSize">100</output></div><input type="range" id="elementSize" min="50" max="150" value="100"></div><div class="field"><div class="range-label"><label for="elementX">Horizontal position</label><output id="elementXValue" for="elementX">0</output></div><input type="range" id="elementX" min="-120" max="120" value="0"></div><div class="field"><div class="range-label"><label for="elementY">Vertical position</label><output id="elementYValue" for="elementY">0</output></div><input type="range" id="elementY" min="-120" max="120" value="0"></div><div class="field"><div class="range-label"><label for="elementRotation">Rotation</label><output id="elementRotationValue" for="elementRotation">0</output></div><input type="range" id="elementRotation" min="-180" max="180" value="0"></div><label class="element-color" for="elementColor">Element color<input type="color" id="elementColor" value="#a2d5d0"></label><label class="toggle" for="elementUseColor"><input id="elementUseColor" type="checkbox">Use a custom element color</label><button type="button" id="resetElement" class="full-button">Reset this element</button></details><div class="field"><label for="texture">Texture</label><select id="texture"><option value="flat">Flat · clean artwork</option><option value="embroidered">Embroidered · woven fabric and raised thread</option></select><p class="help">Your selected finish is included in previews and downloads.</p></div>
-<div class="field"><div class="range-label"><label for="scale">Discovery symbol size</label><output id="scaleValue" for="scale">100%</output></div><input id="scale" type="range" min="80" max="115" value="100"></div>
-<div class="field"><div class="range-label"><label for="road">Road width (when used)</label><output id="roadValue" for="road">100%</output></div><input id="road" type="range" min="75" max="120" value="100"></div>
-<div class="field"><div class="range-label"><label for="weight">Line weight</label><output id="weightValue" for="weight">8</output></div><input id="weight" type="range" min="6" max="14" value="8"></div>
-<div class="actions"><button class="primary" id="generate" type="button">Generate new patch ↗</button><button id="remix" type="button">Remix this patch</button><button id="saveVersion" type="button">Save version</button><button id="reset" type="button">Reset to original sketch</button></div><p class="help">Generate explores a new arrangement. Remix refines this one.</p>
-<details><summary>Concept &amp; symbols</summary><p>Through collaboration and trial and error, curiosity becomes a path to discovery. The puzzle pieces represent people bringing their ideas together, while the cycle reflects the process of testing, learning, and trying again. Together, these symbols show how shared effort and a willingness to experiment can turn questions into new possibilities.</p><p>The eye and magnifying glass suggest observation and discovery. The road represents curiosity and the journey forward. Bubbles suggest weightlessness, while the flag marks a new discovery. Geometric forms translate these ideas into simpler visual relationships.</p></details>
-<details><summary>How variations work</summary><p>Every patch keeps collaboration, experimentation, and discovery together. One eye or magnifier leads the design; puzzle pieces and cycle arrows support it. A road, bubbles, flag, or geometric forms can add one supporting idea. Stars, the planetary orbit, the Earth horizon, and the ringed planet detail are available in every generated composition.</p><p>Generate changes the visual language, arrangement, and discovery symbol within your choices. Remix keeps those decisions and adjusts spacing, proportions, and puzzle rotations.</p><p>Use Colors &amp; lettering to customize the patch palette, text, and borders. Individual elements can be resized, moved, rotated, recolored, or hidden. Generate and Remix keep your custom element adjustments. The small preview mirrors the exported artwork. PNG exports are 1050 × 1050 pixels at 300 dpi; SVG exports are 3.5 × 3.5 inches.</p></details>
+<div class="tab-nav" role="tablist" aria-label="Patch settings">
+<button type="button" id="tab-design" role="tab" aria-controls="panel-design" aria-selected="true" tabindex="0">Design</button>
+<button type="button" id="tab-symbols" role="tab" aria-controls="panel-symbols" aria-selected="false" tabindex="-1">Symbols</button>
+<button type="button" id="tab-space" role="tab" aria-controls="panel-space" aria-selected="false" tabindex="-1">Space</button>
+<button type="button" id="tab-colors" role="tab" aria-controls="panel-colors" aria-selected="false" tabindex="-1">Color &amp; type</button>
+<button type="button" id="tab-elements" role="tab" aria-controls="panel-elements" aria-selected="false" tabindex="-1">Elements</button>
+</div>
+<div class="control-panels">
+<div id="panel-design" class="tab-panel" role="tabpanel" aria-labelledby="tab-design" tabindex="0">
+<div class="field">
+<label for="variationMode">Generation mode</label>
+<select id="variationMode">
+<option value="refine">Stay close to this patch</option>
+<option value="explore">Explore styles & layouts</option>
+</select>
+</div>
+<p id="variationHelp" class="help mode-note">Generate keeps your symbols and composition together, with subtle changes to their arrangement.</p>
+<button id="spacePreset" type="button" class="full-button">Restore Space Discovery patch</button>
+<div id="exploreOptions" hidden>
+<div class="field">
+<label for="style">Design language</label>
+<select id="style">
+<option value="auto">Explore all approaches</option>
+<option value="literal">Literal · original sketch</option>
+<option value="geometric">Geometric · shapes and connections</option>
+<option value="narrative">Narrative · a journey to discovery</option>
+<option value="symbolic">Symbolic · bold, simplified icons</option>
+<option value="abstract">Abstract · fragments and angles</option>
+<option value="minimal">Minimal · fewer, stronger forms</option>
+<option value="unexpected">Unexpected · symbols within symbols</option>
+</select>
+</div>
+<div class="field">
+<label for="layout">Composition</label>
+<select id="layout">
+<option value="auto">Explore different compositions</option>
+<option value="orbit">Collaboration cycle</option>
+<option value="journey">Journey to discovery</option>
+<option value="constellation">Floating constellation</option>
+<option value="assembly">Ideas coming together</option>
+<option value="flagship">Shared discovery</option>
+<option value="portal">A new perspective</option>
+</select>
+</div>
+<div class="field">
+<label for="discovery">Discovery symbol</label>
+<select id="discovery">
+<option value="auto">Explore eye and magnifier</option>
+<option value="eye">Eye · curiosity and observation</option>
+<option value="magnifier">Magnifier · discovery</option>
+</select>
+</div>
+<div class="field">
+<label for="support">Supporting element</label>
+<select id="support">
+<option value="auto">Explore my sketch elements</option>
+<option value="none">Core symbols only</option>
+<option value="road">Road · the journey forward</option>
+<option value="bubble">Bubbles · weightlessness</option>
+<option value="flag">Flag · a new discovery</option>
+<option value="geometry">Geometric forms · connected ideas</option>
+</select>
+</div>
+<div class="field">
+<div class="range-label">
+<label for="road">Road width (when used)</label>
+<output id="roadValue" for="road">100%</output>
+</div>
+<input id="road" type="range" min="75" max="120" step="1" value="100">
+</div>
+</div>
+<details>
+<summary>Concept &amp; symbols</summary>
+<p>Through collaboration and trial and error, curiosity becomes a path to discovery. The puzzle pieces represent people bringing their ideas together, while the cycle reflects the process of testing, learning, and trying again. Together, these symbols show how shared effort and a willingness to experiment can turn questions into new possibilities.</p>
+<p>The eye and magnifying glass suggest observation and discovery. The road represents curiosity and the journey forward. Bubbles suggest weightlessness, while the flag marks a new discovery. Geometric forms translate these ideas into simpler visual relationships.</p>
+</details>
+<details>
+<summary>How variations work</summary>
+<p>Stay close keeps the current design language, composition, and symbols. Explore styles &amp; layouts opens up different visual approaches and arrangements. Both modes preserve your colors, shape settings, and individual element adjustments.</p>
+<p>Use Symbols for eye, puzzle, and arrow shapes; Space for the star field; Color &amp; type for the palette and lettering; and Elements to move, rotate, resize, recolor, or hide one element.</p>
+<p>Save versions to reopen later. Both previews and downloads use the same artwork. PNG: 1050 × 1050 pixels at 300 dpi. SVG: 3.5 × 3.5 inches.</p>
+</details>
+</div>
+<div id="panel-symbols" class="tab-panel" role="tabpanel" aria-labelledby="tab-symbols" tabindex="0" hidden>
+<section class="control-group">
+<h3>Eye &amp; discovery</h3>
+<div class="field">
+<label for="eyeDetail">Discovery detail</label>
+<select id="eyeDetail">
+<option value="planet">Ringed planet inside eye or magnifier</option>
+<option value="classic">Original eye or magnifier detail</option>
+</select>
+</div>
+<div class="field">
+<div class="range-label">
+<label for="scale">Discovery symbol size</label>
+<output id="scaleValue" for="scale">100%</output>
+</div>
+<input id="scale" type="range" min="80" max="115" step="1" value="100">
+</div>
+<div class="field">
+<div class="range-label">
+<label for="eyeOpening">Eye opening</label>
+<output id="eyeOpeningValue" for="eyeOpening">100%</output>
+</div>
+<input id="eyeOpening" type="range" min="65" max="135" step="1" value="100">
+</div>
+<div class="field">
+<div class="range-label">
+<label for="planetSize">Planet / iris size</label>
+<output id="planetSizeValue" for="planetSize">100%</output>
+</div>
+<input id="planetSize" type="range" min="60" max="125" step="1" value="100">
+</div>
+</section>
+<section class="control-group">
+<h3>Puzzle connection</h3>
+<div class="field">
+<label for="puzzleConnection">Joint shape</label>
+<select id="puzzleConnection">
+<option value="rounded">Rounded tab</option>
+<option value="square">Square tab</option>
+<option value="wave">Wave joint</option>
+</select>
+</div>
+<div class="field">
+<div class="range-label">
+<label for="puzzleDepth">Joint depth</label>
+<output id="puzzleDepthValue" for="puzzleDepth">40</output>
+</div>
+<input id="puzzleDepth" type="range" min="20" max="50" step="1" value="40">
+</div>
+<div class="field">
+<div class="range-label">
+<label for="puzzleSpacing">Piece spacing</label>
+<output id="puzzleSpacingValue" for="puzzleSpacing">0</output>
+</div>
+<input id="puzzleSpacing" type="range" min="0" max="40" step="1" value="0">
+</div>
+<p class="help">Connected pieces separate as spacing increases. In other compositions, pieces spread farther apart.</p>
+</section>
+<section class="control-group">
+<h3>Cycle arrows</h3>
+<div class="field">
+<div class="range-label">
+<label for="arrowLength">Arrow length</label>
+<output id="arrowLengthValue" for="arrowLength">100%</output>
+</div>
+<input id="arrowLength" type="range" min="55" max="120" step="1" value="100">
+</div>
+<div class="field">
+<div class="range-label">
+<label for="arrowCurvature">Arrow curvature</label>
+<output id="arrowCurvatureValue" for="arrowCurvature">100%</output>
+</div>
+<input id="arrowCurvature" type="range" min="65" max="120" step="1" value="100">
+</div>
+<div class="field">
+<div class="range-label">
+<label for="arrowSpacing">Extra gap between arrows</label>
+<output id="arrowSpacingValue" for="arrowSpacing">0°</output>
+</div>
+<input id="arrowSpacing" type="range" min="0" max="36" step="1" value="0">
+</div>
+</section>
+</div>
+<div id="panel-space" class="tab-panel" role="tabpanel" aria-labelledby="tab-space" tabindex="0" hidden>
+<div class="field">
+<label for="spaceScene">Space backdrop</label>
+<select id="spaceScene">
+<option value="full">Stars, orbit &amp; Earth horizon</option>
+<option value="none">Core symbols only</option>
+</select>
+<p class="help">Use Elements to move, resize, or hide the orbit and Earth horizon individually.</p>
+</div>
+<section class="control-group">
+<h3>Star field</h3>
+<div class="field">
+<div class="range-label">
+<label for="starSize">Star size</label>
+<output id="starSizeValue" for="starSize">100%</output>
+</div>
+<input id="starSize" type="range" min="50" max="150" step="1" value="100">
+</div>
+<div class="field">
+<div class="range-label">
+<label for="starCount">Number of stars</label>
+<output id="starCountValue" for="starCount">19</output>
+</div>
+<input id="starCount" type="range" min="0" max="36" step="1" value="19">
+</div>
+</section>
+<p class="help">Star placement stays consistent while you adjust the shapes. Both previews and downloads update together.</p>
+</div>
+<div id="panel-colors" class="tab-panel" role="tabpanel" aria-labelledby="tab-colors" tabindex="0" hidden>
+<section class="control-group">
+<h3>Lettering</h3>
+<div class="field">
+<label for="top">Top label</label>
+<input id="top" type="text" maxlength="18" value="BARUCH COLLEGE">
+</div>
+<div class="field">
+<label for="bottom">Bottom label</label>
+<input id="bottom" type="text" maxlength="22" value="ISS SPRING 2027">
+</div>
+<div class="field">
+<div class="range-label">
+<label for="labelSize">Label size</label>
+<output id="labelSizeValue" for="labelSize">46</output>
+</div>
+<input id="labelSize" type="range" min="30" max="54" step="1" value="46">
+</div>
+<div class="field">
+<div class="range-label">
+<label for="letterSpacing">Letter spacing</label>
+<output id="letterSpacingValue" for="letterSpacing">0</output>
+</div>
+<input id="letterSpacing" type="range" min="0" max="5" step="1" value="0">
+</div>
+</section>
+<section class="control-group">
+<h3>Palette</h3>
+<div class="field">
+<label for="palette">Patch colors</label>
+<select id="palette">
+<option value="forest">Forest · green / cream / mint</option>
+<option value="space">Space · navy / cream / sea glass</option>
+<option value="earth">Earth · green / cream / gold</option>
+<option value="mono">Monochrome · charcoal / cream</option>
+</select>
+</div>
+<div class="color-grid">
+<label class="color-field" for="bgColor">Background<input type="color" id="bgColor" value="#14283e">
+<output id="bgColorValue" for="bgColor">#14283E</output>
+</label>
+<label class="color-field" for="inkColor">Main artwork<input type="color" id="inkColor" value="#f3f2eb">
+<output id="inkColorValue" for="inkColor">#F3F2EB</output>
+</label>
+<label class="color-field" for="accentColor">Accent<input type="color" id="accentColor" value="#a2d5d0">
+<output id="accentColorValue" for="accentColor">#A2D5D0</output>
+</label>
+<label class="color-field" for="goldColor">Orbit &amp; stars<input type="color" id="goldColor" value="#dfba67">
+<output id="goldColorValue" for="goldColor">#DFBA67</output>
+</label>
+<label class="color-field" for="textColor">Label text<input type="color" id="textColor" value="#f3f2eb">
+<output id="textColorValue" for="textColor">#F3F2EB</output>
+</label>
+<label class="color-field" for="borderColor">Border<input type="color" id="borderColor" value="#f3f2eb">
+<output id="borderColorValue" for="borderColor">#F3F2EB</output>
+</label>
+</div>
+</section>
+<section class="control-group">
+<h3>Finish &amp; linework</h3>
+<div class="field">
+<label for="texture">Texture</label>
+<select id="texture">
+<option value="flat">Flat · clean artwork</option>
+<option value="embroidered">Embroidered · woven fabric and raised thread</option>
+</select>
+</div>
+<div class="field">
+<div class="range-label">
+<label for="borderWeight">Border weight</label>
+<output id="borderWeightValue" for="borderWeight">12</output>
+</div>
+<input id="borderWeight" type="range" min="0" max="18" step="1" value="12">
+</div>
+<div class="field">
+<div class="range-label">
+<label for="weight">Line weight</label>
+<output id="weightValue" for="weight">8</output>
+</div>
+<input id="weight" type="range" min="6" max="14" step="1" value="8">
+</div>
+</section>
+</div>
+<div id="panel-elements" class="tab-panel" role="tabpanel" aria-labelledby="tab-elements" tabindex="0" hidden>
+<div class="field">
+<label for="elementSelect">Element to adjust</label>
+<select id="elementSelect">
+</select>
+<p class="help">Adjust one element at a time. Your changes appear in both previews and downloads.</p>
+</div>
+<label class="toggle" for="elementVisible">
+<input id="elementVisible" type="checkbox" checked>Show this element</label>
+<div class="field">
+<div class="range-label">
+<label for="elementSize">Size</label>
+<output id="elementSizeValue" for="elementSize">100</output>
+</div>
+<input type="range" id="elementSize" min="50" max="150" value="100">
+</div>
+<div class="field">
+<div class="range-label">
+<label for="elementX">Horizontal position</label>
+<output id="elementXValue" for="elementX">0</output>
+</div>
+<input type="range" id="elementX" min="-120" max="120" value="0">
+</div>
+<div class="field">
+<div class="range-label">
+<label for="elementY">Vertical position</label>
+<output id="elementYValue" for="elementY">0</output>
+</div>
+<input type="range" id="elementY" min="-120" max="120" value="0">
+</div>
+<div class="field">
+<div class="range-label">
+<label for="elementRotation">Rotation</label>
+<output id="elementRotationValue" for="elementRotation">0</output>
+</div>
+<input type="range" id="elementRotation" min="-180" max="180" value="0">
+</div>
+<label class="element-color" for="elementColor">Element color<input type="color" id="elementColor" value="#a2d5d0">
+</label>
+<label class="toggle" for="elementUseColor">
+<input id="elementUseColor" type="checkbox">Use a custom element color</label>
+<button type="button" id="resetElement" class="full-button">Reset this element</button>
+</div>
+</div>
+<div class="actions">
+<button class="primary" id="generate" type="button">Generate variation ↗</button>
+<button id="remix" type="button">Remix this patch</button>
+<button id="saveVersion" type="button">Save version</button>
+<button id="reset" type="button">Reset to original sketch</button>
+</div>
+<p class="help">Your colors and custom adjustments stay with each variation.</p>
 </aside>
 <section class="stage" aria-label="Patch preview and export">
 <div class="preview-grid"><div class="preview"><svg id="patch" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000" role="img" aria-label="Current mission patch"></svg></div>
@@ -75,7 +389,14 @@ const languages={literal:"Literal",geometric:"Geometric",narrative:"Narrative",s
 const layouts={orbit:"Collaboration cycle",journey:"Journey to discovery",constellation:"Floating constellation",assembly:"Ideas coming together",flagship:"Shared discovery",portal:"A new perspective"};
 const meanings={orbit:"Shared ideas move through a cycle of testing, learning, and trying again.",journey:"Curiosity creates a path toward observation and discovery.",constellation:"Different ideas float independently while forming a connected whole.",assembly:"Individual contributions come together to create new possibilities.",flagship:"A shared effort marks a new discovery.",portal:"A familiar symbol becomes a window into another idea."};
 const palettes={forest:{bg:"#172820",ink:"#f3f2eb",accent:"#93cfa6"},space:{bg:"#14283e",ink:"#f3f2eb",accent:"#a2d5d0"},earth:{bg:"#28342a",ink:"#f3f2eb",accent:"#d8bd79"},mono:{bg:"#161918",ink:"#f3f2eb",accent:"#f3f2eb"}};
-const defaults={style:"auto",layout:"auto",discovery:"auto",support:"auto",top:"BARUCH COLLEGE",bottom:"ISS SPRING 2027",palette:"forest",texture:"flat",scale:"100",road:"100",weight:"8",smallSize:"120",bgColor:"#172820",inkColor:"#f3f2eb",accentColor:"#93cfa6",goldColor:"#dfba67",textColor:"#f3f2eb",borderColor:"#f3f2eb",labelSize:"46",letterSpacing:"0",borderWeight:"12",spaceScene:"full",eyeDetail:"planet"};
+const defaults={style:"auto",layout:"auto",discovery:"auto",support:"auto",top:"BARUCH COLLEGE",bottom:"ISS SPRING 2027",palette:"forest",texture:"flat",scale:"100",road:"100",weight:"8",smallSize:"120",bgColor:"#172820",inkColor:"#f3f2eb",accentColor:"#93cfa6",goldColor:"#dfba67",textColor:"#f3f2eb",borderColor:"#f3f2eb",labelSize:"46",letterSpacing:"0",borderWeight:"12",spaceScene:"full",eyeDetail:"planet",variationMode:"refine",eyeOpening:"100",planetSize:"100",puzzleConnection:"rounded",puzzleDepth:"40",puzzleSpacing:"0",arrowLength:"100",arrowCurvature:"100",arrowSpacing:"0",starSize:"100",starCount:"19"};
+const shapeRanges=[["eyeOpening",65,135,100,"%"],["planetSize",60,125,100,"%"],["puzzleDepth",20,50,40,""],["puzzleSpacing",0,40,0,""],["arrowLength",55,120,100,"%"],["arrowCurvature",65,120,100,"%"],["arrowSpacing",0,36,0,"°"],["starSize",50,150,100,"%"],["starCount",0,36,19,""]];
+const tabIds=["design","symbols","space","colors","elements"];
+function activateTab(id,focus=false){
+ for(const name of tabIds){const active=name===id;$("tab-"+name).setAttribute("aria-selected",String(active));$("tab-"+name).tabIndex=active?0:-1;$("panel-"+name).hidden=!active;}
+ $("panel-"+id).parentElement.scrollTop=0;
+ if(focus)$("tab-"+id).focus();
+}
 const rand=(a,b)=>a+Math.random()*(b-a),pick=a=>a[Math.floor(Math.random()*a.length)],n=x=>Number(x.toFixed(2));
 const shuffle=a=>{a=[...a];for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;};
 const esc=s=>String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&apos;"}[c]));
@@ -118,17 +439,35 @@ function bubble(x,y,r,p,w,simple=false){
  return s;
 }
 function planetDetail(p){
- const gold=$("goldColor").value;
- return '<g data-detail="ringed-planet">'+circle(0,0,30,p.bg)+circle(0,0,19,p.accent)+path("M-14-9Q0-14 15-6M-17 0Q0-5 18 3M-13 10Q0 5 13 13","none",p.bg,1.2,'opacity=".35"')+`<ellipse cx="0" cy="2" rx="32" ry="7" transform="rotate(-25)" fill="none" stroke="${gold}" stroke-width="3"/>`+circle(-6,-9,3.5,p.ink)+'</g>';
+ const gold=$("goldColor").value,size=Number($("planetSize").value)/100;
+ return '<g data-detail="ringed-planet" transform="scale('+size+')">'+circle(0,0,30,p.bg)+circle(0,0,19,p.accent)+path("M-14-9Q0-14 15-6M-17 0Q0-5 18 3M-13 10Q0 5 13 13","none",p.bg,1.2,'opacity=".35"')+'<ellipse cx="0" cy="2" rx="32" ry="7" transform="rotate(-25)" fill="none" stroke="'+gold+'" stroke-width="3"/>'+circle(-6,-9,3.5,p.ink)+'</g>';
+}
+function eyeOutline(width,height,angular=false){
+ const h=n(height*Number($("eyeOpening").value)/100);
+ return angular?'M-'+width+' 0L0-'+n(h/2)+' '+width+' 0 0 '+n(h/2)+'Z':'M-'+width+' 0Q0-'+h+' '+width+' 0Q0 '+h+'-'+width+' 0Z';
+}
+function eyeArtwork(p,w,width=85,height=75,bold=false,angular=false){
+ const outline=eyeOutline(width,height,angular),size=Number($("planetSize").value)/100;
+ const detail=$("eyeDetail").value==="planet"?'<g transform="scale('+(width/85)+')">'+planetDetail(p)+'</g>':'<g transform="scale('+n(width/85*size)+')">'+circle(0,0,27,bold?p.bg:p.accent)+circle(0,0,11,bold?p.ink:p.bg)+'</g>';
+ return path(outline,bold?p.ink:p.bg,p.ink,w)+(bold?satin(outline):'')+'<defs><clipPath id="patch-finish-eye"><path d="'+outline+'"/></clipPath></defs><g clip-path="url(#patch-finish-eye)">'+detail+'</g>';
+}
+function puzzlePaths(){
+ const depth=Number($("puzzleDepth").value),type=$("puzzleConnection").value;
+ const down=type==="square"?'V-22H'+n(depth*.7)+'V22H0':type==="wave"?'V-28C'+depth+'-28 '+depth+' 0 0 0S'+(-depth)+' 28 0 28':'V-22C'+depth+'-42 '+depth+' 42 0 22';
+ const up=type==="square"?'V22H'+n(depth*.7)+'V-22H0':type==="wave"?'V28C'+(-depth)+' 28 '+(-depth)+' 0 0 0S'+depth+'-28 0-28':'V22C'+depth+' 42 '+depth+'-42 0-22';
+ return ['M-95-64H0'+down+'V64H-95Z','M0-64H95V64H0'+up+'Z'];
+}
+function puzzleShape(){
+ const depth=Number($("puzzleDepth").value)/40,type=$("puzzleConnection").value;
+ if(type==="square")return 'M-36-34H-12V'+n(-34-15*depth)+'H12V-34H36V-12H'+n(36+15*depth)+'V12H36V36H12V20H-12V36H-36Z';
+ if(type==="wave")return 'M-36-34H-12Q'+n(-26*depth)+'-58 0-48T12-34H36V-11Q'+n(64*depth)+'-24 '+n(55*depth)+' 0T36 11V36H12Q'+n(25*depth)+' 9 0 20T-12 36H-36Z';
+ return 'M-36-34H-12C'+n(-25*depth)+'-62 '+n(25*depth)+'-62 12-34H36V-11C'+n(36+28*depth)+'-24 '+n(36+28*depth)+' 24 36 11V36H12C'+n(25*depth)+' 9 '+n(-25*depth)+' 9-12 36H-36Z';
 }
 function glyph(kind,x,y,r,p,w,angle=0){
  const mode=state.language,angular=mode==="geometric"||mode==="abstract",bold=mode==="symbolic"||mode==="minimal",simple=mode==="minimal";
  let s="";
  if(kind==="eye"){
-  const outline=angular?"M-85 0L0-44 85 0 0 44Z":"M-85 0Q0-75 85 0Q0 75-85 0Z";
-  s+=path(outline,bold?p.ink:p.bg,p.ink,w)+(bold?satin(outline):"");
-  if($("eyeDetail").value==="planet")s+=planetDetail(p);
-  else{s+=circle(0,0,27,bold?p.bg:p.accent);s+=circle(0,0,11,bold?p.ink:p.bg);}
+  s+=eyeArtwork(p,w,85,angular?88:75,bold,angular);
   if(mode==="abstract")s+=path("M-90-43L-60-43M60 43H90","none",p.accent,w);
  }else if(kind==="magnifier"){
   s+=path("M-22 31L-64 80","none",p.ink,w*1.8);
@@ -136,7 +475,7 @@ function glyph(kind,x,y,r,p,w,angle=0){
   s+=$("eyeDetail").value==="planet"?`<g transform="translate(2 -9) scale(1.2)">${planetDetail(p)}</g>`:path("M2-34V16M-23-9H27","none",p.accent,w*.8);
   if(!simple)s+=path("M-27-35Q-36-25-36-13","none",p.ink,w*.65);
  }else if(kind==="puzzle"){
-  const shape=mode==="abstract"?"M-36-34H-12V-49H12V-34H36V-12H51V12H36V36H12V20H-12V36H-36Z":puzzle;
+  const shape=puzzleShape();
   s+=`<g transform="scale(1.45)">${path(shape,bold?p.accent:p.bg,p.accent,w/1.45)}${bold?satin(shape):""}</g>`;
  }else if(kind==="bubble"){
   s+=bubble(0,0,65,p,w,simple);
@@ -156,6 +495,10 @@ function glyph(kind,x,y,r,p,w,angle=0){
   s+=path("M0 63V-55","none",bold?p.bg:p.accent,w*.75,'stroke-dasharray="15 15"');
  }
  return `<g transform="translate(${n(x)} ${n(y)}) rotate(${n(angle)}) scale(${n(r/100)})">${s}</g>`;
+}
+function cycleArrows(cx,cy,rx,ry,segments,p,w,faceted=false){
+ const length=Number($("arrowLength").value)/100,gap=Number($("arrowSpacing").value),curve=Number($("arrowCurvature").value)/100;
+ return segments.map(([a,b])=>{const mid=(a+b)/2+state.phase,span=Math.max(8,(b-a)*length-gap);return '<g data-detail="cycle-arrow">'+arc(cx,cy,rx,ry*curve,mid-span/2,mid+span/2,p,w,faceted)+'</g>';}).join('');
 }
 function arc(cx,cy,rx,ry,start,end,p,w,faceted){
  const points=[],steps=faceted?3:30;
@@ -184,14 +527,12 @@ function geometryFor(){
  const move=([x,y,r])=>[500+(x-500)*state.spread,y+state.lift,r];
  const main=move(t.main);main[2]*=state.symbolScale*Number($("scale").value)/100;
  if(state.layout==="portal"&&state.main==="magnifier")main[2]=Math.min(main[2],170);
- return {main,pieces:(state.language==="minimal"?t.pieces.slice(-2):t.pieces).map(move),pair:t.pair?move(t.pair):null,support:move(t.support),wideRoad:["orbit","journey","constellation"].includes(state.layout)};
+ return {main,pieces:(state.language==="minimal"?t.pieces.slice(-2):t.pieces).map(([x,y,r])=>[500+(x-500)*(1+Number($("puzzleSpacing").value)/250),500+(y-500)*(1+Number($("puzzleSpacing").value)/400),r]).map(move),pair:t.pair?move(t.pair):null,support:move(t.support),wideRoad:["orbit","journey","constellation"].includes(state.layout)};
 }
 function puzzlePair(x,y,r,p,w){
- const fill=state.language==="symbolic"||state.language==="minimal";
- const left="M-95-64H0V-22C40-42 40 42 0 22V64H-95Z";
- const right="M0-64H95V64H0V22C40 42 40-42 0-22Z";
- return `<g transform="translate(${n(x)} ${n(y)}) scale(${n(r/100)})">`+
- element("puzzle1",path(left,fill?p.accent:p.bg,p.accent,w*.65)+(fill?satin(left):""),-47,0)+element("puzzle2",path(right,fill?p.ink:p.bg,p.ink,w*.65)+(fill?satin(right):""),47,0)+"</g>";
+ const fill=state.language==="symbolic"||state.language==="minimal",[left,right]=puzzlePaths(),gap=Number($("puzzleSpacing").value);
+ const piece=(id,d,color,cx,shift)=>element(id,'<g transform="translate('+shift+' 0)">'+path(d,fill?color:p.bg,color,w*.65)+(fill?satin(d):'')+'</g>',cx+shift,0);
+ return '<g data-detail="puzzle-connection" transform="translate('+n(x)+' '+n(y)+') scale('+n(r/100)+') rotate('+n(state.turns[0])+')">'+piece('puzzle1',left,p.accent,-47,-gap/2)+piece('puzzle2',right,p.ink,47,gap/2)+'</g>';
 }
 // Use the opening patch's frame for its generated variations as well.
 function patchFrame(p){
@@ -221,11 +562,13 @@ function finishArtwork(markup){
 function spaceLayer(id,p=currentPalette()){
  if($("spaceScene").value!=="full")return "";
  const gold=$("goldColor").value;
- const star=(x,y,r)=>path(`M${x} ${y-r}Q${x+2} ${y-2} ${x+r} ${y}Q${x+2} ${y+2} ${x} ${y+r}Q${x-2} ${y+2} ${x-r} ${y}Q${x-2} ${y-2} ${x} ${y-r}Z`,gold,"none",0);
- if(id==="stars")return element("stars",(()=>{let s="";
-s+=star(500,220,23)+star(126,483,16)+star(874,483,16)+star(261,458,10)+star(760,688,14)+star(245,730,10);
- [[300,227,3],[693,223,3],[226,348,3],[785,356,2],[308,484,2],[730,492,3],[270,665,2],[765,589,2],[355,754,2],[647,736,3],[679,303,2],[344,289,2]].forEach(([x,y,r])=>s+=circle(x,y,r,p.ink));
- s+=star(500,745,13);return s;})(),500,500);
+ const star=(x,y,r)=>'<g data-detail="star">'+path(`M${x} ${y-r}Q${x+2} ${y-2} ${x+r} ${y}Q${x+2} ${y+2} ${x} ${y+r}Q${x-2} ${y+2} ${x-r} ${y}Q${x-2} ${y-2} ${x} ${y-r}Z`,gold,"none",0)+'</g>';
+ if(id==="stars")return element("stars",(()=>{
+ const points=[[500,220,23,1],[126,483,16,1],[874,483,16,1],[261,458,10,1],[760,688,14,1],[245,730,10,1],[500,745,13,1],...[ [300,227,3],[693,223,3],[226,348,3],[785,356,2],[308,484,2],[730,492,3],[270,665,2],[765,589,2],[355,754,2],[647,736,3],[679,303,2],[344,289,2]].map(a=>[...a,0])];
+ for(let i=19;i<36;i++)points.push([155+(i*137)%690,220+(i*89)%520,2+(i%4),i%3===0?1:0]);
+ const size=Number($("starSize").value)/100,count=Number($("starCount").value);
+ return points.slice(0,count).map(([x,y,r,pointed])=>pointed?star(x,y,r*size):'<g data-detail="star">'+circle(x,y,r*size,p.ink)+'</g>').join('');
+ })(),500,500);
  if(id==="orbit")return element("orbit",(()=>{let s="";
 s+=`<ellipse cx="500" cy="548" rx="322" ry="57" transform="rotate(-16 500 548)" fill="none" stroke="${gold}" stroke-width="5"/>`;
  s+=circle(793,465,9,p.ink,gold,2);
@@ -251,22 +594,14 @@ function composeSpacePatch(){
  s+=spaceLayer("orbit",p);
  const orbit={...p,accent:p.accent};
  s+=element("cycle",(()=>{let s="";
-[[-78,-3],[38,117],[173,249]].forEach(([a,b])=>s+=arc(500,490+state.lift,304*state.spread,255,a+state.phase,b+state.phase,orbit,w+2,false));
+s+=cycleArrows(500,490+state.lift,304*state.spread,255,[[-78,-3],[38,117],[173,249]],orbit,w+2);
  return s;})(),500,490);
- // Two complementary pieces share a single joint, with no gap or doubled seam.
- const pr=1.37*state.spread,py=589+state.lift;
- s+=`<g transform="translate(500 ${py}) scale(${pr})">`;
- s+=element("puzzle1",path("M-95-64H0V-22C40-42 40 42 0 22V64H-95Z",p.accent,"none",0)+satin("M-95-64H0V-22C40-42 40 42 0 22V64H-95Z"),-47,0);
- s+=element("puzzle2",path("M0-64H95V64H0V22C40 42 40-42 0-22Z",p.ink,"none",0)+satin("M0-64H95V64H0V22C40 42 40-42 0-22Z"),47,0);
- 
- s+="</g>";
+ s+=puzzlePair(500,589+state.lift,137*state.spread,p,0);
  // A ringed planet becomes the iris of the observation symbol.
  const size=Number($("scale").value)/100*state.symbolScale;
  s+=element("discovery",(()=>{let s="";
 s+=`<g transform="translate(500 ${345+state.lift}) scale(${size})">`;
- s+=path("M-147 0Q0-137 147 0Q0 137-147 0Z",p.ink,"none",0);
- s+=satin("M-147 0Q0-137 147 0Q0 137-147 0Z");
- s+=$("eyeDetail").value==="planet"?`<g transform="scale(1.733)">${planetDetail(p)}</g>`:circle(0,0,44,p.bg)+circle(0,0,20,p.accent);
+ s+=eyeArtwork(p,0,147,137,true);
  s+="</g>";
  return s;})(),500,345);
  // The Earth horizon stays inside the square's protected lower artwork band.
@@ -277,8 +612,8 @@ s+=`<g transform="translate(500 ${345+state.lift}) scale(${size})">`;
 }
 function loadSpacePreset(){
  Object.entries({...defaults,top:"BARUCH COLLEGE",bottom:"ISS SPRING 2027",palette:"space",texture:"embroidered",style:"auto",layout:"auto",discovery:"auto",support:"none"}).forEach(([id,value])=>$(id).value=value);
- state={...original(),preset:"space-discovery",spaceDesign:true,language:"minimal",layout:"assembly",support:"none"};edition=0;syncPalette();render();
- $("status").textContent="Space Discovery ready. Generate explores new compositions with these same space elements. Use Space elements to switch the backdrop or planet detail.";
+ state={...original(),preset:"space-discovery",spaceDesign:true,language:"minimal",layout:"assembly",support:"none",turns:[0,0,0]};edition=0;syncPalette();render();
+ $("status").textContent="Space Discovery ready. Generate keeps this design together. Choose Explore styles & layouts in Design for broader changes.";
 }
 function compose(){
  if(state.preset==="space-discovery")return composeSpacePatch();
@@ -302,7 +637,7 @@ if(state.support==="road"&&g.wideRoad){
  return s;})(),500,700);
  const cy=state.layout==="orbit"?480:490,rx=(state.layout==="orbit"?280:315)*state.spread,ry=state.layout==="orbit"?230:268;
  const arrows=state.layout==="constellation"?[[-66,4],[54,103],[166,200]]:[[-66,4],[54,124],[174,244]];
- s+=element("cycle",arrows.map(([a,b])=>arc(500,cy+state.lift,rx,ry,a+state.phase,b+state.phase,p,w,mode==="abstract"||mode==="geometric")).join(""),500,cy);
+ s+=element("cycle",cycleArrows(500,cy+state.lift,rx,ry,arrows,p,w,mode==="abstract"||mode==="geometric"),500,cy);
  if(state.layout==="portal"){
   // A bubble can become a window around the discovery symbol.
   s+=circle(mx,my,211,p.bg);
@@ -332,6 +667,14 @@ if(state.support!=="none"&&!(state.support==="road"&&g.wideRoad)&&!(state.suppor
  return finishArtwork(s+"</g>");
 }
 function render(){
+ const explore=$("variationMode").value==="explore";
+ $("exploreOptions").hidden=!explore;
+ $("variationHelp").textContent=explore?"Generate explores the styles, compositions, and symbols you choose below.":"Generate keeps your current symbols and composition together, with subtle changes to their arrangement.";
+ $("generate").textContent=explore?"Explore a new patch ↗":"Generate variation ↗";
+ for(const [id,,,,unit] of shapeRanges)$(id+"Value").textContent=$(id).value+unit;
+ $("eyeOpening").disabled=state.main!=="eye";
+ $("planetSize").disabled=state.main==="magnifier"&&$("eyeDetail").value!=="planet";
+ for(const id of ["starSize","starCount"])$(id).disabled=$("spaceScene").value!=="full";
  syncElementControls();
  for(const id of ["bgColor","inkColor","accentColor","goldColor","textColor","borderColor"])$(id+"Value").textContent=$(id).value.toUpperCase();
  for(const id of ["labelSize","letterSpacing","borderWeight"])$(id+"Value").textContent=$(id).value;
@@ -348,6 +691,10 @@ function render(){
 }
 function generate(){
  edition=++serial;
+ if($("variationMode").value!=="explore"){
+ state={...state,turns:Array.from({length:3},()=>rand(-8,8)),spread:rand(.96,1.03),lift:rand(-8,8),phase:rand(-4,4),bend:rand(-14,14),symbolScale:rand(.95,1.03)};
+ render();$("status").textContent="New variation ready. Your composition, symbols, colors, and shape settings stay together.";return;
+ }
  const language=$("style").value==="auto"?pick(Object.keys(languages)):$("style").value;
  let eligible=Object.keys(layouts);
  if(language==="narrative")eligible=["journey","flagship","constellation"];
@@ -380,7 +727,9 @@ function normalizeSnapshot(item){
  }
  for(const id of ["bgColor","inkColor","accentColor","goldColor","textColor","borderColor"])safeParams[id]=/^#[0-9a-f]{6}$/i.test(pa[id])?pa[id]:(id==="bgColor"?palettes[safeParams.palette].bg:id==="accentColor"?palettes[safeParams.palette].accent:id==="goldColor"?"#dfba67":palettes[safeParams.palette].ink);
  safeParams.spaceScene=valid(pa.spaceScene,["full","none"],st.preset==="space-discovery"?"full":"none");safeParams.eyeDetail=valid(pa.eyeDetail,["planet","classic"],st.preset==="space-discovery"?"planet":"classic");
- for(const [id,min,max,fallback] of [["labelSize",30,54,46],["letterSpacing",0,5,0],["borderWeight",0,18,12]])safeParams[id]=String(finite(pa[id],min,max,fallback));
+ for(const [id,min,max,fallback] of [["labelSize",30,54,46],["letterSpacing",0,5,0],["borderWeight",0,18,12],...shapeRanges])safeParams[id]=String(finite(pa[id],min,max,fallback));
+ safeParams.puzzleConnection=valid(pa.puzzleConnection,["rounded","square","wave"],"rounded");
+ safeParams.variationMode=valid(pa.variationMode,["refine","explore"],"refine");
  return {id:typeof item.id==="string"?item.id.slice(0,80):"saved-"+Math.random().toString(36).slice(2),edition:Math.floor(finite(item.edition,0,999999,0)),state:safeState,params:safeParams};
 }
 let saved=[];
@@ -429,7 +778,11 @@ async function downloadPNG(){
  const button=$("png"),source=svgSource(true),name=filename("png");button.disabled=true;let url;
  try{url=URL.createObjectURL(new Blob([source],{type:"image/svg+xml;charset=utf-8"}));const img=new Image();await new Promise((resolve,reject)=>{img.onload=resolve;img.onerror=()=>reject(new Error("Could not render the patch"));img.src=url;});const canvas=document.createElement("canvas");canvas.width=canvas.height=1050;const ctx=canvas.getContext("2d");if(!ctx)throw new Error("Canvas export unavailable");ctx.drawImage(img,0,0);const raw=await new Promise((resolve,reject)=>canvas.toBlob(b=>b?resolve(b):reject(new Error("PNG export failed")),"image/png"));save(png300dpi(new Uint8Array(await raw.arrayBuffer())),name);$("status").textContent="PNG download started · 1050 × 1050 pixels · 300 dpi.";}catch(error){$("status").textContent=error.message+". Try Download SVG.";}finally{if(url)URL.revokeObjectURL(url);button.disabled=false;}
 }
-Object.keys(defaults).forEach(id=>$(id).addEventListener("input",()=>{if(["style","layout","discovery","support"].includes(id)){generate();}else{if(id==="palette")syncPalette();render();}}));
+for(const [i,id] of tabIds.entries()){
+ $("tab-"+id).addEventListener("click",()=>activateTab(id));
+ $("tab-"+id).addEventListener("keydown",event=>{let next;if(event.key==="ArrowRight")next=(i+1)%tabIds.length;else if(event.key==="ArrowLeft")next=(i+tabIds.length-1)%tabIds.length;else if(event.key==="Home")next=0;else if(event.key==="End")next=tabIds.length-1;else return;event.preventDefault();activateTab(tabIds[next],true);});
+}
+Object.keys(defaults).forEach(id=>$(id).addEventListener("input",()=>{if(["style","layout","discovery","support"].includes(id)&&$("variationMode").value==="explore"){generate();}else{if(id==="palette")syncPalette();render();}}));
 $("elementSelect").addEventListener("change",syncElementControls);
 for(const [id,key] of [["elementSize","size"],["elementX","x"],["elementY","y"],["elementRotation","rotation"],["elementVisible","visible"],["elementColor","color"],["elementUseColor","useColor"]]){
  $(id).addEventListener("input",()=>{const name=$("elementSelect").value;state.elements??={};const value=$(id).type==="checkbox"?$(id).checked:$(id).type==="range"?Number($(id).value):$(id).value;state.elements[name]={...elementDefault(),...state.elements[name],[key]:value};if(id==="elementColor")state.elements[name].useColor=true;render();});
