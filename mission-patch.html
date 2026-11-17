@@ -48,13 +48,13 @@ fieldset{border:0;padding:0;margin:0 0 22px}legend{padding:0;margin-bottom:10px}
 <div class="field"><label for="top">Top label</label><input id="top" type="text" maxlength="18" value="BARUCH COLLEGE"></div>
 <div class="field"><label for="bottom">Bottom label</label><input id="bottom" type="text" maxlength="22" value="ISS SPRING 2027"></div>
 <div class="field"><label for="palette">Patch colors</label><select id="palette"><option value="forest">Forest · green / cream / mint</option><option value="space">Space · navy / cream / sea glass</option><option value="earth">Earth · green / cream / gold</option><option value="mono">Monochrome · charcoal / cream</option></select></div>
-<details class="custom-panel" open><summary>Colors &amp; lettering</summary><p class="help">Choose a palette above, then fine-tune each color.</p><div class="color-grid"><label class="color-field" for="bgColor">Background<input type="color" id="bgColor" value="#14283e"><output id="bgColorValue" for="bgColor">#14283E</output></label><label class="color-field" for="inkColor">Main artwork<input type="color" id="inkColor" value="#f3f2eb"><output id="inkColorValue" for="inkColor">#F3F2EB</output></label><label class="color-field" for="accentColor">Accent<input type="color" id="accentColor" value="#a2d5d0"><output id="accentColorValue" for="accentColor">#A2D5D0</output></label><label class="color-field" for="goldColor">Orbit & stars<input type="color" id="goldColor" value="#dfba67"><output id="goldColorValue" for="goldColor">#DFBA67</output></label><label class="color-field" for="textColor">Label text<input type="color" id="textColor" value="#f3f2eb"><output id="textColorValue" for="textColor">#F3F2EB</output></label><label class="color-field" for="borderColor">Border<input type="color" id="borderColor" value="#f3f2eb"><output id="borderColorValue" for="borderColor">#F3F2EB</output></label></div><div class="field"><div class="range-label"><label for="labelSize">Label size</label><output id="labelSizeValue" for="labelSize">46</output></div><input type="range" id="labelSize" min="30" max="54" value="46"></div><div class="field"><div class="range-label"><label for="letterSpacing">Letter spacing</label><output id="letterSpacingValue" for="letterSpacing">0</output></div><input type="range" id="letterSpacing" min="0" max="5" value="0"></div><div class="field"><div class="range-label"><label for="borderWeight">Border weight</label><output id="borderWeightValue" for="borderWeight">12</output></div><input type="range" id="borderWeight" min="0" max="18" value="12"></div></details><details class="custom-panel" open><summary>Individual elements</summary><div class="field"><label for="elementSelect">Element to adjust</label><select id="elementSelect"></select><p class="help">Adjust one element at a time. Your changes appear in both previews and downloads.</p></div><label class="toggle" for="elementVisible"><input id="elementVisible" type="checkbox" checked>Show this element</label><div class="field"><div class="range-label"><label for="elementSize">Size</label><output id="elementSizeValue" for="elementSize">100</output></div><input type="range" id="elementSize" min="50" max="150" value="100"></div><div class="field"><div class="range-label"><label for="elementX">Horizontal position</label><output id="elementXValue" for="elementX">0</output></div><input type="range" id="elementX" min="-120" max="120" value="0"></div><div class="field"><div class="range-label"><label for="elementY">Vertical position</label><output id="elementYValue" for="elementY">0</output></div><input type="range" id="elementY" min="-120" max="120" value="0"></div><div class="field"><div class="range-label"><label for="elementRotation">Rotation</label><output id="elementRotationValue" for="elementRotation">0</output></div><input type="range" id="elementRotation" min="-180" max="180" value="0"></div><label class="element-color" for="elementColor">Element color<input type="color" id="elementColor" value="#a2d5d0"></label><label class="toggle" for="elementUseColor"><input id="elementUseColor" type="checkbox">Use a custom element color</label><button type="button" id="resetElement" class="full-button">Reset this element</button></details><div class="field"><label for="texture">Texture</label><select id="texture"><option value="flat">Flat · clean artwork</option><option value="embroidered">Embroidered · woven fabric and raised thread</option></select><p class="help">Your selected finish is included in previews and downloads.</p></div>
+<details class="custom-panel" open><summary>Colors &amp; lettering</summary><p class="help">Choose a palette above, then fine-tune each color.</p><div class="color-grid"><label class="color-field" for="bgColor">Background<input type="color" id="bgColor" value="#14283e"><output id="bgColorValue" for="bgColor">#14283E</output></label><label class="color-field" for="inkColor">Main artwork<input type="color" id="inkColor" value="#f3f2eb"><output id="inkColorValue" for="inkColor">#F3F2EB</output></label><label class="color-field" for="accentColor">Accent<input type="color" id="accentColor" value="#a2d5d0"><output id="accentColorValue" for="accentColor">#A2D5D0</output></label><label class="color-field" for="goldColor">Orbit & stars<input type="color" id="goldColor" value="#dfba67"><output id="goldColorValue" for="goldColor">#DFBA67</output></label><label class="color-field" for="textColor">Label text<input type="color" id="textColor" value="#f3f2eb"><output id="textColorValue" for="textColor">#F3F2EB</output></label><label class="color-field" for="borderColor">Border<input type="color" id="borderColor" value="#f3f2eb"><output id="borderColorValue" for="borderColor">#F3F2EB</output></label></div><div class="field"><div class="range-label"><label for="labelSize">Label size</label><output id="labelSizeValue" for="labelSize">46</output></div><input type="range" id="labelSize" min="30" max="54" value="46"></div><div class="field"><div class="range-label"><label for="letterSpacing">Letter spacing</label><output id="letterSpacingValue" for="letterSpacing">0</output></div><input type="range" id="letterSpacing" min="0" max="5" value="0"></div><div class="field"><div class="range-label"><label for="borderWeight">Border weight</label><output id="borderWeightValue" for="borderWeight">12</output></div><input type="range" id="borderWeight" min="0" max="18" value="12"></div></details><details class="custom-panel" open><summary>Space elements</summary><div class="field"><label for="spaceScene">Space backdrop</label><select id="spaceScene"><option value="full">Stars, orbit &amp; Earth horizon</option><option value="none">Core symbols only</option></select><p class="help">These elements stay available when you generate or remix. Adjust or hide each one under Individual elements.</p></div><div class="field"><label for="eyeDetail">Discovery detail</label><select id="eyeDetail"><option value="planet">Ringed planet inside eye or magnifier</option><option value="classic">Original eye or magnifier detail</option></select></div></details><details class="custom-panel" open><summary>Individual elements</summary><div class="field"><label for="elementSelect">Element to adjust</label><select id="elementSelect"></select><p class="help">Adjust one element at a time. Your changes appear in both previews and downloads.</p></div><label class="toggle" for="elementVisible"><input id="elementVisible" type="checkbox" checked>Show this element</label><div class="field"><div class="range-label"><label for="elementSize">Size</label><output id="elementSizeValue" for="elementSize">100</output></div><input type="range" id="elementSize" min="50" max="150" value="100"></div><div class="field"><div class="range-label"><label for="elementX">Horizontal position</label><output id="elementXValue" for="elementX">0</output></div><input type="range" id="elementX" min="-120" max="120" value="0"></div><div class="field"><div class="range-label"><label for="elementY">Vertical position</label><output id="elementYValue" for="elementY">0</output></div><input type="range" id="elementY" min="-120" max="120" value="0"></div><div class="field"><div class="range-label"><label for="elementRotation">Rotation</label><output id="elementRotationValue" for="elementRotation">0</output></div><input type="range" id="elementRotation" min="-180" max="180" value="0"></div><label class="element-color" for="elementColor">Element color<input type="color" id="elementColor" value="#a2d5d0"></label><label class="toggle" for="elementUseColor"><input id="elementUseColor" type="checkbox">Use a custom element color</label><button type="button" id="resetElement" class="full-button">Reset this element</button></details><div class="field"><label for="texture">Texture</label><select id="texture"><option value="flat">Flat · clean artwork</option><option value="embroidered">Embroidered · woven fabric and raised thread</option></select><p class="help">Your selected finish is included in previews and downloads.</p></div>
 <div class="field"><div class="range-label"><label for="scale">Discovery symbol size</label><output id="scaleValue" for="scale">100%</output></div><input id="scale" type="range" min="80" max="115" value="100"></div>
 <div class="field"><div class="range-label"><label for="road">Road width (when used)</label><output id="roadValue" for="road">100%</output></div><input id="road" type="range" min="75" max="120" value="100"></div>
 <div class="field"><div class="range-label"><label for="weight">Line weight</label><output id="weightValue" for="weight">8</output></div><input id="weight" type="range" min="6" max="14" value="8"></div>
 <div class="actions"><button class="primary" id="generate" type="button">Generate new patch ↗</button><button id="remix" type="button">Remix this patch</button><button id="saveVersion" type="button">Save version</button><button id="reset" type="button">Reset to original sketch</button></div><p class="help">Generate explores a new arrangement. Remix refines this one.</p>
 <details><summary>Concept &amp; symbols</summary><p>Through collaboration and trial and error, curiosity becomes a path to discovery. The puzzle pieces represent people bringing their ideas together, while the cycle reflects the process of testing, learning, and trying again. Together, these symbols show how shared effort and a willingness to experiment can turn questions into new possibilities.</p><p>The eye and magnifying glass suggest observation and discovery. The road represents curiosity and the journey forward. Bubbles suggest weightlessness, while the flag marks a new discovery. Geometric forms translate these ideas into simpler visual relationships.</p></details>
-<details><summary>How variations work</summary><p>Every patch keeps collaboration, experimentation, and discovery together. One eye or magnifier leads the design; puzzle pieces and cycle arrows support it. A road, bubbles, flag, or geometric forms can add one supporting idea.</p><p>Generate changes the visual language, arrangement, and discovery symbol within your choices. Remix keeps those decisions and adjusts spacing, proportions, and puzzle rotations.</p><p>Use Colors &amp; lettering to customize the patch palette, text, and borders. Individual elements can be resized, moved, rotated, recolored, or hidden. Generate and Remix keep your custom element adjustments. The small preview mirrors the exported artwork. PNG exports are 1050 × 1050 pixels at 300 dpi; SVG exports are 3.5 × 3.5 inches.</p></details>
+<details><summary>How variations work</summary><p>Every patch keeps collaboration, experimentation, and discovery together. One eye or magnifier leads the design; puzzle pieces and cycle arrows support it. A road, bubbles, flag, or geometric forms can add one supporting idea. Stars, the planetary orbit, the Earth horizon, and the ringed planet detail are available in every generated composition.</p><p>Generate changes the visual language, arrangement, and discovery symbol within your choices. Remix keeps those decisions and adjusts spacing, proportions, and puzzle rotations.</p><p>Use Colors &amp; lettering to customize the patch palette, text, and borders. Individual elements can be resized, moved, rotated, recolored, or hidden. Generate and Remix keep your custom element adjustments. The small preview mirrors the exported artwork. PNG exports are 1050 × 1050 pixels at 300 dpi; SVG exports are 3.5 × 3.5 inches.</p></details>
 </aside>
 <section class="stage" aria-label="Patch preview and export">
 <div class="preview-grid"><div class="preview"><svg id="patch" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000" role="img" aria-label="Current mission patch"></svg></div>
@@ -70,12 +70,12 @@ fieldset{border:0;padding:0;margin:0 0 22px}legend{padding:0;margin-bottom:10px}
 "use strict";
 (() => {
 const $ = id => document.getElementById(id);
-const names={eye:"eye",magnifier:"magnifying glass",puzzle:"puzzle pieces",bubble:"bubbles",cycle:"cycle arrows",road:"road",flag:"flag",geometry:"geometric forms"};
+const names={eye:"eye",magnifier:"magnifying glass",puzzle:"puzzle pieces",bubble:"bubbles",cycle:"cycle arrows",road:"road",flag:"flag",geometry:"geometric forms",stars:"stars",orbit:"planetary orbit",earth:"Earth horizon"};
 const languages={literal:"Literal",geometric:"Geometric",narrative:"Narrative",symbolic:"Symbolic",abstract:"Abstract",minimal:"Minimal",unexpected:"Unexpected"};
 const layouts={orbit:"Collaboration cycle",journey:"Journey to discovery",constellation:"Floating constellation",assembly:"Ideas coming together",flagship:"Shared discovery",portal:"A new perspective"};
 const meanings={orbit:"Shared ideas move through a cycle of testing, learning, and trying again.",journey:"Curiosity creates a path toward observation and discovery.",constellation:"Different ideas float independently while forming a connected whole.",assembly:"Individual contributions come together to create new possibilities.",flagship:"A shared effort marks a new discovery.",portal:"A familiar symbol becomes a window into another idea."};
 const palettes={forest:{bg:"#172820",ink:"#f3f2eb",accent:"#93cfa6"},space:{bg:"#14283e",ink:"#f3f2eb",accent:"#a2d5d0"},earth:{bg:"#28342a",ink:"#f3f2eb",accent:"#d8bd79"},mono:{bg:"#161918",ink:"#f3f2eb",accent:"#f3f2eb"}};
-const defaults={style:"auto",layout:"auto",discovery:"auto",support:"auto",top:"BARUCH COLLEGE",bottom:"ISS SPRING 2027",palette:"forest",texture:"flat",scale:"100",road:"100",weight:"8",smallSize:"120",bgColor:"#172820",inkColor:"#f3f2eb",accentColor:"#93cfa6",goldColor:"#dfba67",textColor:"#f3f2eb",borderColor:"#f3f2eb",labelSize:"46",letterSpacing:"0",borderWeight:"12"};
+const defaults={style:"auto",layout:"auto",discovery:"auto",support:"auto",top:"BARUCH COLLEGE",bottom:"ISS SPRING 2027",palette:"forest",texture:"flat",scale:"100",road:"100",weight:"8",smallSize:"120",bgColor:"#172820",inkColor:"#f3f2eb",accentColor:"#93cfa6",goldColor:"#dfba67",textColor:"#f3f2eb",borderColor:"#f3f2eb",labelSize:"46",letterSpacing:"0",borderWeight:"12",spaceScene:"full",eyeDetail:"planet"};
 const rand=(a,b)=>a+Math.random()*(b-a),pick=a=>a[Math.floor(Math.random()*a.length)],n=x=>Number(x.toFixed(2));
 const shuffle=a=>{a=[...a];for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;};
 const esc=s=>String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&apos;"}[c]));
@@ -94,7 +94,7 @@ function element(id,markup,x=500,y=500){
  if(e.useColor){const p=currentPalette();for(const c of new Set([p.ink,p.accent,$("goldColor").value])){if(c!==p.bg)markup=markup.replaceAll(c,e.color||p.accent);}}
  return `<g data-element="${id}" transform="translate(${e.x} ${e.y}) translate(${x} ${y}) rotate(${e.rotation}) scale(${e.size/100}) translate(${-x} ${-y})">${markup}</g>`;
 }
-function availableElements(){return state.preset==="space-discovery"?["discovery","puzzle1","puzzle2","cycle","orbit","stars","earth"]:["discovery","puzzle1","puzzle2",...(geometryFor().pieces.length>2?["puzzle3"]:[]),"cycle",...(state.support!=="none"?["support"]:[])];}
+function availableElements(){return ["discovery","puzzle1","puzzle2",...(state.preset!=="space-discovery"&&geometryFor().pieces.length>2?["puzzle3"]:[]),"cycle",...(state.support!=="none"?["support"]:[]),...($("spaceScene").value==="full"?["orbit","stars","earth"]:[])];}
 function syncElementControls(){
  const select=$("elementSelect"),ids=availableElements(),previous=select.value;
  select.replaceChildren(...ids.map(id=>{const option=document.createElement("option");option.value=id;option.textContent=elementNames[id];return option;}));select.value=ids.includes(previous)?previous:ids[0];
@@ -103,6 +103,8 @@ function syncElementControls(){
  $("elementVisible").checked=e.visible;$("elementColor").value=e.color||$("accentColor").value;$("elementUseColor").checked=e.useColor;
 }
 const path=(d,fill,stroke,w,extra="")=>`<path d="${d}" fill="${fill}" stroke="${stroke}" stroke-width="${w}" ${extra}/>`;
+const spaceDesign=()=>state.spaceDesign===true||state.preset==="space-discovery";
+const satin=d=>spaceDesign()&&$("texture").value==="embroidered"?path(d,"url(#patch-finish-satin)","none",0):"";
 const circle=(x,y,r,fill,stroke="none",w=0)=>`<circle cx="${n(x)}" cy="${n(y)}" r="${n(r)}" fill="${fill}" stroke="${stroke}" stroke-width="${w}"/>`;
 const puzzle="M-36-34H-12C-25-62 25-62 12-34H36V-11C64-24 64 24 36 11V36H12C25 9-25 9-12 36H-36Z";
 function bubble(x,y,r,p,w,simple=false){
@@ -115,21 +117,27 @@ function bubble(x,y,r,p,w,simple=false){
  if(!simple)s+=circle(x+.02*r,y-.8*r,Math.max(2,w*.32),p.ink);
  return s;
 }
+function planetDetail(p){
+ const gold=$("goldColor").value;
+ return '<g data-detail="ringed-planet">'+circle(0,0,30,p.bg)+circle(0,0,19,p.accent)+path("M-14-9Q0-14 15-6M-17 0Q0-5 18 3M-13 10Q0 5 13 13","none",p.bg,1.2,'opacity=".35"')+`<ellipse cx="0" cy="2" rx="32" ry="7" transform="rotate(-25)" fill="none" stroke="${gold}" stroke-width="3"/>`+circle(-6,-9,3.5,p.ink)+'</g>';
+}
 function glyph(kind,x,y,r,p,w,angle=0){
  const mode=state.language,angular=mode==="geometric"||mode==="abstract",bold=mode==="symbolic"||mode==="minimal",simple=mode==="minimal";
  let s="";
  if(kind==="eye"){
-  s+=path(angular?"M-85 0L0-44 85 0 0 44Z":"M-85 0Q0-75 85 0Q0 75-85 0Z",bold?p.ink:p.bg,p.ink,w);
-  s+=circle(0,0,27,bold?p.bg:p.accent);s+=circle(0,0,11,bold?p.ink:p.bg);
+  const outline=angular?"M-85 0L0-44 85 0 0 44Z":"M-85 0Q0-75 85 0Q0 75-85 0Z";
+  s+=path(outline,bold?p.ink:p.bg,p.ink,w)+(bold?satin(outline):"");
+  if($("eyeDetail").value==="planet")s+=planetDetail(p);
+  else{s+=circle(0,0,27,bold?p.bg:p.accent);s+=circle(0,0,11,bold?p.ink:p.bg);}
   if(mode==="abstract")s+=path("M-90-43L-60-43M60 43H90","none",p.accent,w);
  }else if(kind==="magnifier"){
   s+=path("M-22 31L-64 80","none",p.ink,w*1.8);
   s+=angular?path("M-51-61H53V43H-51Z",p.bg,p.ink,w):circle(2,-9,56,p.bg,p.ink,w);
-  s+=path("M2-34V16M-23-9H27","none",p.accent,w*.8);
+  s+=$("eyeDetail").value==="planet"?`<g transform="translate(2 -9) scale(1.2)">${planetDetail(p)}</g>`:path("M2-34V16M-23-9H27","none",p.accent,w*.8);
   if(!simple)s+=path("M-27-35Q-36-25-36-13","none",p.ink,w*.65);
  }else if(kind==="puzzle"){
   const shape=mode==="abstract"?"M-36-34H-12V-49H12V-34H36V-12H51V12H36V36H12V20H-12V36H-36Z":puzzle;
-  s+=`<g transform="scale(1.45)">${path(shape,bold?p.accent:p.bg,p.accent,w/1.45)}</g>`;
+  s+=`<g transform="scale(1.45)">${path(shape,bold?p.accent:p.bg,p.accent,w/1.45)}${bold?satin(shape):""}</g>`;
  }else if(kind==="bubble"){
   s+=bubble(0,0,65,p,w,simple);
  }else if(kind==="flag"){
@@ -183,12 +191,21 @@ function puzzlePair(x,y,r,p,w){
  const left="M-95-64H0V-22C40-42 40 42 0 22V64H-95Z";
  const right="M0-64H95V64H0V22C40 42 40-42 0-22Z";
  return `<g transform="translate(${n(x)} ${n(y)}) scale(${n(r/100)})">`+
- element("puzzle1",path(left,fill?p.accent:p.bg,p.accent,w*.65),-47,0)+element("puzzle2",path(right,fill?p.ink:p.bg,p.ink,w*.65),47,0)+"</g>";
+ element("puzzle1",path(left,fill?p.accent:p.bg,p.accent,w*.65)+(fill?satin(left):""),-47,0)+element("puzzle2",path(right,fill?p.ink:p.bg,p.ink,w*.65)+(fill?satin(right):""),47,0)+"</g>";
+}
+// Use the opening patch's frame for its generated variations as well.
+function patchFrame(p){
+ const border=$("borderColor").value,weight=Number($("borderWeight").value);
+ if(!spaceDesign())return `<rect x="30" y="30" width="940" height="940" fill="none" stroke="${border}" stroke-width="${weight}"/><rect x="48" y="48" width="904" height="904" fill="none" stroke="${border}" stroke-width="${weight>0?2:0}"/>`+label($("top").value,126,p)+label($("bottom").value,934,p);
+ let s=`<rect x="25" y="25" width="950" height="950" rx="10" fill="none" stroke="${p.bg}" stroke-width="36"/>`;
+ if($("texture").value==="embroidered")s+=`<rect data-detail="stitched-border" x="25" y="25" width="950" height="950" rx="10" fill="none" stroke="${p.accent}" stroke-opacity=".4" stroke-width="28" stroke-dasharray="1.7 4.3"/>`;
+ return s+`<rect x="47" y="47" width="906" height="906" rx="3" fill="none" stroke="${border}" stroke-width="${weight*7/12}"/><rect x="62" y="62" width="876" height="876" fill="none" stroke="${border}" stroke-width="${weight>0?2:0}"/>`+label($("top").value,135,p)+label($("bottom").value,919,p)+path("M112 177H888M112 855H888","none",p.accent,2);
 }
 // Keep the finish inside the SVG so saved previews and both exports match.
 function finishArtwork(markup){
  if($("texture").value!=="embroidered")return markup;
  const defs=`<defs>
+ <pattern id="patch-finish-satin" width="5" height="7" patternUnits="userSpaceOnUse" patternTransform="rotate(-18)"><path d="M0 1H5" stroke="#fff" stroke-width="1" opacity=".3"/><path d="M0 3H5" stroke="#000" stroke-width=".6" opacity=".2"/></pattern>
  <pattern id="patch-finish-weave" width="6" height="6" patternUnits="userSpaceOnUse">
  <path d="M-2 2L2-2M0 6L6 0M4 8L8 4" stroke="#ffffff" stroke-width=".9" opacity=".13"/>
  <path d="M-2 4L4-2M2 8L8 2" stroke="#000000" stroke-width="1" opacity=".22"/>
@@ -201,53 +218,19 @@ function finishArtwork(markup){
  const raised=markup.replace('<g stroke-linecap="round" stroke-linejoin="round">','<g stroke-linecap="round" stroke-linejoin="round" filter="url(#patch-finish-thread)">');
  return defs+raised+`<rect width="1000" height="1000" fill="url(#patch-finish-weave)" pointer-events="none"/>`;
 }
-// A deterministic square insignia: the same SVG is used in both previews and exports.
-function composeSpacePatch(){
- const p=currentPalette(),gold=$("goldColor").value,w=Number($("weight").value),stitched=$("texture").value==="embroidered";
- used=["eye","puzzle","cycle"];
+function spaceLayer(id,p=currentPalette()){
+ if($("spaceScene").value!=="full")return "";
+ const gold=$("goldColor").value;
  const star=(x,y,r)=>path(`M${x} ${y-r}Q${x+2} ${y-2} ${x+r} ${y}Q${x+2} ${y+2} ${x} ${y+r}Q${x-2} ${y+2} ${x-r} ${y}Q${x-2} ${y-2} ${x} ${y-r}Z`,gold,"none",0);
- let s=`<defs>
- <clipPath id="patch-finish-earth"><path d="M155 825Q500 666 845 825V849H155Z"/></clipPath>
- <pattern id="patch-finish-satin" width="5" height="7" patternUnits="userSpaceOnUse" patternTransform="rotate(-18)"><path d="M0 1H5" stroke="#fff" stroke-width="1" opacity=".3"/><path d="M0 3H5" stroke="#000" stroke-width=".6" opacity=".2"/></pattern>
- </defs><rect width="1000" height="1000" fill="${p.bg}"/><g stroke-linecap="round" stroke-linejoin="round">`;
- s+=`<rect x="25" y="25" width="950" height="950" rx="10" fill="none" stroke="${p.bg}" stroke-width="36"/>`;
- if(stitched)s+=`<rect x="25" y="25" width="950" height="950" rx="10" fill="none" stroke="${p.accent}" stroke-opacity=".4" stroke-width="28" stroke-dasharray="1.7 4.3"/>`;
- s+=`<rect x="47" y="47" width="906" height="906" rx="3" fill="none" stroke="${$("borderColor").value}" stroke-width="${Number($("borderWeight").value)*7/12}"/><rect x="62" y="62" width="876" height="876" fill="none" stroke="${$("borderColor").value}" stroke-width="${Number($("borderWeight").value)>0?2:0}"/>`;
- s+=label($("top").value.toUpperCase(),135,p)+label($("bottom").value.toUpperCase(),919,p);
- s+=path("M112 177H888M112 855H888","none",p.accent,2);
- s+=element("stars",(()=>{let s="";
+ if(id==="stars")return element("stars",(()=>{let s="";
 s+=star(500,220,23)+star(126,483,16)+star(874,483,16)+star(261,458,10)+star(760,688,14)+star(245,730,10);
  [[300,227,3],[693,223,3],[226,348,3],[785,356,2],[308,484,2],[730,492,3],[270,665,2],[765,589,2],[355,754,2],[647,736,3],[679,303,2],[344,289,2]].forEach(([x,y,r])=>s+=circle(x,y,r,p.ink));
- return s;})(),500,500);
- // The gold orbit passes behind the main symbols.
- s+=element("orbit",(()=>{let s="";
+ s+=star(500,745,13);return s;})(),500,500);
+ if(id==="orbit")return element("orbit",(()=>{let s="";
 s+=`<ellipse cx="500" cy="548" rx="322" ry="57" transform="rotate(-16 500 548)" fill="none" stroke="${gold}" stroke-width="5"/>`;
  s+=circle(793,465,9,p.ink,gold,2);
  return s;})(),500,548);
- const orbit={...p,accent:p.accent};
- s+=element("cycle",(()=>{let s="";
-[[-78,-3],[38,117],[173,249]].forEach(([a,b])=>s+=arc(500,490+state.lift,304*state.spread,255,a+state.phase,b+state.phase,orbit,w+2,false));
- return s;})(),500,490);
- // Two complementary pieces share a single joint, with no gap or doubled seam.
- const pr=1.37*state.spread,py=589+state.lift;
- s+=`<g transform="translate(500 ${py}) scale(${pr})">`;
- s+=element("puzzle1",path("M-95-64H0V-22C40-42 40 42 0 22V64H-95Z",p.accent,"none",0),-47,0);
- s+=element("puzzle2",path("M0-64H95V64H0V22C40 42 40-42 0-22Z",p.ink,"none",0),47,0);
- 
- s+="</g>";
- // A ringed planet becomes the iris of the observation symbol.
- const size=Number($("scale").value)/100*state.symbolScale;
- s+=element("discovery",(()=>{let s="";
-s+=`<g transform="translate(500 ${345+state.lift}) scale(${size})">`;
- s+=path("M-147 0Q0-137 147 0Q0 137-147 0Z",p.ink,"none",0);
- if(stitched)s+=path("M-147 0Q0-137 147 0Q0 137-147 0Z","url(#patch-finish-satin)","none",0);
- s+=circle(0,0,52,p.bg)+circle(0,0,33,p.accent);
- s+=path("M-25-16Q0-24 26-10M-30 0Q0-9 31 6M-22 17Q0 9 22 22","none",p.bg,2,'opacity=".35"');
- s+=`<ellipse cx="0" cy="3" rx="55" ry="12" transform="rotate(-25)" fill="none" stroke="${gold}" stroke-width="5"/>`;
- s+=circle(-10,-16,6,p.ink)+"</g>";
- return s;})(),500,345);
- // The Earth horizon stays inside the square's protected lower artwork band.
- s+=element("earth",(()=>{let s="";
+ if(id==="earth")return element("earth",(()=>{let s=`<defs><clipPath id="patch-finish-earth"><path d="M155 825Q500 666 845 825V849H155Z"/></clipPath></defs>`;
 s+=`<g clip-path="url(#patch-finish-earth)"><rect x="150" y="700" width="700" height="149" fill="${p.accent}"/>`;
  s+=path("M163 816L226 786 270 792 298 776 337 784 345 801 385 809 371 825 399 849H150Z",p.bg,"none",0);
  s+=path("M416 753L454 757 477 775 463 791 490 808 480 849H441L427 825 440 801 410 784Z",p.bg,"none",0);
@@ -255,24 +238,57 @@ s+=`<g clip-path="url(#patch-finish-earth)"><rect x="150" y="700" width="700" he
  s+=path("M753 838L785 820 826 836 846 849H763Z",p.bg,"none",0)+"</g>";
  s+=path("M155 825Q500 666 845 825","none",gold,5)+path("M170 831Q500 680 830 831","none",p.ink,2);
  return s;})(),500,785);
- s+=element("stars",star(500,745,13));
+ return "";
+}
+// A deterministic square insignia: the same SVG is used in both previews and exports.
+function composeSpacePatch(){
+ const p=currentPalette(),w=Number($("weight").value);
+ used=["eye","puzzle","cycle",...($("spaceScene").value==="full"?["stars","orbit","earth"]:[])];
+ let s=`<rect width="1000" height="1000" fill="${p.bg}"/><g stroke-linecap="round" stroke-linejoin="round">`;
+ s+=patchFrame(p);
+ s+=spaceLayer("stars",p);
+ // The gold orbit passes behind the main symbols.
+ s+=spaceLayer("orbit",p);
+ const orbit={...p,accent:p.accent};
+ s+=element("cycle",(()=>{let s="";
+[[-78,-3],[38,117],[173,249]].forEach(([a,b])=>s+=arc(500,490+state.lift,304*state.spread,255,a+state.phase,b+state.phase,orbit,w+2,false));
+ return s;})(),500,490);
+ // Two complementary pieces share a single joint, with no gap or doubled seam.
+ const pr=1.37*state.spread,py=589+state.lift;
+ s+=`<g transform="translate(500 ${py}) scale(${pr})">`;
+ s+=element("puzzle1",path("M-95-64H0V-22C40-42 40 42 0 22V64H-95Z",p.accent,"none",0)+satin("M-95-64H0V-22C40-42 40 42 0 22V64H-95Z"),-47,0);
+ s+=element("puzzle2",path("M0-64H95V64H0V22C40 42 40-42 0-22Z",p.ink,"none",0)+satin("M0-64H95V64H0V22C40 42 40-42 0-22Z"),47,0);
+ 
+ s+="</g>";
+ // A ringed planet becomes the iris of the observation symbol.
+ const size=Number($("scale").value)/100*state.symbolScale;
+ s+=element("discovery",(()=>{let s="";
+s+=`<g transform="translate(500 ${345+state.lift}) scale(${size})">`;
+ s+=path("M-147 0Q0-137 147 0Q0 137-147 0Z",p.ink,"none",0);
+ s+=satin("M-147 0Q0-137 147 0Q0 137-147 0Z");
+ s+=$("eyeDetail").value==="planet"?`<g transform="scale(1.733)">${planetDetail(p)}</g>`:circle(0,0,44,p.bg)+circle(0,0,20,p.accent);
+ s+="</g>";
+ return s;})(),500,345);
+ // The Earth horizon stays inside the square's protected lower artwork band.
+ s+=spaceLayer("earth",p);
+ 
  s+="</g>";
  return finishArtwork(s);
 }
 function loadSpacePreset(){
- Object.entries({...defaults,top:"BARUCH COLLEGE",bottom:"ISS SPRING 2027",palette:"space",texture:"embroidered",style:"minimal",layout:"assembly",discovery:"eye",support:"none"}).forEach(([id,value])=>$(id).value=value);
- state={...original(),preset:"space-discovery",language:"minimal",layout:"assembly",support:"none"};edition=0;syncPalette();render();
- $("status").textContent="Square Space Discovery patch ready. Edit the labels or colors, choose Flat or Embroidered, then download the matching PNG or SVG.";
+ Object.entries({...defaults,top:"BARUCH COLLEGE",bottom:"ISS SPRING 2027",palette:"space",texture:"embroidered",style:"auto",layout:"auto",discovery:"auto",support:"none"}).forEach(([id,value])=>$(id).value=value);
+ state={...original(),preset:"space-discovery",spaceDesign:true,language:"minimal",layout:"assembly",support:"none"};edition=0;syncPalette();render();
+ $("status").textContent="Space Discovery ready. Generate explores new compositions with these same space elements. Use Space elements to switch the backdrop or planet detail.";
 }
 function compose(){
  if(state.preset==="space-discovery")return composeSpacePatch();
  const p=currentPalette(),mode=state.language,w=Math.max(Number($("weight").value),mode==="minimal"?10:0),g=geometryFor();
  const [mx,my,mr]=g.main;
- used=[state.main,"puzzle","cycle"];if(state.support!=="none")used.push(state.support);
+ used=[state.main,"puzzle","cycle",...($("spaceScene").value==="full"?["stars","orbit","earth"]:[])];if(state.support!=="none")used.push(state.support);
  let s=`<rect width="1000" height="1000" fill="${p.bg}"/><g stroke-linecap="round" stroke-linejoin="round">`;
  // The same borders and protected text positions identify the whole collection.
- s+=`<rect x="30" y="30" width="940" height="940" fill="none" stroke="${$("borderColor").value}" stroke-width="${$("borderWeight").value}"/><rect x="48" y="48" width="904" height="904" fill="none" stroke="${$("borderColor").value}" stroke-width="${Number($("borderWeight").value)>0?2:0}"/>`;
- s+=label($("top").value,126,p)+label($("bottom").value,934,p);
+ s+=patchFrame(p);
+ s+=spaceLayer("stars",p)+spaceLayer("orbit",p);
  if(state.layout==="constellation"){
   g.pieces.forEach(([x,y])=>{s+=path(`M${mx} ${my}L${x} ${y}`,"none",p.accent,w*.6,mode==="abstract"?'stroke-dasharray="15 17"':"");});
  }
@@ -311,6 +327,7 @@ if(state.support!=="none"&&!(state.support==="road"&&g.wideRoad)&&!(state.suppor
   }else{s+=glyph(state.support,x,y,r,p,w,0);}
  }
  return s;})(),500,700);
+ s+=spaceLayer("earth",p);
  s+=element("discovery",glyph(state.main,mx,my,mr,p,w,0),mx,my);
  return finishArtwork(s+"</g>");
 }
@@ -339,22 +356,22 @@ function generate(){
  if($("layout").value==="auto"&&eligible.length>1&&layout===state.layout)layout=pick(eligible.filter(k=>k!==state.layout));
  const main=$("discovery").value==="auto"?pick(["eye","magnifier"]):$("discovery").value;
  const support=$("support").value==="auto"?(layout==="journey"?"road":language==="unexpected"?"bubble":pick(["none","road","bubble","flag","geometry"])):$("support").value;
- state={elements:state.elements||{},language,layout,main,support,turns:Array.from({length:3},()=>rand(-24,24)),spread:rand(.97,1.025),lift:rand(-6,6),phase:rand(-3,3),bend:rand(-12,12),symbolScale:rand(.96,1.025)};
- render();$("status").textContent="New patch ready. Collaboration, experimentation, and discovery stay together.";
+ state={spaceDesign:spaceDesign(),elements:state.elements||{},language,layout,main,support,turns:Array.from({length:3},()=>rand(-24,24)),spread:rand(.97,1.025),lift:rand(-6,6),phase:rand(-3,3),bend:rand(-12,12),symbolScale:rand(.96,1.025)};
+ render();$("status").textContent="New patch ready. Your space elements, colors, and individual adjustments are kept.";
 }
 function remix(){
  edition=++serial;
  state={...state,turns:state.turns.map(a=>clamp(a+rand(-7,7),-30,30)),spread:clamp(state.spread+rand(-.016,.016),.96,1.03),lift:clamp(state.lift+rand(-4,4),-8,8),phase:clamp(state.phase+rand(-1.5,1.5),-4,4),bend:clamp(state.bend+rand(-5,5),-14,14),symbolScale:clamp(state.symbolScale+rand(-.018,.018),.95,1.03)};
  render();$("status").textContent="Remixed spacing, scale, and puzzle rotations. Your symbols and composition stay together.";
 }
-function reset(){Object.entries(defaults).forEach(([id,value])=>$(id).value=value);edition=0;state=original();syncPalette();render();$("status").textContent="Original eye, road, puzzle pieces, and cycle restored. Your saved versions are available below.";}
+function reset(){Object.entries(defaults).forEach(([id,value])=>$(id).value=value);edition=0;state=original();$("spaceScene").value="none";$("eyeDetail").value="classic";syncPalette();render();$("status").textContent="Original eye, road, puzzle pieces, and cycle restored. Your saved versions are available below.";}
 function params(){return Object.fromEntries(Object.keys(defaults).map(id=>[id,$(id).value]));}
 function normalizeSnapshot(item){
  if(!item||typeof item!=="object"||!item.state||!item.params)return null;
  const st=item.state,pa=item.params;
  if(!Object.hasOwn(languages,st.language)||!Object.hasOwn(layouts,st.layout)||!["eye","magnifier"].includes(st.main)||!["none","road","bubble","flag","geometry"].includes(st.support))return null;
  const finite=(v,a,b,f)=>Number.isFinite(Number(v))?clamp(Number(v),a,b):f;
- const safeState={...(st.preset==="space-discovery"?{preset:st.preset}:{}),elements:{},language:st.language,layout:st.layout,main:st.main,support:st.support,spread:finite(st.spread,.96,1.03,1),lift:finite(st.lift,-8,8,0),phase:finite(st.phase,-4,4,0),bend:finite(st.bend,-14,14,0),symbolScale:finite(st.symbolScale,.95,1.03,1),turns:Array.from({length:3},(_,i)=>finite(st.turns?.[i],-30,30,0))};
+ const safeState={...(st.preset==="space-discovery"?{preset:st.preset}:{}),spaceDesign:st.spaceDesign===true||st.preset==="space-discovery",elements:{},language:st.language,layout:st.layout,main:st.main,support:st.support,spread:finite(st.spread,.96,1.03,1),lift:finite(st.lift,-8,8,0),phase:finite(st.phase,-4,4,0),bend:finite(st.bend,-14,14,0),symbolScale:finite(st.symbolScale,.95,1.03,1),turns:Array.from({length:3},(_,i)=>finite(st.turns?.[i],-30,30,0))};
  const valid=(v,a,f)=>a.includes(v)?v:f;
  const safeParams={style:valid(pa.style,["auto",...Object.keys(languages)],"auto"),layout:valid(pa.layout,["auto",...Object.keys(layouts)],"auto"),discovery:valid(pa.discovery,["auto","eye","magnifier"],"auto"),support:valid(pa.support,["auto","none","road","bubble","flag","geometry"],"auto"),top:String(pa.top??"").slice(0,18),bottom:String(pa.bottom??"").slice(0,22),palette:valid(pa.palette,Object.keys(palettes),"forest"),texture:valid(pa.texture,["flat","embroidered"],"flat"),scale:String(finite(pa.scale,80,115,100)),road:String(finite(pa.road,75,120,100)),weight:String(finite(pa.weight,6,14,8)),smallSize:String(finite(pa.smallSize,80,180,120))};
  for(const [id,value] of Object.entries(st.elements||{})){
@@ -362,6 +379,7 @@ function normalizeSnapshot(item){
  safeState.elements[id]={size:finite(value.size,50,150,100),x:finite(value.x,-120,120,0),y:finite(value.y,-120,120,0),rotation:finite(value.rotation,-180,180,0),visible:value.visible!==false,color:/^#[0-9a-f]{6}$/i.test(value.color)?value.color:"",useColor:value.useColor===true};
  }
  for(const id of ["bgColor","inkColor","accentColor","goldColor","textColor","borderColor"])safeParams[id]=/^#[0-9a-f]{6}$/i.test(pa[id])?pa[id]:(id==="bgColor"?palettes[safeParams.palette].bg:id==="accentColor"?palettes[safeParams.palette].accent:id==="goldColor"?"#dfba67":palettes[safeParams.palette].ink);
+ safeParams.spaceScene=valid(pa.spaceScene,["full","none"],st.preset==="space-discovery"?"full":"none");safeParams.eyeDetail=valid(pa.eyeDetail,["planet","classic"],st.preset==="space-discovery"?"planet":"classic");
  for(const [id,min,max,fallback] of [["labelSize",30,54,46],["letterSpacing",0,5,0],["borderWeight",0,18,12]])safeParams[id]=String(finite(pa[id],min,max,fallback));
  return {id:typeof item.id==="string"?item.id.slice(0,80):"saved-"+Math.random().toString(36).slice(2),edition:Math.floor(finite(item.edition,0,999999,0)),state:safeState,params:safeParams};
 }
