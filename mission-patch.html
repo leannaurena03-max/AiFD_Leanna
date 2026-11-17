@@ -35,7 +35,6 @@ fieldset{border:0;padding:0;margin:0 0 22px}legend{padding:0;margin-bottom:10px}
 <main>
 <aside aria-label="Patch controls">
 <h2>Build your patch</h2>
-<button class="primary" id="spacePreset" type="button" style="width:100%;margin-bottom:12px">Space Discovery · square patch</button><p class="help" style="margin-bottom:22px">Load the space design, then adjust its labels, colors, scale, and finish.</p>
 <div class="field"><label for="style">Design language</label><select id="style"><option value="auto">Explore all approaches</option><option value="literal">Literal · original sketch</option><option value="geometric">Geometric · shapes and connections</option><option value="narrative">Narrative · a journey to discovery</option><option value="symbolic">Symbolic · bold, simplified icons</option><option value="abstract">Abstract · fragments and angles</option><option value="minimal">Minimal · fewer, stronger forms</option><option value="unexpected">Unexpected · symbols within symbols</option></select></div>
 <div class="field"><label for="layout">Composition</label><select id="layout"><option value="auto">Explore different compositions</option><option value="orbit">Collaboration cycle</option><option value="journey">Journey to discovery</option><option value="constellation">Floating constellation</option><option value="assembly">Ideas coming together</option><option value="flagship">Shared discovery</option><option value="portal">A new perspective</option></select></div>
 <div class="core-note"><p class="kicker">One shared message</p><p>Puzzle pieces for collaboration. Cycle arrows for experimentation. An eye or magnifier for discovery.</p></div>
@@ -44,7 +43,6 @@ fieldset{border:0;padding:0;margin:0 0 22px}legend{padding:0;margin-bottom:10px}
 <div class="field"><label for="top">Top label</label><input id="top" type="text" maxlength="18" value="BARUCH"></div>
 <div class="field"><label for="bottom">Bottom label</label><input id="bottom" type="text" maxlength="22" value="SSEP"></div>
 <div class="field"><label for="palette">Patch colors</label><select id="palette"><option value="forest">Forest · green / cream / mint</option><option value="space">Space · navy / cream / sea glass</option><option value="earth">Earth · green / cream / gold</option><option value="mono">Monochrome · charcoal / cream</option></select></div>
-<div class="field"><label for="texture">Texture</label><select id="texture"><option value="flat">Flat · clean artwork</option><option value="embroidered">Embroidered · woven fabric and raised thread</option></select><p class="help">Your selected finish is included in previews and downloads.</p></div>
 <div class="field"><div class="range-label"><label for="scale">Discovery symbol size</label><output id="scaleValue" for="scale">100%</output></div><input id="scale" type="range" min="80" max="115" value="100"></div>
 <div class="field"><div class="range-label"><label for="road">Road width (when used)</label><output id="roadValue" for="road">100%</output></div><input id="road" type="range" min="75" max="120" value="100"></div>
 <div class="field"><div class="range-label"><label for="weight">Line weight</label><output id="weightValue" for="weight">8</output></div><input id="weight" type="range" min="6" max="14" value="8"></div>
@@ -71,7 +69,7 @@ const languages={literal:"Literal",geometric:"Geometric",narrative:"Narrative",s
 const layouts={orbit:"Collaboration cycle",journey:"Journey to discovery",constellation:"Floating constellation",assembly:"Ideas coming together",flagship:"Shared discovery",portal:"A new perspective"};
 const meanings={orbit:"Shared ideas move through a cycle of testing, learning, and trying again.",journey:"Curiosity creates a path toward observation and discovery.",constellation:"Different ideas float independently while forming a connected whole.",assembly:"Individual contributions come together to create new possibilities.",flagship:"A shared effort marks a new discovery.",portal:"A familiar symbol becomes a window into another idea."};
 const palettes={forest:{bg:"#172820",ink:"#f3f2eb",accent:"#93cfa6"},space:{bg:"#14283e",ink:"#f3f2eb",accent:"#a2d5d0"},earth:{bg:"#28342a",ink:"#f3f2eb",accent:"#d8bd79"},mono:{bg:"#161918",ink:"#f3f2eb",accent:"#f3f2eb"}};
-const defaults={style:"auto",layout:"auto",discovery:"auto",support:"auto",top:"BARUCH",bottom:"SSEP",palette:"forest",texture:"flat",scale:"100",road:"100",weight:"8",smallSize:"120"};
+const defaults={style:"auto",layout:"auto",discovery:"auto",support:"auto",top:"BARUCH",bottom:"SSEP",palette:"forest",scale:"100",road:"100",weight:"8",smallSize:"120"};
 const rand=(a,b)=>a+Math.random()*(b-a),pick=a=>a[Math.floor(Math.random()*a.length)],n=x=>Number(x.toFixed(2));
 const shuffle=a=>{a=[...a];for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;};
 const esc=s=>String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&apos;"}[c]));
@@ -163,77 +161,7 @@ function puzzlePair(x,y,r,p,w){
  return `<g transform="translate(${n(x)} ${n(y)}) scale(${n(r/100)})">`+
  path(left,fill?p.accent:p.bg,p.accent,w*.65)+path(right,fill?p.ink:p.bg,p.ink,w*.65)+"</g>";
 }
-// Keep the finish inside the SVG so saved previews and both exports match.
-function finishArtwork(markup){
- if($("texture").value!=="embroidered")return markup;
- const defs=`<defs>
- <pattern id="patch-finish-weave" width="6" height="6" patternUnits="userSpaceOnUse">
- <path d="M-2 2L2-2M0 6L6 0M4 8L8 4" stroke="#ffffff" stroke-width=".9" opacity=".13"/>
- <path d="M-2 4L4-2M2 8L8 2" stroke="#000000" stroke-width="1" opacity=".22"/>
- <path d="M0 1H6M0 4H6" stroke="#ffffff" stroke-width=".45" opacity=".055"/>
- </pattern>
- <filter id="patch-finish-thread" x="-30%" y="-30%" width="160%" height="160%" color-interpolation-filters="sRGB">
- <feDropShadow dx="1.4" dy="2.3" stdDeviation="1" flood-color="#000000" flood-opacity=".55"/>
- <feDropShadow dx="-.6" dy="-.8" stdDeviation=".35" flood-color="#ffffff" flood-opacity=".28"/>
- </filter></defs>`;
- const raised=markup.replace('<g stroke-linecap="round" stroke-linejoin="round">','<g stroke-linecap="round" stroke-linejoin="round" filter="url(#patch-finish-thread)">');
- return defs+raised+`<rect width="1000" height="1000" fill="url(#patch-finish-weave)" pointer-events="none"/>`;
-}
-// A deterministic square insignia: the same SVG is used in both previews and exports.
-function composeSpacePatch(){
- const p=palettes[$("palette").value],gold=$("palette").value==="mono"?p.ink:"#dfba67",w=Number($("weight").value),stitched=$("texture").value==="embroidered";
- used=["eye","puzzle","cycle"];
- const star=(x,y,r)=>path(`M${x} ${y-r}Q${x+2} ${y-2} ${x+r} ${y}Q${x+2} ${y+2} ${x} ${y+r}Q${x-2} ${y+2} ${x-r} ${y}Q${x-2} ${y-2} ${x} ${y-r}Z`,gold,"none",0);
- let s=`<defs>
- <clipPath id="patch-finish-earth"><path d="M155 825Q500 666 845 825V849H155Z"/></clipPath>
- <pattern id="patch-finish-satin" width="5" height="7" patternUnits="userSpaceOnUse" patternTransform="rotate(-18)"><path d="M0 1H5" stroke="#fff" stroke-width="1" opacity=".3"/><path d="M0 3H5" stroke="#000" stroke-width=".6" opacity=".2"/></pattern>
- </defs><rect width="1000" height="1000" fill="${p.bg}"/><g stroke-linecap="round" stroke-linejoin="round">`;
- s+=`<rect x="25" y="25" width="950" height="950" rx="10" fill="none" stroke="${p.bg}" stroke-width="36"/>`;
- if(stitched)s+=`<rect x="25" y="25" width="950" height="950" rx="10" fill="none" stroke="${p.accent}" stroke-opacity=".4" stroke-width="28" stroke-dasharray="1.7 4.3"/>`;
- s+=`<rect x="47" y="47" width="906" height="906" rx="3" fill="none" stroke="${p.ink}" stroke-width="7"/><rect x="62" y="62" width="876" height="876" fill="none" stroke="${p.accent}" stroke-width="2"/>`;
- s+=label($("top").value.toUpperCase(),135,p)+label($("bottom").value.toUpperCase(),919,p);
- s+=path("M112 177H888M112 855H888","none",p.accent,2);
- s+=star(500,220,23)+star(126,483,16)+star(874,483,16)+star(261,458,10)+star(760,688,14)+star(245,730,10);
- [[300,227,3],[693,223,3],[226,348,3],[785,356,2],[308,484,2],[730,492,3],[270,665,2],[765,589,2],[355,754,2],[647,736,3],[679,303,2],[344,289,2]].forEach(([x,y,r])=>s+=circle(x,y,r,p.ink));
- // The gold orbit passes behind the main symbols.
- s+=`<ellipse cx="500" cy="548" rx="322" ry="57" transform="rotate(-16 500 548)" fill="none" stroke="${gold}" stroke-width="5"/>`;
- s+=circle(793,465,9,p.ink,gold,2);
- const orbit={...p,accent:p.accent};
- [[-78,-3],[38,117],[173,249]].forEach(([a,b])=>s+=arc(500,490+state.lift,304*state.spread,255,a+state.phase,b+state.phase,orbit,w+2,false));
- // Two complementary pieces share a single joint, with no gap or doubled seam.
- const pr=1.37*state.spread,py=589+state.lift;
- s+=`<g transform="translate(500 ${py}) scale(${pr})">`;
- s+=path("M-95-64H0V-22C40-42 40 42 0 22V64H-95Z",p.accent,"none",0);
- s+=path("M0-64H95V64H0V22C40 42 40-42 0-22Z",p.ink,"none",0);
- if(stitched)s+=`<path d="M-95-64H95V64H-95Z" fill="url(#patch-finish-satin)"/>`;
- s+=path("M-95-64H95V64H-95Z","none",p.bg,2)+"</g>";
- // A ringed planet becomes the iris of the observation symbol.
- const size=Number($("scale").value)/100*state.symbolScale;
- s+=`<g transform="translate(500 ${345+state.lift}) scale(${size})">`;
- s+=path("M-147 0Q0-137 147 0Q0 137-147 0Z",p.ink,"none",0);
- if(stitched)s+=path("M-147 0Q0-137 147 0Q0 137-147 0Z","url(#patch-finish-satin)","none",0);
- s+=circle(0,0,52,p.bg)+circle(0,0,33,p.accent);
- s+=path("M-25-16Q0-24 26-10M-30 0Q0-9 31 6M-22 17Q0 9 22 22","none",p.bg,2,'opacity=".35"');
- s+=`<ellipse cx="0" cy="3" rx="55" ry="12" transform="rotate(-25)" fill="none" stroke="${gold}" stroke-width="5"/>`;
- s+=circle(-10,-16,6,p.ink)+"</g>";
- // The Earth horizon stays inside the square's protected lower artwork band.
- s+=`<g clip-path="url(#patch-finish-earth)"><rect x="150" y="700" width="700" height="149" fill="${p.accent}"/>`;
- s+=path("M163 816L226 786 270 792 298 776 337 784 345 801 385 809 371 825 399 849H150Z",p.bg,"none",0);
- s+=path("M416 753L454 757 477 775 463 791 490 808 480 849H441L427 825 440 801 410 784Z",p.bg,"none",0);
- s+=path("M548 761L602 757 650 778 694 775 749 803 720 823 677 816 656 839 624 823 598 831 579 807 546 802 533 784Z",p.bg,"none",0);
- s+=path("M753 838L785 820 826 836 846 849H763Z",p.bg,"none",0)+"</g>";
- s+=path("M155 825Q500 666 845 825","none",gold,5)+path("M170 831Q500 680 830 831","none",p.ink,2);
- s+=star(500,745,13);
- s+="</g>";
- return finishArtwork(s);
-}
-function loadSpacePreset(){
- Object.entries({...defaults,top:"BARUCH COLLEGE",bottom:"ISS SPRING 2027",palette:"space",texture:"embroidered",style:"minimal",layout:"assembly",discovery:"eye",support:"none"}).forEach(([id,value])=>$(id).value=value);
- state={...original(),preset:"space-discovery",language:"minimal",layout:"assembly",support:"none"};edition=0;render();
- $("status").textContent="Square Space Discovery patch ready. Edit the labels or colors, choose Flat or Embroidered, then download the matching PNG or SVG.";
-}
 function compose(){
- if(state.preset==="space-discovery")return composeSpacePatch();
  const p=palettes[$("palette").value],mode=state.language,w=Math.max(Number($("weight").value),mode==="minimal"?10:0),g=geometryFor();
  const [mx,my,mr]=g.main;
  used=[state.main,"puzzle","cycle"];if(state.support!=="none")used.push(state.support);
@@ -274,17 +202,17 @@ function compose(){
   }else{s+=glyph(state.support,x,y,r,p,w,0);}
  }
  s+=glyph(state.main,mx,my,mr,p,w,0);
- return finishArtwork(s+"</g>");
+ return s+"</g>";
 }
 function render(){
- artCache=compose();$("patch").innerHTML=artCache.replaceAll("patch-finish-","preview-finish-");$("mini").innerHTML=artCache.replaceAll("patch-finish-","mini-finish-");
+ artCache=compose();$("patch").innerHTML=artCache;$("mini").innerHTML=artCache;
  ["scale","road"].forEach(id=>$(id+"Value").textContent=$(id).value+"%");
  $("road").disabled=state.support!=="road";
  $("weightValue").textContent=$("weight").value;$("smallValue").textContent=$("smallSize").value+" px";$("mini").style.width=$("smallSize").value+"px";
- $("edition").textContent=edition?"Variation "+String(edition).padStart(2,"0"):state.preset==="space-discovery"?"Space Discovery · square":"Original sketch";
- $("designName").textContent=state.preset==="space-discovery"?"Space Discovery · Square mission patch":languages[state.language]+" · "+layouts[state.layout];
+ $("edition").textContent=edition?"Variation "+String(edition).padStart(2,"0"):"Original sketch";
+ $("designName").textContent=languages[state.language]+" · "+layouts[state.layout];
  $("usedSymbols").textContent="Elements: "+used.map(k=>names[k]).join(" · ");
- $("designMeaning").textContent=state.preset==="space-discovery"?"Curiosity guides collaboration through a cycle of experimentation toward new discoveries beyond Earth.":meanings[state.layout];
+ $("designMeaning").textContent=meanings[state.layout];
  const desc="Mission patch: collaboration through puzzle pieces, experimentation through cycle arrows, and discovery through "+names[state.main]+(state.support!=="none"?", with "+names[state.support]:"");
  $("patch").setAttribute("aria-label",desc);$("mini").setAttribute("aria-label","Small preview. "+desc);
 }
@@ -315,7 +243,7 @@ function normalizeSnapshot(item){
  const finite=(v,a,b,f)=>Number.isFinite(Number(v))?clamp(Number(v),a,b):f;
  const safeState={language:st.language,layout:st.layout,main:st.main,support:st.support,spread:finite(st.spread,.96,1.03,1),lift:finite(st.lift,-8,8,0),phase:finite(st.phase,-4,4,0),bend:finite(st.bend,-14,14,0),symbolScale:finite(st.symbolScale,.95,1.03,1),turns:Array.from({length:3},(_,i)=>finite(st.turns?.[i],-30,30,0))};
  const valid=(v,a,f)=>a.includes(v)?v:f;
- const safeParams={style:valid(pa.style,["auto",...Object.keys(languages)],"auto"),layout:valid(pa.layout,["auto",...Object.keys(layouts)],"auto"),discovery:valid(pa.discovery,["auto","eye","magnifier"],"auto"),support:valid(pa.support,["auto","none","road","bubble","flag","geometry"],"auto"),top:String(pa.top??"").slice(0,18),bottom:String(pa.bottom??"").slice(0,22),palette:valid(pa.palette,Object.keys(palettes),"forest"),texture:valid(pa.texture,["flat","embroidered"],"flat"),scale:String(finite(pa.scale,80,115,100)),road:String(finite(pa.road,75,120,100)),weight:String(finite(pa.weight,6,14,8)),smallSize:String(finite(pa.smallSize,80,180,120))};
+ const safeParams={style:valid(pa.style,["auto",...Object.keys(languages)],"auto"),layout:valid(pa.layout,["auto",...Object.keys(layouts)],"auto"),discovery:valid(pa.discovery,["auto","eye","magnifier"],"auto"),support:valid(pa.support,["auto","none","road","bubble","flag","geometry"],"auto"),top:String(pa.top??"").slice(0,18),bottom:String(pa.bottom??"").slice(0,22),palette:valid(pa.palette,Object.keys(palettes),"forest"),scale:String(finite(pa.scale,80,115,100)),road:String(finite(pa.road,75,120,100)),weight:String(finite(pa.weight,6,14,8)),smallSize:String(finite(pa.smallSize,80,180,120))};
  return {id:typeof item.id==="string"?item.id.slice(0,80):"saved-"+Math.random().toString(36).slice(2),edition:Math.floor(finite(item.edition,0,999999,0)),state:safeState,params:safeParams};
 }
 let saved=[];
@@ -353,7 +281,7 @@ function saveVersion(){
 }
 function svgSource(pixels){return `<svg xmlns="http://www.w3.org/2000/svg" width="${pixels?'1050':'3.5in'}" height="${pixels?'1050':'3.5in'}" viewBox="0 0 1000 1000"><title>${esc($("patch").getAttribute("aria-label"))}</title>${artCache}</svg>`;}
 function save(blob,name){const url=URL.createObjectURL(blob),a=document.createElement("a");a.href=url;a.download=name;document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),30000);}
-const filename=ext=>`mission-patch-${state.preset==="space-discovery"?"space-discovery-square":state.language+"-"+state.layout}-${String(edition).padStart(2,"0")}.${ext}`;
+const filename=ext=>`mission-patch-${state.language}-${state.layout}-${String(edition).padStart(2,"0")}.${ext}`;
 function png300dpi(bytes){
  function crc32(data){let crc=0xffffffff;for(const b of data){crc^=b;for(let j=0;j<8;j++)crc=(crc>>>1)^((crc&1)?0xedb88320:0);}return(crc^0xffffffff)>>>0;}
  const chunk=new Uint8Array(21),dv=new DataView(chunk.buffer);dv.setUint32(0,9);chunk.set([112,72,89,115],4);dv.setUint32(8,11811);dv.setUint32(12,11811);chunk[16]=1;dv.setUint32(17,crc32(chunk.subarray(4,17)));
@@ -365,8 +293,7 @@ async function downloadPNG(){
  try{url=URL.createObjectURL(new Blob([source],{type:"image/svg+xml;charset=utf-8"}));const img=new Image();await new Promise((resolve,reject)=>{img.onload=resolve;img.onerror=()=>reject(new Error("Could not render the patch"));img.src=url;});const canvas=document.createElement("canvas");canvas.width=canvas.height=1050;const ctx=canvas.getContext("2d");if(!ctx)throw new Error("Canvas export unavailable");ctx.drawImage(img,0,0);const raw=await new Promise((resolve,reject)=>canvas.toBlob(b=>b?resolve(b):reject(new Error("PNG export failed")),"image/png"));save(png300dpi(new Uint8Array(await raw.arrayBuffer())),name);$("status").textContent="PNG download started · 1050 × 1050 pixels · 300 dpi.";}catch(error){$("status").textContent=error.message+". Try Download SVG.";}finally{if(url)URL.revokeObjectURL(url);button.disabled=false;}
 }
 Object.keys(defaults).forEach(id=>$(id).addEventListener("input",()=>{if(["style","layout","discovery","support"].includes(id)){generate();}else{render();}}));
-$("spacePreset").addEventListener("click",loadSpacePreset);
-$("generate").addEventListener("click",generate);$("remix").addEventListener("click",remix);$("saveVersion").addEventListener("click",saveVersion);$("reset").addEventListener("click",reset);$("png").addEventListener("click",downloadPNG);$("svg").addEventListener("click",()=>{save(new Blob([svgSource(false)],{type:"image/svg+xml;charset=utf-8"}),filename("svg"));$("status").textContent="SVG download started.";});loadSpacePreset();drawGallery();
+$("generate").addEventListener("click",generate);$("remix").addEventListener("click",remix);$("saveVersion").addEventListener("click",saveVersion);$("reset").addEventListener("click",reset);$("png").addEventListener("click",downloadPNG);$("svg").addEventListener("click",()=>{save(new Blob([svgSource(false)],{type:"image/svg+xml;charset=utf-8"}),filename("svg"));$("status").textContent="SVG download started.";});render();drawGallery();
 })();
 </script>
 </body>
