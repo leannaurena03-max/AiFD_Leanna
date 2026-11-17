@@ -3,297 +3,448 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="color-scheme" content="dark">
 <title>Mission Patch Generator — Leanna Urena</title>
 <style>
-:root{--paper:#121614;--panel:#1a201c;--field:#151a17;--ink:#f3f2eb;--green:#93cfa6;--muted:#aab7ac;--line:#364239}
-*{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font:400 15px/1.5 Arial,Helvetica,sans-serif}
-button,input,select{font:inherit;border-radius:0}button,a,input,select{touch-action:manipulation}:focus-visible{outline:2px solid var(--green);outline-offset:4px}
-a{color:inherit;text-underline-offset:5px}.wrap{max-width:1400px;margin:auto;padding:32px}h1,h2,h3{font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;font-weight:700;line-height:1.25}h1{font-size:24px;margin:0 0 12px}h2{font-size:18px;margin:0 0 20px}h3{font-size:14px;margin:0 0 10px}
-.site-top{display:flex;justify-content:space-between;align-items:center;gap:20px;padding:0 0 26px;border-bottom:1px solid var(--green)}.site-top a{font-size:14px}.site-top span{font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;text-align:right}
-.project-header{padding:46px 0 28px}.green-bar{width:64px;height:8px;margin-bottom:28px;background:var(--green)}.kicker{margin:0 0 9px;color:var(--green);font-size:11px;letter-spacing:.13em;text-transform:uppercase}.project-header .kicker{margin:0 0 18px;color:var(--ink);font-size:12px;font-weight:700;letter-spacing:.14em}.project-header p:last-child{max-width:650px;color:var(--muted);margin:0}
-main{display:grid;grid-template-columns:260px minmax(0,1fr);gap:36px;padding:32px 0;align-items:start}aside,.stage{min-width:0}.field{display:grid;gap:7px;margin-bottom:19px}label,legend{font-size:12px;font-weight:700}input[type=text],select{width:100%;min-height:44px;padding:10px 11px;background:var(--field);color:var(--ink);border:1px solid var(--line)}input[type=range]{width:100%;margin:6px 0;accent-color:var(--green)}.range-label{display:flex;align-items:baseline;justify-content:space-between;gap:12px}output{color:var(--muted);font-size:12px}.help{color:var(--muted);font-size:12px;margin:0}
-button{min-height:45px;padding:11px 15px;background:transparent;color:var(--ink);border:1px solid var(--line);font-size:13px;font-weight:700;cursor:pointer}button:hover{border-color:var(--green)}button:active{transform:translateY(1px)}button:disabled{opacity:.55;cursor:wait}.primary{background:var(--green);color:#122318;border-color:var(--green)}.primary:hover{background:#ade0bc}.actions{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:24px 0 12px}.actions #generate,.actions #reset{grid-column:1/-1}
-fieldset{border:0;padding:0;margin:0 0 22px}legend{padding:0;margin-bottom:10px}.symbol-list{display:grid;grid-template-columns:1fr 1fr;gap:5px 10px}.symbol-list label{display:flex;align-items:center;gap:7px;min-height:36px;font-weight:400}.symbol-list input{accent-color:var(--green);width:16px;height:16px;margin:0}.symbol-help{margin-top:10px}
-.preview-grid{display:grid;grid-template-columns:minmax(0,1fr) 218px;gap:18px;align-items:start}.preview{padding:22px;background:#0b0f0d;border:1px solid var(--line)}#patch{display:block;width:100%;height:auto;aspect-ratio:1}.small-window{background:var(--panel);border:1px solid var(--line);padding:16px}.small-window .kicker{font-size:10px;letter-spacing:.08em;margin-bottom:7px}.small-stage{min-height:202px;display:grid;place-items:center;background:#0b0f0d;margin:16px -8px;padding:8px}#mini{display:block;width:120px;max-width:100%;height:auto;aspect-ratio:1}.small-window label,.small-window output,.small-window .help{font-size:11px}.check-note{border-top:1px solid var(--line);padding-top:12px;margin-top:14px}
-.meta{display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px 18px;margin:13px 0 16px;color:var(--muted);font-size:11px}.exports{display:grid;grid-template-columns:1fr 1fr;gap:10px}#status{min-height:20px;margin:12px 0 0;color:var(--muted);font-size:12px}.design-note{border-top:1px solid var(--line);margin-top:22px;padding-top:17px}.design-note p{margin:5px 0;color:var(--muted);font-size:12px}.design-note strong{color:var(--ink)}details{border-top:1px solid var(--line);margin-top:25px;padding-top:18px}summary{cursor:pointer;font-size:12px;font-weight:700}details p{font-size:12px;color:var(--muted)}footer{border-top:1px solid var(--line);padding:21px 0;color:var(--muted);font-size:11px}
-@media(min-width:1101px){.stage{position:sticky;top:24px}}
-@media(max-width:1100px){.preview-grid{grid-template-columns:1fr}.small-window{display:grid;grid-template-columns:minmax(0,1fr) 202px;gap:0 22px}.small-stage{grid-column:2;grid-row:1 / span 6;margin:0}}
-@media(max-width:740px){.wrap{padding:22px 16px}main{grid-template-columns:1fr;gap:28px}.preview{padding:12px}h1{font-size:22px}}
-@media(max-width:600px){.site-top{align-items:flex-start;gap:16px}.site-top span{max-width:180px;font-size:10px}.project-header{padding-top:34px}}
-@media(max-width:420px){.small-window{display:block}.small-stage{margin:14px 0}.exports{grid-template-columns:1fr}}
-@media print{body{background:white}.site-top,.project-header,aside,.small-window,.meta,.exports,#status,.design-note,footer{display:none}.wrap,main,.stage,.preview-grid,.preview{display:block;position:static;padding:0;margin:0;border:0;background:white}#patch{width:3.5in;height:3.5in}}
-.core-note{border-left:3px solid var(--green);padding:3px 0 3px 12px;margin:0 0 22px}.core-note p:last-child{font-size:12px;color:var(--muted);margin:0}.core-note .kicker{font-size:10px;margin-bottom:6px}
-.saved-section{border-top:1px solid var(--line);padding:25px 0 30px}.saved-heading{display:flex;align-items:baseline;justify-content:space-between;gap:16px}.saved-heading h2{margin-bottom:10px}.saved-heading span{color:var(--muted);font-size:12px}.saved-gallery{display:grid;grid-template-columns:repeat(auto-fill,minmax(165px,1fr));gap:16px;margin-top:18px}.saved-card{border:1px solid var(--line);padding:10px;min-width:0;background:var(--panel)}.saved-open{display:block;width:100%;padding:0;border:0;text-align:left;min-height:0;font-weight:400}.saved-open img{display:block;width:100%;height:auto;aspect-ratio:1;margin-bottom:10px}.saved-open strong,.saved-open span{display:block}.saved-open strong{font-size:12px}.saved-open span{font-size:11px;color:var(--muted);margin-top:4px}.saved-remove{width:100%;min-height:36px;font-size:11px;margin-top:10px;padding:7px 10px}#savedEmpty{margin-top:16px}input:disabled{opacity:.4}
-@media print{.saved-section{display:none}}
+:root{--background:#fff;--text:#111;--accent:#2e9b4f;--line:#deded8}
+*{box-sizing:border-box}
+body{margin:0;background:var(--background);color:var(--text);
+  font:16px/1.5 Arial,Helvetica,sans-serif}
+button,input,select{font:inherit}
+button,input,select{border-radius:0}
+button,a,input,select{touch-action:manipulation}
+:focus-visible{outline:2px solid #111;outline-offset:4px}
+.wrap{max-width:1200px;margin:auto;padding:32px}
+a{color:inherit;text-underline-offset:4px}
+header{padding:24px 0 28px;border-bottom:1px solid var(--line)}
+.kicker{font-size:11px;letter-spacing:.14em;text-transform:uppercase;
+  color:#515851;margin:0 0 8px}
+h1,h2{font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;
+  font-weight:700;line-height:1.25}
+h1{font-size:24px;margin:0 0 10px}
+h2{font-size:18px;margin:0 0 18px}
+header p:last-child{max-width:650px;margin:0;color:#515851}
+main{display:grid;grid-template-columns:300px minmax(0,1fr);gap:40px;
+  padding:32px 0}
+aside{min-width:0}
+.field{display:grid;gap:7px;margin-bottom:19px}
+label{font-size:13px;font-weight:bold}
+input[type=text],select{width:100%;padding:10px;border:1px solid #aaa;
+  background:#fff;color:#111;min-height:44px}
+input[type=range]{width:100%;accent-color:var(--accent)}
+.range-label{display:flex;justify-content:space-between;gap:12px}
+output{font-weight:normal}
+button{padding:12px 16px;border:1px solid #111;background:#fff;
+  color:#111;cursor:pointer;font-weight:bold;min-height:46px}
+button:hover{text-decoration:underline;text-underline-offset:4px}
+.primary{background:var(--accent);border-color:var(--accent)}
+.actions{display:grid;gap:10px;margin-top:24px}
+.stage{min-width:0}
+.preview{background:#eeeee8;padding:24px;display:grid;place-items:center}
+canvas{display:block;width:100%;max-width:610px;height:auto;
+  aspect-ratio:1;background:#fff;box-shadow:0 8px 24px #00000015}
+.meta{display:flex;justify-content:space-between;gap:16px;
+  font-size:12px;color:#515851;margin:12px 0 20px;flex-wrap:wrap}
+.download{width:100%}
+.note{font-size:12px;color:#515851}
+details{border-top:1px solid var(--line);padding-top:18px;margin-top:24px}
+summary{cursor:pointer;font-size:13px;font-weight:bold}
+details p{font-size:13px;color:#515851}
+footer{border-top:1px solid var(--line);padding:22px 0;
+  font-size:12px;color:#515851}
+#status{min-height:20px}
+@media(max-width:760px){
+ .wrap{padding:20px 16px}
+ main{grid-template-columns:1fr;gap:28px}
+ .preview{padding:14px}
+ h1{font-size:22px}
+}
+@media print{
+ header,aside,footer,.meta,.download,.note{display:none}
+ .wrap,main,.preview{padding:0;margin:0;background:white;display:block}
+ canvas{width:3.5in;height:3.5in;box-shadow:none}
+}
 </style>
 </head>
 <body>
 <div class="wrap">
-<nav class="site-top" aria-label="Portfolio navigation"><a href="index.html">← Back to work</a><span>Leanna Urena / A.I. for Designers</span></nav>
-<header class="project-header"><div class="green-bar" aria-hidden="true"></div><p class="kicker">Session 2 · Mission Patch Generator</p><h1>Mission Patch Generator</h1><p>Through collaboration and trial and error, curiosity becomes a path to discovery.</p></header>
+<a href="index.html">← Back to Work</a>
+<header>
+<p class="kicker">SSEP Mission Patch · Session 2</p>
+<h1>Mission Patch Generator</h1>
+<p>Collaboration and repeated experimentation lead to discovery
+along the road of curiosity.</p>
+</header>
+
 <main>
 <aside aria-label="Patch controls">
 <h2>Build your patch</h2>
-<div class="field"><label for="style">Design language</label><select id="style"><option value="auto">Explore all approaches</option><option value="literal">Literal · original sketch</option><option value="geometric">Geometric · shapes and connections</option><option value="narrative">Narrative · a journey to discovery</option><option value="symbolic">Symbolic · bold, simplified icons</option><option value="abstract">Abstract · fragments and angles</option><option value="minimal">Minimal · fewer, stronger forms</option><option value="unexpected">Unexpected · symbols within symbols</option></select></div>
-<div class="field"><label for="layout">Composition</label><select id="layout"><option value="auto">Explore different compositions</option><option value="orbit">Collaboration cycle</option><option value="journey">Journey to discovery</option><option value="constellation">Floating constellation</option><option value="assembly">Ideas coming together</option><option value="flagship">Shared discovery</option><option value="portal">A new perspective</option></select></div>
-<div class="core-note"><p class="kicker">One shared message</p><p>Puzzle pieces for collaboration. Cycle arrows for experimentation. An eye or magnifier for discovery.</p></div>
-<div class="field"><label for="discovery">Discovery symbol</label><select id="discovery"><option value="auto">Explore eye and magnifier</option><option value="eye">Eye · curiosity and observation</option><option value="magnifier">Magnifier · discovery</option></select></div>
-<div class="field"><label for="support">Supporting element</label><select id="support"><option value="auto">Explore my sketch elements</option><option value="none">Core symbols only</option><option value="road">Road · the journey forward</option><option value="bubble">Bubbles · weightlessness</option><option value="flag">Flag · a new discovery</option><option value="geometry">Geometric forms · connected ideas</option></select><p class="help">Each patch uses one supporting idea alongside the three core symbols.</p></div>
-<div class="field"><label for="top">Top label</label><input id="top" type="text" maxlength="18" value="BARUCH"></div>
-<div class="field"><label for="bottom">Bottom label</label><input id="bottom" type="text" maxlength="22" value="SSEP"></div>
-<div class="field"><label for="palette">Patch colors</label><select id="palette"><option value="forest">Forest · green / cream / mint</option><option value="space">Space · navy / cream / sea glass</option><option value="earth">Earth · green / cream / gold</option><option value="mono">Monochrome · charcoal / cream</option></select></div>
-<div class="field"><div class="range-label"><label for="scale">Discovery symbol size</label><output id="scaleValue" for="scale">100%</output></div><input id="scale" type="range" min="80" max="115" value="100"></div>
-<div class="field"><div class="range-label"><label for="road">Road width (when used)</label><output id="roadValue" for="road">100%</output></div><input id="road" type="range" min="75" max="120" value="100"></div>
-<div class="field"><div class="range-label"><label for="weight">Line weight</label><output id="weightValue" for="weight">8</output></div><input id="weight" type="range" min="6" max="14" value="8"></div>
-<div class="actions"><button class="primary" id="generate" type="button">Generate new patch ↗</button><button id="remix" type="button">Remix this patch</button><button id="saveVersion" type="button">Save version</button><button id="reset" type="button">Reset to original sketch</button></div><p class="help">Generate explores a new arrangement. Remix refines this one.</p>
-<details><summary>Concept &amp; symbols</summary><p>Through collaboration and trial and error, curiosity becomes a path to discovery. The puzzle pieces represent people bringing their ideas together, while the cycle reflects the process of testing, learning, and trying again. Together, these symbols show how shared effort and a willingness to experiment can turn questions into new possibilities.</p><p>The eye and magnifying glass suggest observation and discovery. The road represents curiosity and the journey forward. Bubbles suggest weightlessness, while the flag marks a new discovery. Geometric forms translate these ideas into simpler visual relationships.</p></details>
-<details><summary>How variations work</summary><p>Every patch keeps collaboration, experimentation, and discovery together. One eye or magnifier leads the design; puzzle pieces and cycle arrows support it. A road, bubbles, flag, or geometric forms can add one supporting idea.</p><p>Generate changes the visual language, arrangement, and discovery symbol within your choices. Remix keeps those decisions and adjusts spacing, proportions, and puzzle rotations.</p><p>Your labels, palette, typography, and borders stay consistent. The small preview mirrors the exported artwork. PNG exports are 1050 × 1050 pixels at 300 dpi; SVG exports are 3.5 × 3.5 inches.</p></details>
+
+<div class="field">
+<label for="top">Top label</label>
+<input id="top" type="text" maxlength="18" value="BARUCH">
+</div>
+
+<div class="field">
+<label for="bottom">Bottom label</label>
+<input id="bottom" type="text" maxlength="22" value="SSEP">
+</div>
+
+<div class="field">
+<label for="palette">Color palette</label>
+<select id="palette">
+<option value="space">Space · navy / cream / green</option>
+<option value="earth">Earth · green / cream / gold</option>
+<option value="mono">Monochrome · cream / black</option>
+</select>
+</div>
+
+<div class="field">
+<label for="layout">Composition</label>
+<select id="layout">
+<option value="balanced">Balanced orbit</option>
+<option value="wide">Wide orbit</option>
+<option value="compact">Compact orbit</option>
+</select>
+</div>
+
+<div class="field">
+<div class="range-label">
+<label for="road">Road width</label>
+<output id="road-value" for="road">100%</output>
+</div>
+<input id="road" type="range" min="75" max="120" value="100">
+</div>
+
+<div class="field">
+<div class="range-label">
+<label for="eye">Eye size</label>
+<output id="eye-value" for="eye">100%</output>
+</div>
+<input id="eye" type="range" min="80" max="120" value="100">
+</div>
+
+<div class="field">
+<div class="range-label">
+<label for="weight">Line weight</label>
+<output id="weight-value" for="weight">8</output>
+</div>
+<input id="weight" type="range" min="6" max="12" value="8">
+</div>
+
+<div class="actions">
+<button class="primary" id="generate" type="button">
+Generate variation ↗
+</button>
+<button id="reset" type="button">Reset to starting design</button>
+</div>
+
+<details>
+<summary>About the symbols</summary>
+<p>The puzzle pieces represent individual contributions to a shared
+effort. The arrows show the cycle of testing, learning, and trying
+again. The road leads toward the eye, connecting curiosity with
+observation and discovery.</p>
+<p>Each variation keeps these symbols together while changing their
+spacing, proportions, and rotation.</p>
+</details>
 </aside>
-<section class="stage" aria-label="Patch preview and export">
-<div class="preview-grid"><div class="preview"><svg id="patch" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000" role="img" aria-label="Current mission patch"></svg></div>
-<section class="small-window" aria-labelledby="small-title"><p class="kicker">Readability check</p><h3 id="small-title">Small preview</h3><p class="help">Can you still recognize the main idea?</p><div class="small-stage"><svg id="mini" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000" role="img" aria-label="Small version of the current mission patch"></svg></div><div class="field"><div class="range-label"><label for="smallSize">Preview size</label><output id="smallValue" for="smallSize">120 px</output></div><input id="smallSize" type="range" min="80" max="180" step="10" value="120"></div><p class="help check-note">If details disappear, try Minimal, Symbolic, or a heavier line.</p><p class="help">Print at 3.5 inches for a physical-size proof.</p></section></div>
-<div class="meta"><span>3.5 × 3.5 inches · 1050 × 1050 px · 300 dpi</span><span id="edition">Original sketch</span></div>
-<div class="exports"><button class="primary" id="png" type="button">Download PNG</button><button id="svg" type="button">Download SVG</button></div><p id="status" role="status" aria-live="polite">Start with your original concept, then generate a new combination.</p>
-<div class="design-note"><p><strong id="designName">Literal · Collaboration cycle</strong></p><p id="usedSymbols"></p><p id="designMeaning"></p></div>
+
+<section class="stage" aria-label="Patch preview and download">
+<div class="preview">
+<canvas id="patch" width="1050" height="1050"
+ role="img" aria-label="Mission patch with an eye, a road,
+ three puzzle-piece circles, and clockwise arrows">
+Your browser needs canvas support to display this patch.
+</canvas>
+</div>
+<div class="meta">
+<span>3.5 × 3.5 inches · 1050 × 1050 px · 300 dpi</span>
+<span id="edition">Starting design</span>
+</div>
+<button class="primary download" id="download" type="button">
+Download PNG
+</button>
+<p class="note" id="status" role="status" aria-live="polite">
+Save the variations you want to keep.
+</p>
 </section>
 </main>
-<section class="saved-section" aria-labelledby="saved-title"><div class="saved-heading"><h2 id="saved-title">Saved versions</h2><span id="savedCount" aria-live="polite">0 / 16</span></div><p class="help">Reopen a version to refine or download it. Versions are saved in this browser; download copies to keep with your project.</p><div id="savedGallery" class="saved-gallery"></div><p id="savedEmpty" class="help">Save the patches you want to keep here.</p></section>
-<footer>Leanna Urena · A.I. for Designers · SSEP Mission Patch</footer></div>
+
+<footer>Leanna Urena · A.I. for Designers · SSEP Mission Patch</footer>
+</div>
+
 <script>
 "use strict";
 (() => {
-const $ = id => document.getElementById(id);
-const names={eye:"eye",magnifier:"magnifying glass",puzzle:"puzzle pieces",bubble:"bubbles",cycle:"cycle arrows",road:"road",flag:"flag",geometry:"geometric forms"};
-const languages={literal:"Literal",geometric:"Geometric",narrative:"Narrative",symbolic:"Symbolic",abstract:"Abstract",minimal:"Minimal",unexpected:"Unexpected"};
-const layouts={orbit:"Collaboration cycle",journey:"Journey to discovery",constellation:"Floating constellation",assembly:"Ideas coming together",flagship:"Shared discovery",portal:"A new perspective"};
-const meanings={orbit:"Shared ideas move through a cycle of testing, learning, and trying again.",journey:"Curiosity creates a path toward observation and discovery.",constellation:"Different ideas float independently while forming a connected whole.",assembly:"Individual contributions come together to create new possibilities.",flagship:"A shared effort marks a new discovery.",portal:"A familiar symbol becomes a window into another idea."};
-const palettes={forest:{bg:"#172820",ink:"#f3f2eb",accent:"#93cfa6"},space:{bg:"#14283e",ink:"#f3f2eb",accent:"#a2d5d0"},earth:{bg:"#28342a",ink:"#f3f2eb",accent:"#d8bd79"},mono:{bg:"#161918",ink:"#f3f2eb",accent:"#f3f2eb"}};
-const defaults={style:"auto",layout:"auto",discovery:"auto",support:"auto",top:"BARUCH",bottom:"SSEP",palette:"forest",scale:"100",road:"100",weight:"8",smallSize:"120"};
-const rand=(a,b)=>a+Math.random()*(b-a),pick=a=>a[Math.floor(Math.random()*a.length)],n=x=>Number(x.toFixed(2));
-const shuffle=a=>{a=[...a];for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;};
-const esc=s=>String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&apos;"}[c]));
+  const $ = id => document.getElementById(id);
+  const canvas = $("patch");
+  const ctx = canvas.getContext("2d");
+  const palettes = {
+    space: {bg:"#142c40",ink:"#f3f2eb",accent:"#8bc9a0"},
+    earth: {bg:"#204b3b",ink:"#f3f2eb",accent:"#d8bd79"},
+    mono:  {bg:"#f3f2eb",ink:"#242925",accent:"#242925"}
+  };
 
-let edition=0,serial=0,artCache="",used=[],storageAvailable=true;
-const STORE="leanna-mission-patch-versions-v3";
-const clamp=(v,a,b)=>Math.min(b,Math.max(a,v));
-const original=()=>({language:"literal",layout:"orbit",main:"eye",support:"road",turns:[0,20,-20],spread:1,lift:0,phase:0,bend:0,symbolScale:1});
-let state=original();
-const path=(d,fill,stroke,w,extra="")=>`<path d="${d}" fill="${fill}" stroke="${stroke}" stroke-width="${w}" ${extra}/>`;
-const circle=(x,y,r,fill,stroke="none",w=0)=>`<circle cx="${n(x)}" cy="${n(y)}" r="${n(r)}" fill="${fill}" stroke="${stroke}" stroke-width="${w}"/>`;
-const puzzle="M-36-34H-12C-25-62 25-62 12-34H36V-11C64-24 64 24 36 11V36H12C25 9-25 9-12 36H-36Z";
-function bubble(x,y,r,p,w,simple=false){
- const point=(a,b)=>`${n(x+a*r)} ${n(y+b*r)}`;
- // An open center and asymmetric reflections keep this a soap bubble
- // even when the rest of the composition uses solid symbolic shapes.
- let s=circle(x,y,r,"none",p.accent,Math.max(3,w*.55));
- s+=path(`M${point(-.72,-.28)}Q${point(-.62,-.73)} ${point(-.2,-.78)}`,"none",p.ink,Math.max(4,w*.8));
- s+=path(`M${point(.48,.63)}Q${point(.7,.53)} ${point(.77,.24)}`,"none",p.ink,Math.max(2.5,w*.45),'opacity=".65"');
- if(!simple)s+=circle(x+.02*r,y-.8*r,Math.max(2,w*.32),p.ink);
- return s;
-}
-function glyph(kind,x,y,r,p,w,angle=0){
- const mode=state.language,angular=mode==="geometric"||mode==="abstract",bold=mode==="symbolic"||mode==="minimal",simple=mode==="minimal";
- let s="";
- if(kind==="eye"){
-  s+=path(angular?"M-85 0L0-44 85 0 0 44Z":"M-85 0Q0-75 85 0Q0 75-85 0Z",bold?p.ink:p.bg,p.ink,w);
-  s+=circle(0,0,27,bold?p.bg:p.accent);s+=circle(0,0,11,bold?p.ink:p.bg);
-  if(mode==="abstract")s+=path("M-90-43L-60-43M60 43H90","none",p.accent,w);
- }else if(kind==="magnifier"){
-  s+=path("M-22 31L-64 80","none",p.ink,w*1.8);
-  s+=angular?path("M-51-61H53V43H-51Z",p.bg,p.ink,w):circle(2,-9,56,p.bg,p.ink,w);
-  s+=path("M2-34V16M-23-9H27","none",p.accent,w*.8);
-  if(!simple)s+=path("M-27-35Q-36-25-36-13","none",p.ink,w*.65);
- }else if(kind==="puzzle"){
-  const shape=mode==="abstract"?"M-36-34H-12V-49H12V-34H36V-12H51V12H36V36H12V20H-12V36H-36Z":puzzle;
-  s+=`<g transform="scale(1.45)">${path(shape,bold?p.accent:p.bg,p.accent,w/1.45)}</g>`;
- }else if(kind==="bubble"){
-  s+=bubble(0,0,65,p,w,simple);
- }else if(kind==="flag"){
-  s+=path("M-58 82V-78M-79 82H-26","none",p.ink,w);
-  s+=path("M-58-72Q-18-91 13-72T75-72V18Q43 37 13 18T-58 18Z",bold?p.accent:p.bg,p.ink,w);
-  s+=circle(9,-29,20,"none",bold?p.bg:p.accent,w*.7);
-  s+=path("M-4-13L-18 3","none",bold?p.bg:p.accent,w);
- }else if(kind==="geometry"){
-  s+=path("M-72 35L-32-55 9 35Z",bold?p.accent:p.bg,p.accent,w);
-  s+=path("M-10-13H61V63H-10Z",p.bg,p.ink,w);
-  s+=circle(36,-34,39,p.bg,p.accent,w);
- }else if(kind==="cycle"){
-  [[-75,20],[45,140],[165,260]].forEach(a=>{s+=arc(0,0,62,62,a[0],a[1],p,w,false);});
- }else if(kind==="road"){
-  s+=path("M-66 78L-9-77H9L66 78Z",bold?p.ink:p.bg,p.ink,w);
-  s+=path("M0 63V-55","none",bold?p.bg:p.accent,w*.75,'stroke-dasharray="15 15"');
- }
- return `<g transform="translate(${n(x)} ${n(y)}) rotate(${n(angle)}) scale(${n(r/100)})">${s}</g>`;
-}
-function arc(cx,cy,rx,ry,start,end,p,w,faceted){
- const points=[],steps=faceted?3:30;
- for(let i=0;i<=steps;i++){const a=(start+(end-start)*i/steps)*Math.PI/180;points.push([cx+rx*Math.cos(a),cy+ry*Math.sin(a)]);}
- const d=points.map((pt,i)=>(i?"L":"M")+pt.map(n).join(" ")).join(" ");
- const [x,y]=points.at(-1),[px,py]=points.at(-2),a=Math.atan2(y-py,x-px)*180/Math.PI;
- return path(d,"none",p.accent,w)+`<g transform="translate(${n(x)} ${n(y)}) rotate(${n(a)})">${path("M-20-13L0 0-20 13","none",p.accent,w)}</g>`;
-}
-function label(text,y,p){
- if(!text.trim())return "";
- const fit=text.length>13?' textLength="730" lengthAdjust="spacingAndGlyphs"':"";
- return `<text x="500" y="${y}" fill="${p.ink}" font-family="Arial,Helvetica,sans-serif" font-size="46" font-weight="700" text-anchor="middle"${fit}>${esc(text)}</text>`;
-}
-function geometryFor(){
- const templates={
-  orbit:{main:[500,458,150],pieces:[[500,262,86],[260,595,86],[740,595,86]],support:[760,315,70]},
-  journey:{main:[500,330,150],pieces:[[265,590,90],[735,590,90]],support:[500,790,65]},
-  constellation:{main:[500,465,150],pieces:[[270,285,85],[730,285,85],[260,700,85]],support:[750,720,70]},
-  assembly:{main:[500,330,160],pieces:[],pair:[500,615,145],support:[780,345,70]},
-  flagship:{main:[500,355,160],pieces:[[270,600,90],[500,660,70],[730,600,90]],support:[780,290,65]},
-  portal:{main:[500,430,155],pieces:[[255,680,85],[745,680,85]],support:[500,790,65]}
- };
- const t=templates[state.layout];
- if(state.layout==="orbit"&&state.main==="magnifier")t.pieces[0]=[500,240,76];
- const move=([x,y,r])=>[500+(x-500)*state.spread,y+state.lift,r];
- const main=move(t.main);main[2]*=state.symbolScale*Number($("scale").value)/100;
- if(state.layout==="portal"&&state.main==="magnifier")main[2]=Math.min(main[2],170);
- return {main,pieces:(state.language==="minimal"?t.pieces.slice(-2):t.pieces).map(move),pair:t.pair?move(t.pair):null,support:move(t.support),wideRoad:["orbit","journey","constellation"].includes(state.layout)};
-}
-function puzzlePair(x,y,r,p,w){
- const fill=state.language==="symbolic"||state.language==="minimal";
- const left="M-95-64H0V-22C40-42 40 42 0 22V64H-95Z";
- const right="M0-64H95V64H0V22C40 42 40-42 0-22Z";
- return `<g transform="translate(${n(x)} ${n(y)}) scale(${n(r/100)})">`+
- path(left,fill?p.accent:p.bg,p.accent,w*.65)+path(right,fill?p.ink:p.bg,p.ink,w*.65)+"</g>";
-}
-function compose(){
- const p=palettes[$("palette").value],mode=state.language,w=Math.max(Number($("weight").value),mode==="minimal"?10:0),g=geometryFor();
- const [mx,my,mr]=g.main;
- used=[state.main,"puzzle","cycle"];if(state.support!=="none")used.push(state.support);
- let s=`<rect width="1000" height="1000" fill="${p.bg}"/><g stroke-linecap="round" stroke-linejoin="round">`;
- // The same borders and protected text positions identify the whole collection.
- s+=`<rect x="30" y="30" width="940" height="940" fill="none" stroke="${p.ink}" stroke-width="12"/><rect x="48" y="48" width="904" height="904" fill="none" stroke="${p.ink}" stroke-width="2"/>`;
- s+=label($("top").value,126,p)+label($("bottom").value,934,p);
- if(state.layout==="constellation"){
-  g.pieces.forEach(([x,y])=>{s+=path(`M${mx} ${my}L${x} ${y}`,"none",p.accent,w*.6,mode==="abstract"?'stroke-dasharray="15 17"':"");});
- }
- if(state.support==="road"&&g.wideRoad){
-  const ex=mx+state.bend,endY=my+mr*.28,half=155*Number($("road").value)/100;
-  s+=path(`M${500-half} 848L${ex-10} ${endY}H${ex+10}L${500+half} 848Z`,mode==="symbolic"?p.ink:p.bg,p.ink,w);
-  if(mode==="abstract"||mode==="geometric")s+=path(`M500 848L${ex} ${endY}L${500+half} 848Z`,p.accent,"none",0);
-  s+=path(`M500 832L${ex} ${endY+15}`,"none",mode==="symbolic"?p.bg:p.accent,w*.75,'stroke-dasharray="24 23"');
- }
- const cy=state.layout==="orbit"?480:490,rx=(state.layout==="orbit"?280:315)*state.spread,ry=state.layout==="orbit"?230:268;
- const arrows=state.layout==="constellation"?[[-66,4],[54,103],[166,200]]:[[-66,4],[54,124],[174,244]];
- arrows.forEach(([a,b])=>{s+=arc(500,cy+state.lift,rx,ry,a+state.phase,b+state.phase,p,w,mode==="abstract"||mode==="geometric");});
- if(state.layout==="portal"){
-  // A bubble can become a window around the discovery symbol.
-  s+=circle(mx,my,211,p.bg);
-  s+=state.support==="bubble"?bubble(mx,my,205,p,w,mode==="minimal"):circle(mx,my,205,"none",p.ink,w*.75);
- }
- if(g.pair){s+=puzzlePair(...g.pair,p,w);}
- g.pieces.forEach(([x,y,r],i)=>{
-  s+=circle(x,y,r+5,p.bg);
-  if(mode==="literal"||mode==="narrative"||mode==="unexpected")s+=circle(x,y,r,p.bg,p.ink,w);
-  if(mode==="geometric")s+=path(`M${x-r} ${y-r}H${x+r}V${y+r}H${x-r}Z`,p.bg,p.ink,w);
-  s+=glyph("puzzle",x,y,r*.93,p,w,state.turns[i%3]);
- });
- if(state.support!=="none"&&!(state.support==="road"&&g.wideRoad)&&!(state.support==="bubble"&&state.layout==="portal")){
-  const [x,y,r]=g.support;
-  s+=circle(x,y,r,p.bg);
-  if(state.support==="road"){
-   const roadScale=Number($("road").value)/100;
-   s+=`<g transform="translate(${x} ${y}) scale(${n(roadScale)} 1) translate(${-x} ${-y})">${glyph("road",x,y,r,p,w)}</g>`;
-  }else{s+=glyph(state.support,x,y,r,p,w,0);}
- }
- s+=glyph(state.main,mx,my,mr,p,w,0);
- return s+"</g>";
-}
-function render(){
- artCache=compose();$("patch").innerHTML=artCache;$("mini").innerHTML=artCache;
- ["scale","road"].forEach(id=>$(id+"Value").textContent=$(id).value+"%");
- $("road").disabled=state.support!=="road";
- $("weightValue").textContent=$("weight").value;$("smallValue").textContent=$("smallSize").value+" px";$("mini").style.width=$("smallSize").value+"px";
- $("edition").textContent=edition?"Variation "+String(edition).padStart(2,"0"):"Original sketch";
- $("designName").textContent=languages[state.language]+" · "+layouts[state.layout];
- $("usedSymbols").textContent="Elements: "+used.map(k=>names[k]).join(" · ");
- $("designMeaning").textContent=meanings[state.layout];
- const desc="Mission patch: collaboration through puzzle pieces, experimentation through cycle arrows, and discovery through "+names[state.main]+(state.support!=="none"?", with "+names[state.support]:"");
- $("patch").setAttribute("aria-label",desc);$("mini").setAttribute("aria-label","Small preview. "+desc);
-}
-function generate(){
- edition=++serial;
- const language=$("style").value==="auto"?pick(Object.keys(languages)):$("style").value;
- let eligible=Object.keys(layouts);
- if(language==="narrative")eligible=["journey","flagship","constellation"];
- if(language==="unexpected")eligible=["portal","assembly"];
- let layout=$("layout").value==="auto"?pick(eligible):$("layout").value;
- if($("layout").value==="auto"&&eligible.length>1&&layout===state.layout)layout=pick(eligible.filter(k=>k!==state.layout));
- const main=$("discovery").value==="auto"?pick(["eye","magnifier"]):$("discovery").value;
- const support=$("support").value==="auto"?(layout==="journey"?"road":language==="unexpected"?"bubble":pick(["none","road","bubble","flag","geometry"])):$("support").value;
- state={language,layout,main,support,turns:Array.from({length:3},()=>rand(-24,24)),spread:rand(.97,1.025),lift:rand(-6,6),phase:rand(-3,3),bend:rand(-12,12),symbolScale:rand(.96,1.025)};
- render();$("status").textContent="New patch ready. Collaboration, experimentation, and discovery stay together.";
-}
-function remix(){
- edition=++serial;
- state={...state,turns:state.turns.map(a=>clamp(a+rand(-7,7),-30,30)),spread:clamp(state.spread+rand(-.016,.016),.96,1.03),lift:clamp(state.lift+rand(-4,4),-8,8),phase:clamp(state.phase+rand(-1.5,1.5),-4,4),bend:clamp(state.bend+rand(-5,5),-14,14),symbolScale:clamp(state.symbolScale+rand(-.018,.018),.95,1.03)};
- render();$("status").textContent="Remixed spacing, scale, and puzzle rotations. Your symbols and composition stay together.";
-}
-function reset(){Object.entries(defaults).forEach(([id,value])=>$(id).value=value);edition=0;state=original();render();$("status").textContent="Original eye, road, puzzle pieces, and cycle restored. Your saved versions are available below.";}
-function params(){return Object.fromEntries(Object.keys(defaults).map(id=>[id,$(id).value]));}
-function normalizeSnapshot(item){
- if(!item||typeof item!=="object"||!item.state||!item.params)return null;
- const st=item.state,pa=item.params;
- if(!Object.hasOwn(languages,st.language)||!Object.hasOwn(layouts,st.layout)||!["eye","magnifier"].includes(st.main)||!["none","road","bubble","flag","geometry"].includes(st.support))return null;
- const finite=(v,a,b,f)=>Number.isFinite(Number(v))?clamp(Number(v),a,b):f;
- const safeState={language:st.language,layout:st.layout,main:st.main,support:st.support,spread:finite(st.spread,.96,1.03,1),lift:finite(st.lift,-8,8,0),phase:finite(st.phase,-4,4,0),bend:finite(st.bend,-14,14,0),symbolScale:finite(st.symbolScale,.95,1.03,1),turns:Array.from({length:3},(_,i)=>finite(st.turns?.[i],-30,30,0))};
- const valid=(v,a,f)=>a.includes(v)?v:f;
- const safeParams={style:valid(pa.style,["auto",...Object.keys(languages)],"auto"),layout:valid(pa.layout,["auto",...Object.keys(layouts)],"auto"),discovery:valid(pa.discovery,["auto","eye","magnifier"],"auto"),support:valid(pa.support,["auto","none","road","bubble","flag","geometry"],"auto"),top:String(pa.top??"").slice(0,18),bottom:String(pa.bottom??"").slice(0,22),palette:valid(pa.palette,Object.keys(palettes),"forest"),scale:String(finite(pa.scale,80,115,100)),road:String(finite(pa.road,75,120,100)),weight:String(finite(pa.weight,6,14,8)),smallSize:String(finite(pa.smallSize,80,180,120))};
- return {id:typeof item.id==="string"?item.id.slice(0,80):"saved-"+Math.random().toString(36).slice(2),edition:Math.floor(finite(item.edition,0,999999,0)),state:safeState,params:safeParams};
-}
-let saved=[];
-try{const raw=JSON.parse(localStorage.getItem(STORE)||"[]");if(Array.isArray(raw))saved=raw.map(normalizeSnapshot).filter(Boolean).slice(0,16);}catch{storageAvailable=false;}
-serial=Math.max(0,...saved.map(s=>s.edition));
-function persist(){try{localStorage.setItem(STORE,JSON.stringify(saved));storageAvailable=true;return true;}catch{storageAvailable=false;return false;}}
-function imageFor(item){
- const priorState=state,priorParams=params(),priorUsed=used;
- try{state=item.state;Object.entries(item.params).forEach(([id,value])=>$(id).value=value);return `<svg xmlns="http://www.w3.org/2000/svg" width="240" height="240" viewBox="0 0 1000 1000">${compose()}</svg>`;}
- finally{state=priorState;Object.entries(priorParams).forEach(([id,value])=>$(id).value=value);used=priorUsed;}
-}
-function restoreVersion(item){
- const snapshot=normalizeSnapshot(item);if(!snapshot)return;
- state=snapshot.state;edition=snapshot.edition;Object.entries(snapshot.params).forEach(([id,value])=>$(id).value=value);render();
- $("status").textContent="Saved version reopened. Remix it, or download the current patch.";
- $("patch").scrollIntoView({behavior:matchMedia("(prefers-reduced-motion: reduce)").matches?"auto":"smooth",block:"center"});
-}
-function drawGallery(){
- const gallery=$("savedGallery");gallery.replaceChildren();$("savedCount").textContent=saved.length+" / 16";$("savedEmpty").hidden=saved.length>0;
- saved.forEach(item=>{
-  const card=document.createElement("div");card.className="saved-card";
-  const open=document.createElement("button");open.type="button";open.className="saved-open";open.setAttribute("aria-label","Reopen "+languages[item.state.language]+", "+layouts[item.state.layout]);
-  const img=document.createElement("img");img.src="data:image/svg+xml;charset=utf-8,"+encodeURIComponent(imageFor(item));img.alt=languages[item.state.language]+" mission patch with "+names[item.state.main]+", puzzle pieces, and cycle arrows";img.width=240;img.height=240;
-  const title=document.createElement("strong");title.textContent=item.edition?"Variation "+String(item.edition).padStart(2,"0"):"Original sketch";
-  const description=document.createElement("span");description.textContent=languages[item.state.language]+" · "+layouts[item.state.layout];open.append(img,title,description);open.addEventListener("click",()=>restoreVersion(item));
-  const remove=document.createElement("button");remove.type="button";remove.className="saved-remove";remove.textContent="Remove saved version";remove.setAttribute("aria-label","Remove "+title.textContent);remove.addEventListener("click",()=>{saved=saved.filter(s=>s.id!==item.id);persist();drawGallery();$("status").textContent="Saved version removed.";});card.append(open,remove);gallery.append(card);
- });
-}
-function saveVersion(){
- const snapshot=normalizeSnapshot({id:Date.now().toString(36)+"-"+Math.random().toString(36).slice(2,8),edition,state,params:params()});
- const same=saved.some(s=>JSON.stringify(s.state)===JSON.stringify(snapshot.state)&&JSON.stringify(s.params)===JSON.stringify(snapshot.params));
- if(same){$("status").textContent="This version is already in your saved collection.";return;}
- if(saved.length>=16){$("status").textContent="Your collection has 16 versions. Remove one before saving another.";return;}
- saved.unshift(snapshot);const durable=persist();drawGallery();$("status").textContent=durable?"Version saved. Reopen it from your collection below.":"Saved for this session. Browser storage is unavailable; download this version to keep it.";
-}
-function svgSource(pixels){return `<svg xmlns="http://www.w3.org/2000/svg" width="${pixels?'1050':'3.5in'}" height="${pixels?'1050':'3.5in'}" viewBox="0 0 1000 1000"><title>${esc($("patch").getAttribute("aria-label"))}</title>${artCache}</svg>`;}
-function save(blob,name){const url=URL.createObjectURL(blob),a=document.createElement("a");a.href=url;a.download=name;document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),30000);}
-const filename=ext=>`mission-patch-${state.language}-${state.layout}-${String(edition).padStart(2,"0")}.${ext}`;
-function png300dpi(bytes){
- function crc32(data){let crc=0xffffffff;for(const b of data){crc^=b;for(let j=0;j<8;j++)crc=(crc>>>1)^((crc&1)?0xedb88320:0);}return(crc^0xffffffff)>>>0;}
- const chunk=new Uint8Array(21),dv=new DataView(chunk.buffer);dv.setUint32(0,9);chunk.set([112,72,89,115],4);dv.setUint32(8,11811);dv.setUint32(12,11811);chunk[16]=1;dv.setUint32(17,crc32(chunk.subarray(4,17)));
- const parts=[bytes.subarray(0,8)],view=new DataView(bytes.buffer,bytes.byteOffset,bytes.byteLength);let offset=8;
- while(offset+12<=bytes.length){const length=view.getUint32(offset),end=offset+length+12;if(end>bytes.length)throw new Error("Invalid PNG data");const type=String.fromCharCode(...bytes.subarray(offset+4,offset+8));if(type!=="pHYs")parts.push(bytes.subarray(offset,end));if(type==="IHDR")parts.push(chunk);offset=end;}return new Blob(parts,{type:"image/png"});
-}
-async function downloadPNG(){
- const button=$("png"),source=svgSource(true),name=filename("png");button.disabled=true;let url;
- try{url=URL.createObjectURL(new Blob([source],{type:"image/svg+xml;charset=utf-8"}));const img=new Image();await new Promise((resolve,reject)=>{img.onload=resolve;img.onerror=()=>reject(new Error("Could not render the patch"));img.src=url;});const canvas=document.createElement("canvas");canvas.width=canvas.height=1050;const ctx=canvas.getContext("2d");if(!ctx)throw new Error("Canvas export unavailable");ctx.drawImage(img,0,0);const raw=await new Promise((resolve,reject)=>canvas.toBlob(b=>b?resolve(b):reject(new Error("PNG export failed")),"image/png"));save(png300dpi(new Uint8Array(await raw.arrayBuffer())),name);$("status").textContent="PNG download started · 1050 × 1050 pixels · 300 dpi.";}catch(error){$("status").textContent=error.message+". Try Download SVG.";}finally{if(url)URL.revokeObjectURL(url);button.disabled=false;}
-}
-Object.keys(defaults).forEach(id=>$(id).addEventListener("input",()=>{if(["style","layout","discovery","support"].includes(id)){generate();}else{render();}}));
-$("generate").addEventListener("click",generate);$("remix").addEventListener("click",remix);$("saveVersion").addEventListener("click",saveVersion);$("reset").addEventListener("click",reset);$("png").addEventListener("click",downloadPNG);$("svg").addEventListener("click",()=>{save(new Blob([svgSource(false)],{type:"image/svg+xml;charset=utf-8"}),filename("svg"));$("status").textContent="SVG download started.";});render();drawGallery();
+  let edition = 0;
+  let variation = {spread:1,lift:0,size:1,turns:[0,25,-25],iris:0};
+
+  function random(a,b) { return a+Math.random()*(b-a); }
+
+  function strokePath(draw,color,width,fill) {
+    ctx.beginPath();
+    draw();
+    if(fill) { ctx.fillStyle=fill; ctx.fill(); }
+    if(color) {
+      ctx.strokeStyle=color;
+      ctx.lineWidth=width;
+      ctx.stroke();
+    }
+  }
+
+  function circle(x,y,r,fill,stroke,width=8) {
+    strokePath(()=>ctx.arc(x,y,r,0,Math.PI*2),stroke,width,fill);
+  }
+
+  function label(text,y,color,maxWidth) {
+    if(!text.trim()) return;
+    ctx.fillStyle=color;
+    ctx.textAlign="center";
+    ctx.textBaseline="middle";
+    let size=48;
+    do {
+      ctx.font=`700 ${size}px Arial,Helvetica,sans-serif`;
+      if(ctx.measureText(text).width<=maxWidth) break;
+      size--;
+    } while(size>12);
+    ctx.fillText(text,500,y);
+  }
+
+  function puzzle(x,y,r,angle,color,width) {
+    ctx.save();
+    ctx.translate(x,y);
+    ctx.rotate(angle*Math.PI/180);
+    ctx.scale(r/82,r/82);
+    // A simple silhouette with two tabs and one socket.
+    strokePath(()=>{
+      ctx.moveTo(-39,-36);
+      ctx.lineTo(-13,-36);
+      ctx.bezierCurveTo(-25,-65,25,-65,13,-36);
+      ctx.lineTo(39,-36);
+      ctx.lineTo(39,-12);
+      ctx.bezierCurveTo(68,-24,68,24,39,12);
+      ctx.lineTo(39,38);
+      ctx.lineTo(13,38);
+      ctx.bezierCurveTo(25,10,-25,10,-13,38);
+      ctx.lineTo(-39,38);
+      ctx.closePath();
+    },color,width*0.72,color);
+    ctx.restore();
+  }
+
+  function arrow(cx,cy,rx,ry,start,end,color,width) {
+    const a=start*Math.PI/180,b=end*Math.PI/180;
+    strokePath(()=>ctx.ellipse(cx,cy,rx,ry,0,a,b),color,width);
+    const x=cx+rx*Math.cos(b),y=cy+ry*Math.sin(b);
+    const tangent=Math.atan2(ry*Math.cos(b),-rx*Math.sin(b));
+    ctx.save();
+    ctx.translate(x,y);
+    ctx.rotate(tangent);
+    strokePath(()=>{
+      ctx.moveTo(-22,-14);
+      ctx.lineTo(0,0);
+      ctx.lineTo(-22,14);
+    },color,width);
+    ctx.restore();
+  }
+
+  function render() {
+    const p=palettes[$("palette").value];
+    const weight=Number($("weight").value);
+    const road=Number($("road").value)/100;
+    const eye=Number($("eye").value)/100;
+    $("road-value").textContent=$("road").value+"%";
+    $("eye-value").textContent=$("eye").value+"%";
+    $("weight-value").textContent=weight;
+
+    ctx.setTransform(1,0,0,1,0,0);
+    ctx.clearRect(0,0,1050,1050);
+    ctx.setTransform(1.05,0,0,1.05,0,0);
+    ctx.lineCap="round";
+    ctx.lineJoin="round";
+    ctx.fillStyle=p.bg;
+    ctx.fillRect(0,0,1000,1000);
+
+    // Square patch border and protected label areas.
+    ctx.strokeStyle=p.ink;
+    ctx.lineWidth=12;
+    ctx.strokeRect(30,30,940,940);
+    ctx.lineWidth=2;
+    ctx.strokeRect(48,48,904,904);
+    label($("top").value,112,p.ink,800);
+    label($("bottom").value,918,p.ink,800);
+
+    const layouts={
+      balanced:{rx:282,ry:232,cy:486,r:82},
+      wide:{rx:314,ry:220,cy:486,r:78},
+      compact:{rx:254,ry:210,cy:474,r:76}
+    };
+    const l=layouts[$("layout").value];
+    const rx=l.rx*variation.spread;
+    const ry=l.ry;
+    const cy=l.cy+variation.lift;
+    const r=l.r*variation.size;
+
+    // Three arrow segments establish one clockwise cycle.
+    arrow(500,cy,rx,ry,-63,3,p.accent,weight);
+    arrow(500,cy,rx,ry,57,123,p.accent,weight);
+    arrow(500,cy,rx,ry,177,243,p.accent,weight);
+
+    // Road overlaps the bottom orbit, as in the original sketch.
+    const half=164*road;
+    strokePath(()=>{
+      ctx.moveTo(500-half,856);
+      ctx.lineTo(490,530);
+      ctx.quadraticCurveTo(500,518,510,530);
+      ctx.lineTo(500+half,856);
+      ctx.closePath();
+    },p.ink,weight,p.bg);
+
+    ctx.save();
+    ctx.setLineDash([24,23]);
+    strokePath(()=>{
+      ctx.moveTo(500,555);
+      ctx.lineTo(500,852);
+    },p.accent,Math.max(5,weight*.72));
+    ctx.restore();
+
+    // Three floating circles, each containing a puzzle piece.
+    [-90,30,150].forEach((degrees,i)=>{
+      const angle=degrees*Math.PI/180;
+      const x=500+rx*Math.cos(angle);
+      const y=cy+ry*Math.sin(angle);
+      circle(x,y,r,p.bg,p.ink,weight);
+      puzzle(x,y,r,variation.turns[i],p.accent,weight);
+    });
+
+    // Central eye: restrained linework that survives reduction.
+    ctx.save();
+    ctx.translate(500,471);
+    ctx.scale(eye,eye);
+    strokePath(()=>{
+      ctx.moveTo(-116,0);
+      ctx.quadraticCurveTo(0,-94,116,0);
+      ctx.quadraticCurveTo(0,88,-116,0);
+      ctx.closePath();
+    },p.ink,weight,p.bg);
+    circle(variation.iris,0,33,p.accent,p.ink,weight*.7);
+    circle(variation.iris,0,14,p.ink);
+    ctx.restore();
+
+    $("edition").textContent=edition
+      ? "Variation "+String(edition).padStart(2,"0")
+      : "Starting design";
+  }
+
+  function generate() {
+    edition++;
+    variation={
+      spread:random(.96,1.04),
+      lift:random(-7,7),
+      size:random(.92,1.03),
+      turns:[random(-45,45),random(-65,65),random(-65,65)],
+      iris:random(-4,4)
+    };
+    render();
+    $("status").textContent="New variation ready. Download it to keep it.";
+  }
+
+  function reset() {
+    $("top").value="BARUCH";
+    $("bottom").value="SSEP";
+    $("palette").value="space";
+    $("layout").value="balanced";
+    $("road").value=100;
+    $("eye").value=100;
+    $("weight").value=8;
+    edition=0;
+    variation={spread:1,lift:0,size:1,turns:[0,25,-25],iris:0};
+    render();
+    $("status").textContent="Starting design restored.";
+  }
+
+  // Set PNG pHYs metadata to 300 dpi (11811 pixels per metre).
+  // Canvas dimensions stay 1050 × 1050; artwork bytes are unchanged.
+  function png300dpi(bytes) {
+    function crc32(data) {
+      let crc=0xffffffff;
+      for(const byte of data) {
+        crc^=byte;
+        for(let j=0;j<8;j++)
+          crc=(crc>>>1)^((crc&1)?0xedb88320:0);
+      }
+      return (crc^0xffffffff)>>>0;
+    }
+    const chunk=new Uint8Array(21);
+    const view=new DataView(chunk.buffer);
+    view.setUint32(0,9);
+    chunk.set([112,72,89,115],4); // pHYs
+    view.setUint32(8,11811);
+    view.setUint32(12,11811);
+    chunk[16]=1;
+    view.setUint32(17,crc32(chunk.subarray(4,17)));
+
+    const parts=[bytes.subarray(0,8)];
+    let offset=8,inserted=false;
+    const source=new DataView(
+      bytes.buffer,bytes.byteOffset,bytes.byteLength
+    );
+    while(offset+12<=bytes.length) {
+      const length=source.getUint32(offset);
+      const end=offset+length+12;
+      if(end>bytes.length) throw new Error("Invalid PNG data");
+      const type=String.fromCharCode(...bytes.subarray(offset+4,offset+8));
+      if(type!=="pHYs") parts.push(bytes.subarray(offset,end));
+      if(type==="IHDR"&&!inserted) {
+        parts.push(chunk);
+        inserted=true;
+      }
+      offset=end;
+    }
+    return new Blob(parts,{type:"image/png"});
+  }
+
+  async function download() {
+    const button=$("download");
+    button.disabled=true;
+    try {
+      const raw=await new Promise((resolve,reject)=>{
+        canvas.toBlob(blob=>blob?resolve(blob):
+          reject(new Error("PNG export unavailable")),"image/png");
+      });
+      const blob=png300dpi(new Uint8Array(await raw.arrayBuffer()));
+      const url=URL.createObjectURL(blob);
+      const a=document.createElement("a");
+      a.href=url;
+      a.download="mission-patch-"+String(edition).padStart(2,"0")+".png";
+      document.body.append(a);
+      a.click();
+      a.remove();
+      setTimeout(()=>URL.revokeObjectURL(url),30000);
+      $("status").textContent=
+        "PNG download started · 1050 × 1050 px · 300 dpi.";
+    } catch(error) {
+      $("status").textContent="Download failed: "+error.message;
+    } finally {
+      button.disabled=false;
+    }
+  }
+
+  ["top","bottom","palette","layout","road","eye","weight"]
+    .forEach(id=>$(id).addEventListener("input",render));
+  $("generate").addEventListener("click",generate);
+  $("reset").addEventListener("click",reset);
+  $("download").addEventListener("click",download);
+  render();
 })();
 </script>
 </body>
